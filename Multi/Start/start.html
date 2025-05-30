@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="de">
+
+  <head>
+    <meta charset="UTF-8">
+    <title>Alles Taco – Startseite</title>
+    <link rel="stylesheet" href="start.css">
+    <script src="start.js"></script>
+  </head>
+
+  <body>
+    <header class="header"> <!-- Obere Leiste -->
+      <div class="logo">
+        <img src="taco_logo.png" alt="Alles Taco Logo">
+      </div>
+
+      <div class="welcome">
+          <h1>Willkommen bei: AllesTaco</h1>
+      </div>
+    </header>
+
+    
+    <main class="main-content"> <!-- Die Haupt anzeige -->
+      <div class="cookie-popup" id="cookie-popup">
+          <h2>Cookies</h2>
+          <label><input type="radio" name="cookie-choice" value="accept"> Cookies Akzeptieren</label>
+          <label><input type="radio" name="cookie-choice" value="reject"> Cookies Ablehnen</label>
+          <button onclick="toggleCookies()">Bestätigen</button>
+      </div>
+
+      <div class="roll-popup" id="roll-popup">
+          <h2>Rollen Wahl</h2>
+          <div>Bitte wähle aus ob du als Verkäufer oder Käufer weiter möchtest.</div>
+          <label><input type="radio" name="roll-button" id="roll-käufer" value="käufer"> Käufer</label>
+          <label><input type="radio" name="roll-button" id="roll-verkäufer" value="verkäufer"> Verkäufer</label>
+          <br>
+          <button onclick="showLogin()">Bestätigen</button>
+      </div>
+
+      <div class="login-popup" id="login-popup">
+          <h2>Einloggen</h2>
+          <input type="text" id="login-username" placeholder="Benutzername">
+          <input type="password" id="login-password" placeholder="Passwort">
+          <button onclick="onLogin()">Einloggen</button>
+          <a href="#" onclick="showRegister(); return false;" style="cursor:pointer; color:blue; text-decoration:underline;">
+            Registrieren</a>  <!-- Das ist der Klickable Text -->
+      </div>
+
+      <div class="register-popup" id="register-popup">
+          <h2>Registrieren</h2>
+          <input type="text" id="register-username" required placeholder="Benutzername">
+          <input type="text" id="register-firstname" required placeholder="Vorname">
+          <input type="text" id="register-lastname" required placeholder="Nachname">
+          <input type="email" id="register-mail" required placeholder="Mail">
+          <input type="password" id="register-password" required placeholder="Passwort">
+          <button onclick="showLogin(); onRegister()">Account erstellen</button>
+      </div>
+    </main>
+
+    <footer class="footer"> <!-- Impressum -->
+      <div>
+        <button class="impressum-button" onclick="window.location.href='https://niclas-sieveneck.de/impressum/'">
+			Impressum
+		</button>
+
+        <button class="impressum-button" onclick="window.location.href='https://niclas-sieveneck.de/datenschutz/'">
+			Datenschutz
+		</button>
+      </div>
+    </footer>
+
+  </body>
+</html>

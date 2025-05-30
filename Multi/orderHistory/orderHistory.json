@@ -1,0 +1,25 @@
+{
+    "orders": [
+        {
+            "id": "1001",
+            "produktname": "Taco Supreme",
+            "anzahl": 2,
+            "preis": 5.99,
+            "versanddaten": "DHL - Lieferung in 3-5 Tagen"
+        },
+        {
+            "id": "1002",
+            "produktname": "Quesadilla Deluxe",
+            "anzahl": 1,
+            "preis": 6.49,
+            "versanddaten": "Hermes - Lieferung in 2-4 Tagen"
+        },
+        {
+            "id": "1003",
+            "produktname": "Burrito Fiesta",
+            "anzahl": 3,
+            "preis": 7.89,
+            "versanddaten": "DHL - Lieferung in 1-3 Tagen"
+        }
+    ]
+}
