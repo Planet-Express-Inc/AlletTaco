@@ -1,0 +1,14 @@
+[
+  {
+    "id": 101,
+    "title": "Taco Supreme",
+    "description": "Der beste Taco der Stadt",
+    "image_url": "/Bilder/taco1.jpg"
+  },
+  {
+    "id": 102,
+    "title": "Burrito Deluxe",
+    "description": "Riesig und lecker",
+    "image_url": "/Bilder/burrito1.jpg"
+  }
+]

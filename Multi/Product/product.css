@@ -1,0 +1,85 @@
+.dropdown-content {
+  display: none;
+  position: absolute;
+  background-color: white;
+  min-width: 160px;
+  box-shadow: 0px 8px 16px rgba(0,0,0,0.2);
+  z-index: 1;
+  right: 20px;
+  top: 60px;
+  border-radius: 8px;
+  overflow: hidden;
+}
+
+.dropdown-content a {
+  padding: 10px 16px;
+  text-decoration: none;
+  display: block;
+  color: black;
+}
+
+.dropdown-content a:hover {
+  background-color: #f1f1f1;
+}
+
+.show {
+  display: block;
+}
+
+.action-button img {
+  width:35px;             
+  height: 35px;             
+  border-radius: 25px;      
+  transition: filter 0.3s ease;
+} 
+
+
+.detail-layout {
+    padding: 20px;
+    display: flex; /* Flexbox verwenden */
+    flex-direction: column; /* Elemente untereinander anordnen */
+    align-items: center; /* Zentriert alle Kinder horizontal */
+    gap: 20px; /* Abstand von 20px zwischen den Elementen */
+}
+  
+.product-large-image {
+    background-color: white;
+    padding: 20px;
+    width: 100%; /* Bild passt sich der Containerbreite an */
+    max-width: 500px; /* Maximalbreite von 600px */
+    border-radius: 12px;
+}
+.add-to-cart {
+    padding: 10px 20px;
+    background-color: rgb(176, 11, 14);
+    color: white;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    font-size: 16px;
+    transition: background-color 0.3s ease;
+}
+
+.add-to-cart {
+    background-color: rgb(150, 9, 11); /* Dunkleres Rot für Hover-Effekt */
+}
+  
+.articel_box, .seller-box {
+    background-color: white;
+    padding: 20px;
+    border-radius: 12px;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+    width: 100%; /* Boxen passen sich der Containerbreite an */
+    max-width: 500px; /* Maximalbreite für die Boxen */
+}
+
+.seller-box {
+    max-width: 500px; /* Maximalbreite für den Verkäuferbereich */
+    min-height: 100px;
+    cursor: pointer;
+}
+
+
+.articel_box h1, .seller-box h2 {
+  margin-top: 0;
+}

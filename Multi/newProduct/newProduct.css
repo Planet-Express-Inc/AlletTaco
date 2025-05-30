@@ -1,0 +1,42 @@
+input[type="text"],
+input[type="number"],
+input[type="file"],
+textarea {
+  width: 100%;           /* Breite füllt das Elternelement */
+  max-width: 600px;      /* Optional: maximale Breite */
+  font-size: 16px;       /* Schriftgröße */
+  padding: 10px;         /* Innenabstand */
+}
+
+
+.detail-layout {
+    padding: 20px;
+    display: flex; /* Flexbox verwenden */
+    flex-direction: column; /* Elemente untereinander anordnen */
+    align-items: center; /* Zentriert alle Kinder horizontal */
+    justify-content: flex-start;
+    padding-bottom: 100px;
+}
+
+#preview {
+  max-width: 300px; 
+  display: none; 
+  border: 1px solid #ccc; 
+  padding: 5px; 
+  border-radius: 8px
+}
+
+form#product-form > * {
+  margin-bottom: 1rem; /* Abstand unten für alle direkte Kinder im Formular */
+}
+
+.save-button {
+  padding: 6px 12px;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+  background-color: rgb(176, 11, 14);
+  color: white;
+  font-size: 16px;
+}
+

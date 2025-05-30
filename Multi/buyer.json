@@ -1,0 +1,20 @@
+[
+    {
+      "id": 1,
+      "title": "Taco Deluxe",
+      "description": "Ein Taco voller Geschmack: Rindfleisch, Käse, Jalapeños und mehr. Perfekt für den großen Hunger.",
+      "image_url": "/Bilder/Taco-deluxe.jpg"
+    },
+    {
+      "id": 2,
+      "title": "Veggie Taco",
+      "description": "Lecker und fleischlos! Mit Bohnen, Avocado, frischem Salat und hausgemachter Soße.",
+      "image_url": "https://via.placeholder.com/150?text=Taco+2"
+    },
+    {
+      "id": 3,
+      "title": "Taco Trio Box",
+      "description": "Drei Tacos deiner Wahl, kombiniert in einer Box. Ideal zum Teilen oder alleine genießen!",
+      "image_url": "https://via.placeholder.com/150?text=Taco+3"
+    }
+  ]

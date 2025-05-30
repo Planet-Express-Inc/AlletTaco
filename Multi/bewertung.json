@@ -1,0 +1,23 @@
+[
+  {
+    "id": 1,
+    "bewerter_id": 101,
+    "bewertender_id": 202,
+    "kommentar": "Schneller Versand und netter Kontakt!",
+    "sterne": 5
+  },
+  {
+    "id": 2,
+    "bewerter_id": 102,
+    "bewertender_id": 203,
+    "kommentar": "Produkt wie beschrieben, aber Lieferung hat gedauert.",
+    "sterne": 3
+  },
+  {
+    "id": 3,
+    "bewerter_id": 103,
+    "bewertender_id": 204,
+    "kommentar": "Unvollständige Lieferung, keine Antwort vom Verkäufer.",
+    "sterne": 0
+  }
+]
