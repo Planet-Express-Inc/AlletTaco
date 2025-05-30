@@ -84,9 +84,9 @@ async function onLogin() {
 
                 
                 if(selectedRoll == "verkäufer"){
-                    window.location.href = "verkaeufer.html"; // Zielseite ist die verkäufer site
+                    window.location.href = "/Multi/Verkaeufer/verkaeufer.html"; // Zielseite ist die verkäufer site
                 }else{
-                    window.location.href = "kaeufer.html"; // Zielseite ist die käufer site
+                    window.location.href = "/Multi/Kaeufer/kaeufer.html"; // Zielseite ist die käufer site
                 }
             } else {
                 alert("Login fehlgeschlagen: Benutzer nicht gefunden oder Passwort falsch.");
