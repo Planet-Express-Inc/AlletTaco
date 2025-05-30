@@ -36,7 +36,7 @@ document.addEventListener("DOMContentLoaded", async () => {
 
         const sellerBox = document.getElementById("seller-box");
         sellerBox.addEventListener('click', () => {
-          window.location.href = `/Seller/seller.html?id=${seller.id}`;
+          window.location.href = `/Multi/Seller/seller.html?id=${seller.id}`;
         });
         
     } catch (error) {

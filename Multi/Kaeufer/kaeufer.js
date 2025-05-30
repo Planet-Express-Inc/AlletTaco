@@ -36,7 +36,7 @@ function loadArticles(query = "") {
         `;
 
         item.addEventListener('click', () => {
-          window.location.href = `/Product/product.html?id=${product.id}`;
+          window.location.href = `/Multi/Product/product.html?id=${product.id}`;
         });
 
         list.appendChild(item);

@@ -27,7 +27,7 @@ document.addEventListener("DOMContentLoaded", () => {    /*laden der Daten nach 
             `;
 
             item.addEventListener('click', () => {
-                window.location.href = `/editProduct/editProduct.html?articelid=${product.id}`;
+                window.location.href = `/Multi/editProduct/editProduct.html?articelid=${product.id}`;
             });
             /*unten anhängen */
             list.appendChild(item);
@@ -39,7 +39,7 @@ document.addEventListener("DOMContentLoaded", () => {    /*laden der Daten nach 
                 `;
 
                 message.addEventListener('click', () => {
-                    window.location.href = '/newProduct/newProduct.html';
+                    window.location.href = '/Multi/newProduct/newProduct.html';
                 });
 
                 list.appendChild(message);

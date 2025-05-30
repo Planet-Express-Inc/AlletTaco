@@ -120,7 +120,7 @@ function bewerten() {
   if (selected) {
     const verkaeuferId = selected.value;
     
-    window.location.href = `/Bewerten/bewerten.html?id=${verkaeuferId}`;
+    window.location.href = `/Multi//Bewerten/bewerten.html?id=${verkaeuferId}`;
   } else {
     alert("Bitte wählen Sie einen Verkäufer aus.");
   }
@@ -157,7 +157,7 @@ function buy() {
 }
 
 function startseite() {
-  window.location.href = "/Kaeufer/kaeufer.html";
+  window.location.href = "/Multi/Kaeufer/kaeufer.html";
 }
 
 
