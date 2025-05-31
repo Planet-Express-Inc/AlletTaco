@@ -17,6 +17,22 @@ if (profilLink) {
     }
   });
 }
+const warenkorb = document.getElementById("warenkorb");
+if (warenkorb) {
+  warenkorb.addEventListener("click", (e) => {
+    e.preventDefault();
+
+    const userId = sessionStorage.getItem("user_id");
+
+    if (userId) {
+      // Leite mit Parameter weiter
+      window.location.href = `/Multi/Warenkorb/warenkorb.html?user_id=${encodeURIComponent(userId)}`;
+    } else {
+      alert("Keine Benutzer-ID gefunden.");
+    }
+  });
+}
+
 
   document.body.addEventListener("click", (e) => {
     const link = e.target.closest('[data-role]');
