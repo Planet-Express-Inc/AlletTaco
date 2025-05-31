@@ -30,14 +30,24 @@
           </div>
         </div>
 
-        <div class="dropdown">
-          <button class="action-button" onclick="toggleDropdown()">
-            <img src="/Multi/Bilder/dein_bild.png" alt="ActionKnopf">
-          </button>
-          <div id="dropdown-menu" class="dropdown-content">
-            <a href="/Multi/Warenkorb/warenkorb.html">Warenkorb</a>
-            <a href="/Multi/Verkaeufer/verkaeufer.html">Verkäufer</a>
-            <a href="/Multi/Kaeufer/kaeufer.html">Käufer</a>
+      <div class="dropdown">
+        <button class="action-button" onclick="toggleDropdown()">
+          <img src="/Multi/Bilder/dein_bild.png" alt="ActionKnopf">
+        </button>
+
+        <div id="dropdown-menu" class="dropdown-content">
+          <!-- Nur für Verkäufer -->
+          <div class="role-content" data-role-content="Verkäufer">
+            <a href="#" id="profil-link">Profil</a>
+            <a href="/Multi/Verkaeufer/verkaeufer.html" data-role="Verkäufer">Startseite</a>
+            <a href="/Multi/Kaeufer/kaeufer.html" data-role="Käufer">Käufer</a>
+          </div>
+
+          <!-- Nur für Käufer -->
+          <div class="role-content" data-role-content="Käufer">
+            <a href="#" id="warenkorb">Warenkorb</a>
+            <a href="/Multi/Kaeufer/kaeufer.html" data-role="Käufer">Startseite</a>
+            <a href="/Multi/Verkaeufer/verkaeufer.html" data-role="Verkäufer">Verkäufer</a>
           </div>
         </div>
       </div>
@@ -85,6 +95,7 @@
       </div>
     </footer>
     <script src="bewerten.js"></script>
+    <script src="/Multi/all.js" defer></script>
   </body>
 </html>
 

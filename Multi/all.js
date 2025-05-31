@@ -1,7 +1,26 @@
 document.addEventListener("DOMContentLoaded", () => {    /*laden der Daten nach laden der Website */
+  showRoleBasedMenu();
   userData();
+
+  const profilLink = document.getElementById("profil-link");
+if (profilLink) {
+  profilLink.addEventListener("click", (e) => {
+    e.preventDefault();
+
+    const userId = sessionStorage.getItem("user_id");
+
+    if (userId) {
+      // Leite mit Parameter weiter
+      window.location.href = `/Multi/verkaeuferProfil/verkaeuferProfil.html?user_id=${encodeURIComponent(userId)}`;
+    } else {
+      alert("Keine Benutzer-ID gefunden.");
+    }
+  });
+}
+
   document.body.addEventListener("click", (e) => {
     const link = e.target.closest('[data-role]');
+    if (!link) return;
     e.preventDefault();
 
     const role = link.getAttribute('data-role');
@@ -35,6 +54,21 @@ function userData (){
       }
 }
 
+function showRoleBasedMenu() {
+  const role = sessionStorage.getItem('roll');
+
+  const allRoleSections = document.querySelectorAll('[data-role-content]');
+  allRoleSections.forEach(section => {
+    section.style.display = 'none'; // Alles ausblenden
+  });
+
+  if (role) {
+    const visibleSection = document.querySelector(`[data-role-content="${role}"]`);
+    if (visibleSection) {
+      visibleSection.style.display = 'block'; // Nur die passende Rolle anzeigen
+    }
+  }
+}
 
 function suche() {
   const query = document.getElementById('search-input').value;

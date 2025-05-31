@@ -11,8 +11,8 @@ document.addEventListener("DOMContentLoaded", async () => {
     try {
         // 2. Holen der Produkt- und Verkäufer-Daten
         const [productRes, sellerRes] = await Promise.all([
-            fetch('/articel.json'),
-            fetch('/seller.json')
+            fetch('/Multi/articel.json'),
+            fetch('/Multi/seller.json')
         ]);
   
         const [products, sellers] = await Promise.all([
@@ -36,7 +36,7 @@ document.addEventListener("DOMContentLoaded", async () => {
 
         const sellerBox = document.getElementById("seller-box");
         sellerBox.addEventListener('click', () => {
-          window.location.href = `/Multi/Seller/seller.html?id=${seller.id}`;
+          window.location.href = `/Multi/verkaeuferProfil/verkaeuferProfil.html?user_id=${seller.id}`;
         });
         
     } catch (error) {

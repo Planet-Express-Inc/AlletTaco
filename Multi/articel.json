@@ -3,9 +3,9 @@
       "id": 1,
       "title": "Taco Deluxe",
       "description": "Ein Taco voller Geschmack: Rindfleisch, Käse, Jalapeños und mehr. Perfekt für den großen Hunger. Ein Taco voller Geschmack: Rindfleisch, Käse, Jalapeños und mehr. Perfekt für den großen Hunger. Ein Taco voller Geschmack: Rindfleisch, Käse, Jalapeños und mehr. Perfekt für den großen Hunger. Ein Taco voller Geschmack: Rindfleisch, Käse, Jalapeños und mehr. Perfekt für den großen Hunger.",
-      "image_url": "/Bilder/Taco-deluxe.jpg",
+      "image_url": "/Multi/Bilder/Taco-deluxe.jpg",
       "amount": 5,
       "price": "8.50",
-      "sellerId": 1
+      "sellerId": 12
     }
   ]
