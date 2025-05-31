@@ -22,7 +22,7 @@ document.getElementById('product-form').addEventListener('submit', function (eve
       verkaeufer_id: 12, 
       beschreibung: description, 
       preis: price, 
-      bildpfad: base64Image, 
+      bild: base64Image,  
       status: "verfügbar", 
       bestand: amount, 
       kategorie: "Taco" 

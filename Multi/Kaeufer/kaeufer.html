@@ -22,11 +22,11 @@
 
       <div class="user-block"> 
         <div class="user-info-block">
-          <div class="user-info">
-            Angemeldet als: Max Mustermann
+          <div class="user-info" id="user-info">
+            Angemeldet als: Fehler 
           </div>
-          <div class="user-role">
-            (Verkäufer-Konto)
+          <div class="user-role" id="user-role">
+            (Kein Konto erkannt)
           </div>
         </div>
 
@@ -36,8 +36,8 @@
           </button>
           <div id="dropdown-menu" class="dropdown-content">
             <a href="/Multi/Warenkorb/warenkorb.html">Warenkorb</a>
-            <a href="/Multi/Verkaeufer/verkaeufer.html">Verkäufer</a>
-            <a href="/Multi/Kaeufer/kaeufer.html">Käufer</a>
+            <a href="/Multi/Verkaeufer/verkaeufer.html" data-role="Verkäufer">Verkäufer</a>
+            <a href="/Multi/Kaeufer/kaeufer.html" data-role="Käufer">Käufer</a>
           </div>
         </div>
       </div>
@@ -64,6 +64,7 @@
       </div>
     </footer>
 
-    <script src="kaeufer.js"></script>
+    <script src="kaeufer.js" defer></script>
+    <script src="/Multi/all.js" defer></script>
   </body>
 </html>

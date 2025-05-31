@@ -1,0 +1,57 @@
+document.addEventListener("DOMContentLoaded", () => {    /*laden der Daten nach laden der Website */
+  userData();
+  document.body.addEventListener("click", (e) => {
+    const link = e.target.closest('[data-role]');
+    e.preventDefault();
+
+    const role = link.getAttribute('data-role');
+    const href = link.getAttribute('href');
+
+    sessionStorage.setItem('roll', role);
+
+    window.location.href = href;
+
+  });
+});
+
+
+function userData (){
+  // Werte aus dem Session Storage holen
+      const username = sessionStorage.getItem('username');
+      const role = sessionStorage.getItem('roll');
+      const userId = sessionStorage.getItem('user_id');
+
+      // DOM-Elemente holen
+      const userInfoElement = document.getElementById('user-info');
+      const userRoleElement = document.getElementById('user-role');
+
+      // Inhalte setzen
+      if (username && userInfoElement) {
+        userInfoElement.textContent = 'Angemeldet als: ' + username;
+      }
+
+      if (role && userRoleElement) {
+        userRoleElement.textContent = `(${role})`;
+      }
+}
+
+
+function suche() {
+  const query = document.getElementById('search-input').value;
+  console.log(query);
+  loadArticles(query); // übergibt den Suchbegriff oder "" an loadArticles
+}
+
+
+
+function toggleDropdown() {
+  document.getElementById("dropdown-menu").classList.toggle("show");
+}
+
+// Klick außerhalb schließt Dropdown
+window.addEventListener("click", function(event) {
+  if (!event.target.closest('.dropdown')) {
+    document.getElementById("dropdown-menu").classList.remove("show");
+  }
+});
+

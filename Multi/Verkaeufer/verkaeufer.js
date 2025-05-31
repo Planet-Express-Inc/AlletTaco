@@ -5,10 +5,6 @@ document.addEventListener("DOMContentLoaded", () => {    /*laden der Daten nach 
         .then(response => response.json())
         .then(data => {
             const list = document.getElementById('product-list');
-    
-
-    
-
             /*auslesen der JSON*/
             data.forEach(product => {
             const item = document.createElement('div');
@@ -50,9 +46,27 @@ document.addEventListener("DOMContentLoaded", () => {    /*laden der Daten nach 
         });
     }
     loadArticles();
+    userData();
   });
 
+function userData (){
+  // Werte aus dem Session Storage holen
+      const username = sessionStorage.getItem('username');
+      const role = sessionStorage.getItem('roll');
 
+      // DOM-Elemente holen
+      const userInfoEl = document.getElementById('user-info');
+      const userRoleEl = document.getElementById('user-role');
+
+      // Inhalte setzen
+      if (username && userInfoEl) {
+        userInfoEl.textContent = 'Angemeldet als: ' + username;
+      }
+
+      if (role && userRoleEl) {
+        userRoleEl.textContent = `(${role})`;
+      }
+}
 
 
 

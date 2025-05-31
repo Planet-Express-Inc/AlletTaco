@@ -81,12 +81,10 @@ document.addEventListener("DOMContentLoaded", () => {    /*laden der Daten nach 
     loadArticles();
   });
 
-
-
-
   function deleteArticel (id){
+  const userId = sessionStorage.getItem('roll');
   const productData = {
-      warenkorbid: 8,
+      warenkorbid: userId,
       articelId:id
     };
     console.log(productData)
@@ -110,10 +108,6 @@ document.addEventListener("DOMContentLoaded", () => {    /*laden der Daten nach 
     */
   }
 
-
-function closeModal() {
-  document.getElementById("review-modal").style.display = "none";
-}
 
 function bewerten() {
   const selected = document.querySelector('input[name="verkaeufer"]:checked');
@@ -160,15 +154,3 @@ function startseite() {
   window.location.href = "/Multi/Kaeufer/kaeufer.html";
 }
 
-
-
-function toggleDropdown() {
-  document.getElementById("dropdown-menu").classList.toggle("show");
-}
-
-// Klick außerhalb schließt Dropdown
-window.addEventListener("click", function(event) {
-  if (!event.target.closest('.dropdown')) {
-    document.getElementById("dropdown-menu").classList.remove("show");
-  }
-});

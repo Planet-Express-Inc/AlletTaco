@@ -7,8 +7,8 @@ function loadArticles(query = "") {
   list.innerHTML = ""; // Liste immer zuerst leeren
 
   const url = query.trim()
-    ? `/search-${encodeURIComponent(query)}.json`
-    : `/buyer.json`;
+    ? `/Multi/search-${encodeURIComponent(query)}.json`
+    : `/Multi/buyer.json`;
 
   fetch(url)
     .then(response => {
@@ -48,23 +48,3 @@ function loadArticles(query = "") {
     });
 }
 
-
-
-function suche() {
-  const query = document.getElementById('search-input').value;
-  console.log(query);
-  loadArticles(query); // übergibt den Suchbegriff oder "" an loadArticles
-}
-
-
-
-function toggleDropdown() {
-  document.getElementById("dropdown-menu").classList.toggle("show");
-}
-
-// Klick außerhalb schließt Dropdown
-window.addEventListener("click", function(event) {
-  if (!event.target.closest('.dropdown')) {
-    document.getElementById("dropdown-menu").classList.remove("show");
-  }
-});

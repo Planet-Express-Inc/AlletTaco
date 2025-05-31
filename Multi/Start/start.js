@@ -1,6 +1,6 @@
 // Globale Variable zum Speichern der gewählten Rolle
 let selectedRoll = "";
-let apiBaseUrl  = "http://allestaco.niclas-sieveneck.de:5000/v1/"; //GrundURL für die API-Anfragen; HTTP WIRD BALD SEHR BALD IN HTTPS UMGEWANDELT
+let apiBaseUrl  = "https://allestaco.niclas-sieveneck.de:5000/v1/"; //GrundURL für die API-Anfragen; HTTP WIRD BALD SEHR BALD IN HTTPS UMGEWANDELT
 
 //Funktion zum Verarbeiten der Cookie-Optionen
 function toggleCookies() {
@@ -83,7 +83,7 @@ async function onLogin() {
                 alert("Login erfolgreich! Benutzer-ID: " + userData.benutzer_id);
 
                 
-                if(selectedRoll == "verkäufer"){
+                if(selectedRoll == "Verkäufer"){
                     window.location.href = "/Multi/Verkaeufer/verkaeufer.html"; // Zielseite ist die verkäufer site
                 }else{
                     window.location.href = "/Multi/Kaeufer/kaeufer.html"; // Zielseite ist die käufer site
