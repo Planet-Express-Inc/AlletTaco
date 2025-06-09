@@ -1,7 +1,8 @@
-document.addEventListener("DOMContentLoaded", () => {    /*laden der Daten nach laden der Website */
+document.addEventListener("DOMContentLoaded", () => {    // Daten laden nach Websiteaufruf
   showRoleBasedMenu();
   userData();
 
+  // Profil aufrufen
   const profilLink = document.getElementById("profil-link");
 if (profilLink) {
   profilLink.addEventListener("click", (e) => {
@@ -10,20 +11,18 @@ if (profilLink) {
     const userId = sessionStorage.getItem("user_id");
 
     if (userId) {
-      // Leite mit Parameter weiter
       window.location.href = `/Multi/verkaeuferProfil/verkaeuferProfil.html?user_id=${encodeURIComponent(userId)}`;
     } else {
       alert("Keine Benutzer-ID gefunden.");
     }
   });
 }
+// Warenkorb aufrufen
 const warenkorb = document.getElementById("warenkorb");
 if (warenkorb) {
   warenkorb.addEventListener("click", (e) => {
     e.preventDefault();
-
     const userId = sessionStorage.getItem("user_id");
-
     if (userId) {
       // Leite mit Parameter weiter
       window.location.href = `/Multi/Warenkorb/warenkorb.html?user_id=${encodeURIComponent(userId)}`;
@@ -49,14 +48,13 @@ if (warenkorb) {
   });
 });
 
-
+// Daten aus Session Storage auslesen
 function userData (){
-  // Werte aus dem Session Storage holen
       const username = sessionStorage.getItem('username');
       const role = sessionStorage.getItem('roll');
       const userId = sessionStorage.getItem('user_id');
 
-      // DOM-Elemente holen
+      // HTML Inhalte auslesen 
       const userInfoElement = document.getElementById('user-info');
       const userRoleElement = document.getElementById('user-role');
 
@@ -70,30 +68,24 @@ function userData (){
       }
 }
 
+// Zeige Dropdownmenü
 function showRoleBasedMenu() {
   const role = sessionStorage.getItem('roll');
 
   const allRoleSections = document.querySelectorAll('[data-role-content]');
+  // alles verstecken
   allRoleSections.forEach(section => {
-    section.style.display = 'none'; // Alles ausblenden
+    section.style.display = 'none'; 
   });
-
+  // Zeige nur das für die Rolle 
   if (role) {
     const visibleSection = document.querySelector(`[data-role-content="${role}"]`);
     if (visibleSection) {
-      visibleSection.style.display = 'block'; // Nur die passende Rolle anzeigen
+      visibleSection.style.display = 'block'; 
     }
   }
 }
-
-function suche() {
-  const query = document.getElementById('search-input').value;
-  console.log(query);
-  loadArticles(query); // übergibt den Suchbegriff oder "" an loadArticles
-}
-
-
-
+// zeige das Dropdownmenü
 function toggleDropdown() {
   document.getElementById("dropdown-menu").classList.toggle("show");
 }
@@ -104,4 +96,25 @@ window.addEventListener("click", function(event) {
     document.getElementById("dropdown-menu").classList.remove("show");
   }
 });
+
+// Suche öffnen
+function suche() {
+  const input = document.getElementById("search-input");
+  const query = input ? input.value.trim() : "";
+  const roll = sessionStorage.getItem('roll'); 
+
+  // Startseite des Käufers mit Suchanfrage öffnen
+  if (roll == 'Käufer')
+  {
+    window.location.href = `/Multi/Kaeufer/kaeufer.html?query=${encodeURIComponent(query)}`;
+  }
+  // Startseite des Verkäufers mit Suchanfrage öffnen  
+  if (roll == 'Verkäufer')
+  {
+    window.location.href = `/Multi/Verkaeufer/verkaeufer.html?query=${encodeURIComponent(query)}`;
+  }
+}
+
+
+
 

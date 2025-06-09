@@ -124,7 +124,7 @@
   cursor: pointer;
 }
 
-.review-button, .home-button {
+.order-button, .home-button {
   background-color: #f0c000;
   border: none;
   padding: 10px 20px;

@@ -34,4 +34,4 @@ fetch('http://allestaco.niclas-sieveneck.de:5000/v1/system/status/api')
             })
             .catch(error => {
                 document.getElementById('istAllesTaco').textContent = 'Fehler bei der Api' + error;
-            });
+});
