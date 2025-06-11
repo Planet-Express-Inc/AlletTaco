@@ -12,7 +12,7 @@
   <body>
     <header class="header"> <!-- Obere Leiste -->
       <div class="logo">
-        <img src="/Multi/taco_logo.png" alt="Alles Taco Logo">
+        <img src="/Multi/Bilder/taco_logo.png" alt="Alles Taco Logo">
       </div>
 
       <div class="welcome">
@@ -40,8 +40,8 @@
 
       <div class="login-popup" id="login-popup">
           <h2>Einloggen</h2>
-          <input type="text" id="login-username" placeholder="Benutzername">
-          <input type="password" id="login-password" placeholder="Passwort">
+          <input type="text" id="login-username" placeholder="Benutzername"required>
+          <input type="password" id="login-password" placeholder="Passwort"required>
           <button onclick="onLogin()">Einloggen</button>
           <a href="#" onclick="showRegister(); return false;" style="cursor:pointer; color:blue; text-decoration:underline;">
             Registrieren</a>  <!-- Das ist der Klickable Text -->
@@ -49,11 +49,11 @@
 
       <div class="register-popup" id="register-popup">
           <h2>Registrieren</h2>
-          <input type="text" id="register-username" required placeholder="Benutzername">
-          <input type="text" id="register-firstname" required placeholder="Vorname">
-          <input type="text" id="register-lastname" required placeholder="Nachname">
-          <input type="email" id="register-mail" required placeholder="Mail">
-          <input type="password" id="register-password" required placeholder="Passwort">
+          <input type="text" id="register-username" required placeholder="Benutzername"required>
+          <input type="text" id="register-firstname" required placeholder="Vorname"required>
+          <input type="text" id="register-lastname" required placeholder="Nachname"required>
+          <input type="email" id="register-mail" required placeholder="Mail"required>
+          <input type="password" id="register-password" required placeholder="Passwort"required>
           <button onclick="showLogin(); onRegister()">Account erstellen</button>
       </div>
     </main>
