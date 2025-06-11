@@ -8,7 +8,7 @@
 }
 
 .product-card {
-  flex: 1; /* nimmt den verfügbaren Platz ein */
+  flex: 1; 
   display: flex;
   flex-direction: column;
   border-radius: 8px;
@@ -55,11 +55,8 @@
 .product-total {
   margin-top: 10px;
   font-weight: bold;
-  color: #008000; /* grün für den Gesamtpreis */
+  color: #008000; 
 }
-
-
-
 
 #total-price-block {
   width: 300px;
@@ -81,21 +78,11 @@
 #total-price {
   font-size: 1.8rem;
   font-weight: bold;
-  color: #008000; /* grüner Farbton für Gesamtpreis */
-}
-
-.buy-button {
-    padding: 10px 20px;
-    background-color: rgb(176, 11, 14);
-    color: white;
-    border: none;
-    border-radius: 8px;
-    cursor: pointer;
-    font-size: 16px;
+  color: #008000; 
 }
 
 .modal {
-  display: none; /* Standard: versteckt */
+  display: none; 
   position: fixed;
   z-index: 1000;
   left: 0;
@@ -117,19 +104,12 @@
   text-align: center;
 }
 
-.close-button {
-  float: right;
-  font-size: 1.5em;
-  font-weight: bold;
-  cursor: pointer;
-}
-
-.order-button, .home-button {
-  background-color: #f0c000;
-  border: none;
+.order-button, .home-button, .buy-button {
   padding: 10px 20px;
-  font-size: 1em;
+  background-color: rgb(176, 11, 14);
+  color: white;
+  border: none;
+  border-radius: 8px;
   cursor: pointer;
-  margin-top: 1em;
-  border-radius: 5px;
+  font-size: 16px;
 }
