@@ -10,39 +10,35 @@ document.addEventListener("DOMContentLoaded", () => {
 function loadArticles(query) {
   const list = document.getElementById('product-list');
   // Test json 
+
+  console.log(encodeURIComponent(query));
   const url = query.trim()
-    ? `/Multi/search-${encodeURIComponent(query)}.json`
-    : `/Multi/buyer.json`;
+    ? `https://allestaco.niclas-sieveneck.de:5000/v1/article/search/${encodeURIComponent(query)}`
+    : `https://allestaco.niclas-sieveneck.de:5000/v1/article/multiple/0/10`;
   // Holen der Json
   fetch(url)
   // Prüfung ob eine Json kommt
     .then(response => {
-      if (!response.ok) {
-        throw new Error("Fehler beim Laden der Artikel.");
-      }
       return response.json();
     })
     // Prüfung ob Daten in der Json sind
     .then(data => {
-      if (data.length === 0) {
-        list.innerHTML = "<p>Keine Artikel gefunden.</p>";
-        return;
-      }
+      console.log(data);
       // Durchlaufen der Json Artikel
       data.forEach(product => {
         const item = document.createElement('div');
         item.className = 'product';
         // Ausgabe auf html
         item.innerHTML = `
-          <img src="${product.image_url}" alt="${product.title}">
+          <img src="https://allestaco.niclas-sieveneck.de:5000/v1/article/picture/${product.artikel_id}" alt="${product.titel}">
           <div class="product-info">
-            <h3 class="product-title">${product.title}</h3>
-            <p class="product-description">${product.description}</p>
+            <h3 class="product-title">${product.titel}</h3>
+            <p class="product-description">${product.beschreibung}</p>
           </div>
         `;
         // Eventlistener wenn auf ein Produkt geklickt wird
         item.addEventListener('click', () => {
-          window.location.href = `/Multi/Product/product.html?id=${product.id}`;
+          window.location.href = `/Multi/Product/product.html?id=${product.artikel_id}`;
         });
 
         list.appendChild(item);

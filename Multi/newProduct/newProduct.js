@@ -1,5 +1,5 @@
 document.getElementById('product-form').addEventListener('submit', function (event) {
-  event.preventDefault(); // Verhindert echtes Absenden
+  //event.preventDefault(); // Verhindert echtes Absenden
 
   const title = document.getElementById('title').value.trim();
   const description = document.getElementById('description').value.trim();

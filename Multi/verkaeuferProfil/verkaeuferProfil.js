@@ -8,8 +8,8 @@ document.addEventListener("DOMContentLoaded", async () => {
     const item = document.getElementById('seller-box');
     try
     {
-        const sellerRes = await fetch('/Multi/seller.json');
-        const sellers = await sellerRes.json();
+        const sellerRes = fetch(`https://allestaco.niclas-sieveneck.de:5000/v1/user/reviews/${sellerId}`);
+        const sellers = sellerRes.json();
 
         // Beispiel: Zugriff auf einen bestimmten Verkäufer
         const seller = sellers.find(s => s.id === sellerId); // z. B. feste ID oder aus URL

@@ -31,11 +31,10 @@ document.addEventListener("DOMContentLoaded", async () => {
         const summe = ratingArray.reduce((acc, ratingArray) => acc + ratingArray.sterne, 0);
         const durchschnitt = summe / ratingArray.length;
         const sternegerundet = Math.round(durchschnitt);
-
         console.log("Durchschnittspreis:", durchschnitt)
   
         // 3. Füllen der Produktinformationen im HTML
-        document.getElementById('product-image').src = "/Multi/Bilder/RalfSchumacherWasMachstDuDennHier.jpg";
+        document.getElementById('product-image').src = `https://allestaco.niclas-sieveneck.de:5000/v1/article/picture/${productId}`;
         document.getElementById('product-image').alt = product.titel;
         document.getElementById('preis').textContent = "Preis: " + product.preis.replace('.',',') + " €";
         document.getElementById('product-title').textContent = product.titel;
