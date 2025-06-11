@@ -12,9 +12,7 @@ window.addEventListener("click", function(event) {
 
 document.addEventListener("DOMContentLoaded", function() {
     // API-URL wie im Screenshot
-    fetch(apiBaseUrl +"user/purchase", {
-        credentials: 'include'}
-        )
+    fetch(apiBaseUrl +"user/purchase",)
         .then(response => response.json())
         .then(orders => {
             console.log("Antwort von der API:", orders); //Fehersuche

@@ -1,3 +1,4 @@
+let apiBaseUrl  = "https://allestaco.niclas-sieveneck.de:5000/v1/"; //GrundURL für die API-Anfragen;
 function toggleDropdown() {
     document.getElementById("dropdown-menu").classList.toggle("show");
   }
@@ -11,7 +12,7 @@ function toggleDropdown() {
   
   document.addEventListener("DOMContentLoaded", function () {
     // Benutzerdaten laden
-    fetch("/api/user")
+    fetch(apiBaseUrl +"user/info/" + sessionStorage.getItem("user_id") )
       .then(response => response.json())
       .then(user => {
         const details = document.getElementById("userDetails");
@@ -20,12 +21,14 @@ function toggleDropdown() {
           <div><strong>Nachname:</strong> ${user.nachname}</div>
           <div><strong>Mail:</strong> ${user.email}</div>
           <div><strong>Benutzername:</strong> ${user.benutzername}</div>
+          <div><strong>Rolle:</strong> ${sessionStorage.getItem("roll")}</div>
+          
         `;
   
         // Wenn Rolle Verkäufer ist, Kommentare anzeigen
-        if (user.rolle === "verkäufer") {
+        if (sessionStorage.getItem("roll") === "verkäufer") {
           document.getElementById("userCommentsSection").style.display = "block";
-          fetch(`/api/comments/${user.id}`)
+          fetch(apiBaseUrl +'/user/reviews/${user.benutzer_id}')
             .then(response => response.json())
             .then(comments => {
               const commentContainer = document.getElementById("userComments");
@@ -33,9 +36,8 @@ function toggleDropdown() {
                 const div = document.createElement("div");
                 div.classList.add("comment");
                 div.innerHTML = `
-                  <h3>${comment.titel} – ${"⭐".repeat(comment.sterne)}</h3>
-                  <p>${comment.text}</p>
-                  <small>Von: ${comment.verfasser}</small>
+                  <p>${comment.kommentar} – ${"⭐".repeat(comment.sterne)}</p>
+                  <small>Von: ${comment.bewerteter_id}</small>
                 `;
                 commentContainer.appendChild(div);
               });
@@ -45,20 +47,5 @@ function toggleDropdown() {
       })
       .catch(error => console.error("Fehler beim Laden der Benutzerdaten:", error));
   
-    // Bestellungen laden (bereits vorhanden)
-    fetch("/api/orders")
-      .then(response => response.json())
-      .then(data => {
-        const orderHistory = document.getElementById("orderHistory");
-        orderHistory.innerHTML = "";
-        data.forEach(order => {
-          const orderDiv = document.createElement("div");
-          orderDiv.classList.add("order-item");
-          orderDiv.innerHTML = `<h3>${order.produktname}</h3>
-                                <p>Preis: ${order.preis} €</p>
-                                <p>Versand: ${order.versanddaten}</p>`;
-          orderHistory.appendChild(orderDiv);
-        });
-      })
-      .catch(error => console.error("Fehler beim Laden der Bestellungen:", error));
+    // verlinkungs knopf noch zur bestellhistorie /Multi/orderHistory/orderHistory.html
   });
