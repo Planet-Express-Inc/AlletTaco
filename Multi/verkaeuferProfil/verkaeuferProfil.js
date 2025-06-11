@@ -8,15 +8,17 @@ document.addEventListener("DOMContentLoaded", async () => {
     const item = document.getElementById('seller-box');
     try
     {
-        const sellerRes = fetch(`https://allestaco.niclas-sieveneck.de:5000/v1/user/reviews/${sellerId}`);
-        const sellers = sellerRes.json();
 
-        // Beispiel: Zugriff auf einen bestimmten Verkäufer
-        const seller = sellers.find(s => s.id === sellerId); // z. B. feste ID oder aus URL
- 
+        // Verkäuferdaten holen
+        const sellerRes = await fetch(`https://allestaco.niclas-sieveneck.de:5000/v1/user/info/${sellerId}`);
+        const sellerArray = await sellerRes.json();
+        const seller = sellerArray[0]; 
+        console.log("Verkäuferdaten:", seller);
+
+
         item.innerHTML = `
-                <p class="seller">Name: ${seller.name}</p>
-                <p class="seller">Email: ${seller.contact}</p>
+                <p class="seller">Name: ${seller.benutzername}</p>
+                <p class="seller">Email: ${seller.email}</p>
                 <p class="seller-rating">${renderSterne((Math.round(seller.rating)))}</p>
             `;
 
