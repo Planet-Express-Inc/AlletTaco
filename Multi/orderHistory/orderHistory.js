@@ -1,3 +1,4 @@
+let apiBaseUrl  = "https://allestaco.niclas-sieveneck.de:5000/v1/"; //GrundURL für die API-Anfragen; HTTP WIRD BALD SEHR BALD IN HTTPS UMGEWANDELT
 function toggleDropdown() {
   document.getElementById("dropdown-menu").classList.toggle("show");
 }
@@ -10,24 +11,34 @@ window.addEventListener("click", function(event) {
 });
 
 document.addEventListener("DOMContentLoaded", function() {
-    fetch("/api/orders") // API Endpoint für abgeschlossene Käufe
+    // API-URL wie im Screenshot
+    fetch(apiBaseUrl +"user/purchase", {
+        credentials: 'include'}
+        )
         .then(response => response.json())
-        .then(data => {
+        .then(orders => {
+            console.log("Antwort von der API:", orders); //Fehersuche
             const orderHistory = document.getElementById("orderHistory");
             orderHistory.innerHTML = ""; // Alte Inhalte löschen
-            data.forEach(order => {
+
+            // Gehe über alle Bestellungen im Array
+            orders.forEach(order => {
                 const orderDiv = document.createElement("div");
                 orderDiv.classList.add("order-item");
-                orderDiv.innerHTML = `<h3>${order.produktname}</h3>
-                                     <p>Preis: ${order.preis} €</p>
-                                     <p>Versand: ${order.versanddaten}</p>`;
+                orderDiv.innerHTML = `
+                    <h3>Artikel-ID: ${order.artikel_id}</h3>
+                    <p>Käufer-ID: ${order.kaeufer_id}</p>
+                    <p>Kauf-ID: ${order.kauf_id}</p>
+                    <p>Preis: ${order.kaupreis} €</p>
+                    <p>Versand: ${order.versanddaten}</p>
+                `;
                 orderHistory.appendChild(orderDiv);
             });
         })
         .catch(error => console.error("Fehler beim Laden der Bestellungen:", error));
 });
 
-fetch('http://allestaco.niclas-sieveneck.de:5000/v1/system/status/api')
+fetch(apiBaseUrl+'system/status/api')
             .then(istAllesTaco => istAllesTaco.text())
             .then(data => {
                 document.getElementById('istAllesTaco').textContent = data;
