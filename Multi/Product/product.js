@@ -10,18 +10,21 @@ document.addEventListener("DOMContentLoaded", async () => {
   
     try {
         // 2. Holen der Produkt- und Verkäufer-Daten
+        // fetch('https://allestaco.niclas-sieveneck.de:5000/v1/article/${productId}'),
+
         const [productRes, sellerRes] = await Promise.all([
-            fetch('/Multi/articel.json'),
+            console.log(`https://allestaco.niclas-sieveneck.de:5000/v1/article/${productId}`),
+            console.log(fetch(`https://allestaco.niclas-sieveneck.de:5000/v1/article/${productId}`)),
             fetch('/Multi/seller.json')
         ]);
   
-        const [products, sellers] = await Promise.all([
+        const [product, seller] = await Promise.all([
             productRes.json(),
             sellerRes.json()
         ]);
-  
-        const product = products.find(p => p.id === productId);  
-        const seller = sellers.find(s => s.id === product.sellerId);
+        
+        console.log("Produkt:", product);
+        console.log("Verkäufer:", seller);
   
         // 3. Füllen der Produktinformationen im HTML
         document.getElementById('product-image').src = product.image_url;
@@ -53,13 +56,3 @@ function addToCart(){
     console.log(productData);
 }
 
-function toggleDropdown() {
-  document.getElementById("dropdown-menu").classList.toggle("show");
-}
-
-// Klick außerhalb schließt Dropdown
-window.addEventListener("click", function(event) {
-  if (!event.target.closest('.dropdown')) {
-    document.getElementById("dropdown-menu").classList.remove("show");
-  }
-});

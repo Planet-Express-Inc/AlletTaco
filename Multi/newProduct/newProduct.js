@@ -34,7 +34,7 @@ document.getElementById('product-form').addEventListener('submit', function (eve
 
     // Optional: Senden an eine REST-API
     
-    fetch('http://allestaco.niclas-sieveneck.de:5000/v1/article/add', {
+    fetch('https://allestaco.niclas-sieveneck.de:5000/v1/article/add', {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json'
