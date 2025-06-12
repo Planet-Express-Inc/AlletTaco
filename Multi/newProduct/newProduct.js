@@ -1,5 +1,5 @@
 document.getElementById('product-form').addEventListener('submit', function (event) {
-  //event.preventDefault(); // Verhindert echtes Absenden
+  event.preventDefault(); 
 
   const title = document.getElementById('title').value.trim();
   const description = document.getElementById('description').value.trim();
@@ -33,9 +33,27 @@ document.getElementById('product-form').addEventListener('submit', function (eve
     console.log(JSON.stringify(productData, null, 2)); // Für Testzwecke
 
     // Optional: Senden an eine REST-API
+
+
+fetch(`https://allestaco.niclas-sieveneck.de:5000/v1/user/login`, {
+  method: 'GET',
+  credentials: 'include'
+})
+  .then(response => {
+    return response.json();
+  })
+  .then(data => {
+    console.log(data);
+  })
+  .catch(error => {
+    console.error('Fehler:', error);
+  });
+
+
     
-    fetch('https://allestaco.niclas-sieveneck.de:5000/v1/article/add', {
+    fetch(`https://allestaco.niclas-sieveneck.de:5000/v1/article`, {
       method: 'POST',
+      credentials: 'include',
       headers: {
         'Content-Type': 'application/json'
       },
