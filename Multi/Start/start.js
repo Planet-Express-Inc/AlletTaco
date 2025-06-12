@@ -100,7 +100,7 @@ async function onLogin() {
                             console.error('Fehler:', error);
                         });
                 }else{
-                  //  window.location.href = "/Multi/Kaeufer/kaeufer.html"; // Zielseite ist die käufer site
+                    window.location.href = "/Multi/Kaeufer/kaeufer.html"; // Zielseite ist die käufer site
                 }
             } else {
                 alert("Login fehlgeschlagen: Benutzer nicht gefunden oder Passwort falsch.");
