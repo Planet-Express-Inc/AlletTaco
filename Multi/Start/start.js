@@ -85,7 +85,7 @@ async function onLogin() {
 
                 
                 if(selectedRoll == "Verkäufer"){
-                   // window.location.href = "/Multi/Verkaeufer/verkaeufer.html"; // Zielseite ist die verkäufer site
+                    window.location.href = "/Multi/Verkaeufer/verkaeufer.html"; // Zielseite ist die verkäufer site
                    fetch(`https://allestaco.niclas-sieveneck.de:5000/v1/user/login`, {
                         method: 'GET',
                         credentials: 'include'
