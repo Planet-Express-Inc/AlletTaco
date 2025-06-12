@@ -59,6 +59,7 @@ async function onLogin() {
     try {
         const response = await fetch(apiBaseUrl + 'user/login', {
             method: 'POST',
+            credentials: 'include',
             headers: {
                 'Content-Type': 'application/json'
             },
@@ -84,9 +85,22 @@ async function onLogin() {
 
                 
                 if(selectedRoll == "Verkäufer"){
-                    window.location.href = "/Multi/Verkaeufer/verkaeufer.html"; // Zielseite ist die verkäufer site
+                   // window.location.href = "/Multi/Verkaeufer/verkaeufer.html"; // Zielseite ist die verkäufer site
+                   fetch(`https://allestaco.niclas-sieveneck.de:5000/v1/user/login`, {
+                        method: 'GET',
+                        credentials: 'include'
+                        })
+                        .then(response => {
+                            return response.json();
+                        })
+                        .then(data => {
+                            console.log(data);
+                        })
+                        .catch(error => {
+                            console.error('Fehler:', error);
+                        });
                 }else{
-                    window.location.href = "/Multi/Kaeufer/kaeufer.html"; // Zielseite ist die käufer site
+                  //  window.location.href = "/Multi/Kaeufer/kaeufer.html"; // Zielseite ist die käufer site
                 }
             } else {
                 alert("Login fehlgeschlagen: Benutzer nicht gefunden oder Passwort falsch.");
