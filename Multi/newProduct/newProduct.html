@@ -69,6 +69,10 @@
 
             <textarea id="description" placeholder="Beschreibung eingeben..." rows="6" required></textarea>
 
+            <h2>Kategorie:</h2>
+
+            <input type="text" id="kategorie" placeholder="Kategorie eingeben..." required>
+
             <h2>Preis:</h2>
 
             <input type="number" id="price" step="0.01" min="0" placeholder="Preis in €" required>
@@ -79,10 +83,14 @@
             
             <button type="submit" class="save-button">Speichern</button> 
             
-          </form>
-
-            
-    </div>
+          </form>            
+  </div>
+    <div id="saveModal" class="modal">
+      <div class="modal-content">
+        <p>Der Artikel wurde erfolgreich gespeichert!</p>
+        <button id="backButton" onclick="window.location.href='/Multi/Verkaeufer/verkaeufer.html'">Zurück zur Startseite</button>
+  </div>
+</div>
 
 </main>
 

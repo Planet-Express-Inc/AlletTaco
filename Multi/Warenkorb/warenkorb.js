@@ -20,93 +20,91 @@ function updateTotalPrice() {
   totalPriceElement.textContent = total.toFixed(2).replace('.', ',') + ' €';
 }
 
-function loadArticles () {
-  fetch('warenkorb.json')  /*URL der API*/
+function loadArticles() {
+  fetch(`https://allestaco.niclas-sieveneck.de:5000/v1/user/cart`, {
+    method: 'GET',
+    credentials: 'include'
+  })
   .then(response => response.json())
-  .then(data => {
+  .then(async data => {  // <-- ACHTUNG: async hier
     productsData = data;
+    console.log(data);
     const list = document.getElementById('product-card');
 
-    /*auslesen der JSON*/
-    data.forEach(product => {
-    const item = document.createElement('div');
-    item.className = 'product';
+    for (const articels of data) {
+      console.log(articels.artikel_id);
+      const productRes = await fetch(`https://allestaco.niclas-sieveneck.de:5000/v1/article/${articels.artikel_id}`);
+      const productArray = await productRes.json();
+      const product = productArray[0]; 
 
-    const basePrice = parseFloat(product.price); // ← WICHTIG  
-        
+      const item = document.createElement('div');
+      item.className = 'product';
 
-    /*hinzufügen der HTML Elemente in die vorhandene Website*/
-    item.innerHTML = `
-        <img src="${product.image_url}" alt="${product.title}">
+      const basePrice = parseFloat(articels.price);
 
+      item.innerHTML = `
+        <img src="https://allestaco.niclas-sieveneck.de:5000/v1/article/picture/${product.artikel_id}" alt="${product.titel}">
         <div class="product-info">
-          <h3 class="product-title">${product.title}</h3>
-          <p class="product-description">${product.description}</p>
-          <p class="product-price" id="price-${product.id}">Preis: ${(parseFloat(product.price)).toFixed(2).replace('.', ',')} €</p>
+          <h3 class="product-title">${product.titel}</h3>
+          <p class="product-description">${product.beschreibung}</p>
+          <p class="product-price" id="price-${product.artikel_id}">Preis: ${(parseFloat(product.preis)).toFixed(2).replace('.', ',')} €</p>
 
           <div class="product-actions">
-          <label for="quantity-${product.id}">Menge:</label>
-          <select id="quantity-${product.id}" class="quantity-select">
+          <label for="quantity-${product.artikel_id}">Menge:</label>
+          <select id="quantity-${product.artikel_id}" class="quantity-select">
               ${[...Array(product.amount)].map((_, i) => `<option value="${i + 1}">${i + 1}</option>`).join("")}
           </select>
 
-          <button onclick="deleteArticel(${product.id})" class="delete-button">Löschen</button>
+          <button onclick="deleteArticel(${product.artikel_id})" class="delete-button">Löschen</button>
           </div>
         </div>
       `;
 
-      // Listner für den dynamischen Preis
-      const quantitySelect = item.querySelector(`#quantity-${product.id}`);
-      const priceElement = item.querySelector(`#price-${product.id}`);
+      const quantitySelect = item.querySelector(`#quantity-${product.artikel_id}`);
+      const priceElement = item.querySelector(`#price-${product.artikel_id}`);
 
       quantitySelect.addEventListener('change', () => {
         const selectedQuantity = parseInt(quantitySelect.value, 10);
         const totalPrice = (basePrice * selectedQuantity).toFixed(2);
         priceElement.textContent = `Preis: ${totalPrice} €`;
 
-      updateTotalPrice();
+        updateTotalPrice();
       });
 
+      list.appendChild(item);
+    }
 
-    // unten anhängen 
-    list.appendChild(item);
-    });
-    
     updateTotalPrice();
   })
   .catch(err => {
-      console.error('Fehler beim Laden der Produkte:', err);
+    console.error('Fehler beim Laden der Produkte:', err);
   });
 }
 loadArticles();
 });
+https://allestaco.niclas-sieveneck.de:5000/v1/user/cart/${id}
 
 // Löscht Artikel aus Warenkorb
-function deleteArticel (id){
-const userId = sessionStorage.getItem('roll');
-const productData = {
-    warenkorbid: userId,
-    articelId:id
-  };
-  console.log(productData)
-  
-      // Optional: Senden an eine REST-API
-  /*
-  fetch('https://dein-server.de/api/produkte', {
-    method: 'POST',
-    headers: {
-      'Content-Type': 'application/json'
-    },
-    body: JSON.stringify(productData)
+function deleteArticel (id) {
+  fetch(`https://allestaco.niclas-sieveneck.de:5000/v1/user/cart/${id}`, {
+    method: 'DELETE',
+    credentials: 'include'
   })
-  .then(response => response.json())
-  .then(data => {
-    console.log('Gespeichert:', data);
+  .then(response => {
+    if (response.status === 204) {
+      console.log('Erfolgreich gelöscht (204)');
+      setTimeout(() => {
+        location.reload();
+      }, 1000);
+    } else {
+      console.error('Fehler beim Löschen: HTTP-Status', response.status);
+      alert("Löschen fehlgeschlagen. Fehlercode: " + response.status);
+    }
   })
   .catch(error => {
     console.error('Fehler beim Senden:', error);
+    alert("Ein technischer Fehler ist aufgetreten.");
   });
-  */
 }
 
 // Zeigt Fenster nach Kauf an

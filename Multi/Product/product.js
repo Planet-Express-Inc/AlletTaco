@@ -1,5 +1,6 @@
 const params = new URLSearchParams(window.location.search);
 const productId = parseInt(params.get('id'), 10);
+let seller;
 
 document.addEventListener("DOMContentLoaded", async () => {
     // 1. Holen der Produkt-ID aus der URL
@@ -23,7 +24,7 @@ document.addEventListener("DOMContentLoaded", async () => {
         // Verkäuferdaten holen
         const sellerRes = await fetch(`https://allestaco.niclas-sieveneck.de:5000/v1/user/info/${sellerId}`);
         const sellerArray = await sellerRes.json();
-        const seller = sellerArray[0]; 
+        seller = sellerArray[0]; 
         console.log("Verkäuferdaten:", seller);
 
         const ratingRes = await fetch(`https://allestaco.niclas-sieveneck.de:5000/v1/user/reviews/${sellerId}`);
@@ -56,10 +57,30 @@ document.addEventListener("DOMContentLoaded", async () => {
 });
 
 function addToCart(){
+    const userId = parseInt(sessionStorage.getItem('user_id'), 10);
       const productData = {
-      warenkorbId: 1,
-      articelId: productId
+      anzahl: 1,
+      artikel_id: productId,
+      benutzer_id: userId,
+      verkaeufer_id: seller.benutzer_id
     };
     console.log(productData);
+
+    fetch(`https://allestaco.niclas-sieveneck.de:5000/v1/user/cart`, {
+      method: 'POST',
+      credentials: 'include',
+      headers: {
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify(productData)
+    })
+    .then(response => response.json())
+    .then(data => {
+      console.log('Hinzugefügt:', data);
+      document.getElementById('saveModal').style.display = 'flex';
+    })
+    .catch(error => {
+      console.error('Fehler beim Senden:', error);
+    });
 }
 

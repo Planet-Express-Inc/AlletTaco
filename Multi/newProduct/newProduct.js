@@ -3,6 +3,7 @@ document.getElementById('product-form').addEventListener('submit', function (eve
 
   const title = document.getElementById('title').value.trim();
   const description = document.getElementById('description').value.trim();
+  const kategorie = document.getElementById('kategorie').value.trim();
   const price = parseFloat(document.getElementById('price').value);
   const amount = parseFloat(document.getElementById('amount').value);
   const imageInput = document.getElementById('image-upload');
@@ -25,31 +26,10 @@ document.getElementById('product-form').addEventListener('submit', function (eve
       bild: base64Image,  
       status: "verfügbar", 
       bestand: amount, 
-      kategorie: "Taco" 
+      kategorie: kategorie 
 
     };
-
-    // Ergebnis anzeigen oder an den Server senden
-    console.log(JSON.stringify(productData, null, 2)); // Für Testzwecke
-
-    // Optional: Senden an eine REST-API
-
-
-fetch(`https://allestaco.niclas-sieveneck.de:5000/v1/user/login`, {
-  method: 'GET',
-  credentials: 'include'
-})
-  .then(response => {
-    return response.json();
-  })
-  .then(data => {
-    console.log(data);
-  })
-  .catch(error => {
-    console.error('Fehler:', error);
-  });
-
-
+    console.log(JSON.stringify(productData, null, 2)); 
     
     fetch(`https://allestaco.niclas-sieveneck.de:5000/v1/article`, {
       method: 'POST',
@@ -62,6 +42,7 @@ fetch(`https://allestaco.niclas-sieveneck.de:5000/v1/user/login`, {
     .then(response => response.json())
     .then(data => {
       console.log('Gespeichert:', data);
+      document.getElementById('saveModal').style.display = 'flex';
     })
     .catch(error => {
       console.error('Fehler beim Senden:', error);
@@ -86,16 +67,5 @@ document.getElementById('image-upload').addEventListener('change', function(even
       preview.style.display = 'block';
     };
     reader.readAsDataURL(file);
-  }
-});
-
-function toggleDropdown() {
-  document.getElementById("dropdown-menu").classList.toggle("show");
-}
-
-// Klick außerhalb schließt Dropdown
-window.addEventListener("click", function(event) {
-  if (!event.target.closest('.dropdown')) {
-    document.getElementById("dropdown-menu").classList.remove("show");
   }
 });
