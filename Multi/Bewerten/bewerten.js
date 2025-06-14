@@ -1,13 +1,13 @@
 document.addEventListener("DOMContentLoaded", () => {
   const params = new URLSearchParams(window.location.search);
-  const sellerName = params.get('name');
+  const sellerID = params.get('seller_id');
   const sterneContainer = document.getElementById('sterne-container');
   const sterneInput = document.getElementById('sterne-wert');
   const sterneSpans = sterneContainer.querySelectorAll('span');
 
-    if (sellerName) {
+    if (sellerID) {
     const titelElement = document.getElementById('verkaeuferName');
-    titelElement.textContent = `Verkäufer: ${sellerName}`;
+    titelElement.textContent = `Verkäufer: ${sellerID}`;
   }
 
   sterneSpans.forEach(stern => {
