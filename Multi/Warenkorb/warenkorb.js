@@ -82,7 +82,6 @@ function loadArticles() {
 }
 loadArticles();
 });
-https://allestaco.niclas-sieveneck.de:5000/v1/user/cart/${id}
 
 // Löscht Artikel aus Warenkorb
 function deleteArticel (id) {

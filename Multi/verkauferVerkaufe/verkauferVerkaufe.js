@@ -1,14 +1,4 @@
 let apiBaseUrl  = "https://allestaco.niclas-sieveneck.de:5000/v1/"; //GrundURL für die API-Anfragen; HTTP WIRD BALD SEHR BALD IN HTTPS UMGEWANDELT
-function toggleDropdown() {
-  document.getElementById("dropdown-menu").classList.toggle("show");
-}
-
-// Klick außerhalb schließt Dropdown
-window.addEventListener("click", function(event) {
-  if (!event.target.closest('.dropdown')) {
-    document.getElementById("dropdown-menu").classList.remove("show");
-  }
-});
 
 document.addEventListener("DOMContentLoaded", function() {
     // API-URL wie im Screenshot
