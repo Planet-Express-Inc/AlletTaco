@@ -47,8 +47,6 @@ document.getElementById('bewerten-form').addEventListener('submit', function (ev
 
     // Ergebnis anzeigen oder an den Server senden
     console.log(JSON.stringify(productData, null, 2)); // Für Testzwecke
-
-    // Optional: Senden an eine REST-API
     
     fetch(`https://allestaco.niclas-sieveneck.de:5000/v1/user/reviews`, {
       method: 'POST',
@@ -61,6 +59,7 @@ document.getElementById('bewerten-form').addEventListener('submit', function (ev
     .then(response => response.json())
     .then(data => {
       console.log('Gespeichert:', data);
+      document.getElementById('saveModal').style.display = 'flex';
     })
     .catch(error => {
       console.error('Fehler beim Senden:', error);
