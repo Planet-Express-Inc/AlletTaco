@@ -37,6 +37,12 @@ document.addEventListener("DOMContentLoaded", async () => {
         .then(data => {
             const list = document.getElementById('bewertung-list');
     
+
+            const verkauferCall = await fetch(apiBaseUrl + "user/info/" + product.verkaeufer_id);
+            const verkauferArray = await verkauferCall.json();
+            const verkaufer = verkauferArray[0];
+
+
             /*auslesen der JSON*/
             data.forEach(bewertung => {
             const item = document.createElement('div');
@@ -44,9 +50,8 @@ document.addEventListener("DOMContentLoaded", async () => {
                 
             /*hinzufügen der HTML Elemente in die vorhandene Website*/
             item.innerHTML = `
-                    <p class="bewertung-title">Titel: ${bewertung.id}</p>
-                    <p class="bewertung-user">User: ${bewertung.bewerter_id}</p>
-                    <p class="bewertung-user">User1: ${bewertung.bewertender_id}</p>
+                    <p class="bewertung-user">Bewerter: ${bewertung.bewerter_id}</p>
+                    <p class="bewertung-user">Bewerteter: ${bewertung.bewerteter_id}</p>
                     <p class="bewertung-sterne">${renderSterne(bewertung.sterne)}</p>
                     <p class="bewertung-kommentar">Kommentar: ${bewertung.kommentar}</p>
             `;

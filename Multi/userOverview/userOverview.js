@@ -49,35 +49,35 @@ function toggleDropdown() {
 
 
   
-    function loadBewertungen () {
-        const sellerId = sessionStorage.getItem("user_id"); // Verkäufer-ID aus dem Session Storage hole
-        fetch(`https://allestaco.niclas-sieveneck.de:5000/v1/user/reviews/${sellerId}`)  /*URL der API*/
-        .then(response => response.json())
-        .then(data => {
-            const list = document.getElementById('userComments');
-    
-            /*auslesen der JSON*/
-            data.forEach(bewertung => {
+async function loadBewertungen() {
+    try {
+        // Bewertungen laden
+        const response = await fetch(`https://allestaco.niclas-sieveneck.de:5000/v1/user/reviews/${sellerId}`);
+        const data = await response.json();
+
+        const list = document.getElementById('bewertung-list');
+
+
+
+        // Bewertungen verarbeiten
+        data.forEach(bewertung => {
             const item = document.createElement('div');
             item.className = 'bewertung';
-                
-
-            /*hinzufügen der HTML Elemente in die vorhandene Website*/
+            
             item.innerHTML = `
-                    <p class="bewertung-title">Titel: ${bewertung.id}</p>
-                    <p class="bewertung-user">User: ${bewertung.bewerter_id}</p>
-                    <p class="bewertung-user">User1: ${bewertung.bewertender_id}</p>
-                    <p class="bewertung-sterne">${renderSterne(bewertung.sterne)}</p>
-                    <p class="bewertung-kommentar">Kommentar: ${bewertung.kommentar}</p>
+                <p class="bewertung-user">Bewerter: ${bewertung.bewerter_id}</p>
+                <p class="bewertung-user">Bewerteter: ${bewertung.bewerteter_id}</p>
+                <p class="bewertung-sterne">${renderSterne(bewertung.sterne)}</p>
+                <p class="bewertung-kommentar">Kommentar: ${bewertung.kommentar}</p>
             `;
-            /*unten anhängen */
+
             list.appendChild(item);
-            });
-        })
-        .catch(err => {
-            console.error('Fehler beim Laden der Produkte:', err);
         });
+
+    } catch (err) {
+        console.error('Fehler beim Laden der Bewertungen:', err);
     }
+}
 
 
 function renderSterne(anzahl) {
