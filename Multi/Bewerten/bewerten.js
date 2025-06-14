@@ -1,6 +1,8 @@
+const params = new URLSearchParams(window.location.search);
+const sellerID = params.get('seller_id');
+
 document.addEventListener("DOMContentLoaded", () => {
-  const params = new URLSearchParams(window.location.search);
-  const sellerID = params.get('seller_id');
+
   const sterneContainer = document.getElementById('sterne-container');
   const sterneInput = document.getElementById('sterne-wert');
   const sterneSpans = sterneContainer.querySelectorAll('span');
@@ -28,14 +30,18 @@ document.addEventListener("DOMContentLoaded", () => {
 document.getElementById('bewerten-form').addEventListener('submit', function (event) {
   event.preventDefault(); // Verhindert echtes Absenden
 
-  const title = document.getElementById('title').value.trim();
   const description = document.getElementById('description').value.trim();
   const sterne = parseInt(document.getElementById('sterne-wert').value, 10);
 
+  const user_id = sessionStorage.getItem("user_id");
+  const roll = sessionStorage.getItem("roll");
+
 
     const productData = {
-      title: title,
-      description: description,
+      bewerter_id: user_id,
+      bewerteter_id: sellerID,
+      kommentar: description,
+      rolle_des_bewerteten: roll,
       sterne: sterne
     };
 
@@ -44,8 +50,9 @@ document.getElementById('bewerten-form').addEventListener('submit', function (ev
 
     // Optional: Senden an eine REST-API
     
-    fetch('https://dein-server.de/api/produkte', {
+    fetch(`https://allestaco.niclas-sieveneck.de:5000/v1/user/reviews`, {
       method: 'POST',
+      credentials: 'include',
       headers: {
         'Content-Type': 'application/json'
       },
@@ -58,14 +65,4 @@ document.getElementById('bewerten-form').addEventListener('submit', function (ev
     .catch(error => {
       console.error('Fehler beim Senden:', error);
     });
-});
-function toggleDropdown() {
-  document.getElementById("dropdown-menu").classList.toggle("show");
-}
-
-// Klick außerhalb schließt Dropdown
-window.addEventListener("click", function(event) {
-  if (!event.target.closest('.dropdown')) {
-    document.getElementById("dropdown-menu").classList.remove("show");
-  }
 });
