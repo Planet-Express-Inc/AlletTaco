@@ -1,7 +1,10 @@
+const params = new URLSearchParams(window.location.search);
+const sellerId = parseInt(params.get('user_id'), 10);
+
 document.addEventListener("DOMContentLoaded", async () => {
     // 1. Holen der Produkt-ID aus der URL
-    const params = new URLSearchParams(window.location.search);
-    const sellerId = parseInt(params.get('user_id'), 10);
+    
+    
   
     if (isNaN(sellerId)) return;
 
@@ -30,7 +33,7 @@ document.addEventListener("DOMContentLoaded", async () => {
 
 
     function loadBewertungen () {
-        fetch('/Multi/bewertung.json')  /*URL der API*/
+        fetch(`https://allestaco.niclas-sieveneck.de:5000/v1/user/reviews/${sellerId}`)  /*URL der API*/
         .then(response => response.json())
         .then(data => {
             const list = document.getElementById('bewertung-list');
@@ -61,16 +64,8 @@ document.addEventListener("DOMContentLoaded", async () => {
 
 function renderSterne(anzahl) {
   const maxSterne = 5;
-  return '★'.repeat(anzahl) + '☆'.repeat(maxSterne - anzahl);
+  console.log(anzahl);
+  const sterne = anzahl || 0;
+  console.log(sterne);
+  return '★'.repeat(sterne) + '☆'.repeat(maxSterne - sterne);
 }
-
-function toggleDropdown() {
-  document.getElementById("dropdown-menu").classList.toggle("show");
-}
-
-// Klick außerhalb schließt Dropdown
-window.addEventListener("click", function(event) {
-  if (!event.target.closest('.dropdown')) {
-    document.getElementById("dropdown-menu").classList.remove("show");
-  }
-});

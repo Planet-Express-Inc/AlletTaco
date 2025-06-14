@@ -109,6 +109,10 @@ function deleteArticel (id) {
 
 // Zeigt Fenster nach Kauf an
 function buy() {
+  fetch(`https://allestaco.niclas-sieveneck.de:5000/v1/user/purchase`, {
+    method: 'POST',
+    credentials: 'include'
+  })
   const modal = document.getElementById("review-modal");
   modal.style.display = "block";
 }

@@ -47,7 +47,7 @@ document.addEventListener("DOMContentLoaded", async () => {
 
         const sellerBox = document.getElementById("seller-box");
         sellerBox.addEventListener('click', () => {
-          window.location.href = `/Multi/verkaeuferProfil/verkaeuferProfil.html?user_id=${seller.id}`;
+          window.location.href = `/Multi/verkaeuferProfil/verkaeuferProfil.html?user_id=${seller.benutzer_id}`;
         });
         
     } catch (error) {

@@ -37,7 +37,7 @@ document.getElementById('product-form').addEventListener('submit', function (eve
   const file = imageInput.files[0];
 
   if (!file) {
-    alert("Bitte ein Bild auswählen.");
+    alert("Bitte ein neues Bild auswählen.");
     return;
   }
 

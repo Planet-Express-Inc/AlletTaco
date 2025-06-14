@@ -43,7 +43,7 @@ document.getElementById('bewerten-form').addEventListener('submit', function (ev
     console.log(JSON.stringify(productData, null, 2)); // Für Testzwecke
 
     // Optional: Senden an eine REST-API
-    /*
+    
     fetch('https://dein-server.de/api/produkte', {
       method: 'POST',
       headers: {
@@ -58,7 +58,6 @@ document.getElementById('bewerten-form').addEventListener('submit', function (ev
     .catch(error => {
       console.error('Fehler beim Senden:', error);
     });
-    */
 });
 function toggleDropdown() {
   document.getElementById("dropdown-menu").classList.toggle("show");
