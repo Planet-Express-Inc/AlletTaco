@@ -17,10 +17,11 @@ document.getElementById('product-form').addEventListener('submit', function (eve
   const reader = new FileReader();
   reader.onload = function () {
     const base64Image = reader.result
+    const userId = parseInt(sessionStorage.getItem('user_id'), 10);
 
     const productData = {
       titel: title, 
-      verkaeufer_id: 12, 
+      verkaeufer_id: userId, 
       beschreibung: description, 
       preis: price, 
       bild: base64Image,  

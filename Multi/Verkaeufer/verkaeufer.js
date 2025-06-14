@@ -1,7 +1,8 @@
 document.addEventListener("DOMContentLoaded", () => {    /*laden der Daten nach laden der Website */
     
     function loadArticles () {
-        fetch('verkaeufer.json')  /*URL der API*/
+      const userId = parseInt(sessionStorage.getItem('user_id'), 10);
+        fetch(`https://allestaco.niclas-sieveneck.de:5000/v1/article/user/${userId}`)  /*URL der API*/
         .then(response => response.json())
         .then(data => {
             const list = document.getElementById('product-list');
@@ -12,18 +13,18 @@ document.addEventListener("DOMContentLoaded", () => {    /*laden der Daten nach 
 
             /*hinzufügen der HTML Elemente in die vorhandene Website*/
             item.innerHTML = `
-                <img src="${product.image_url}" alt="${product.title}">   
+                <img src="https://allestaco.niclas-sieveneck.de:5000/v1/article/picture/${product.artikel_id}" alt="${product.titel}">   
                 <div class="product-info">
-                <h3 class="product-title">${product.title}</h3>
-                <p class="product-description">${product.description}</p>
-                <p class="product-price">Preis: ${product.price} €</p>
-                <p class="product-amount">Anzahl: ${product.amount}</p>
-                <button onclick="adjust(${product.id})" class="adjust">Bearbeiten</button>
+                <h3 class="product-title">${product.titel}</h3>
+                <p class="product-description">${product.beschreibung}</p>
+                <p class="product-price">Preis: ${product.preis.replace('.', ',')} €</p>
+                <p class="product-amount">Anzahl: ${product.bestand}</p>
+                <button onclick="adjust(${product.artikel_id})" class="adjust">Bearbeiten</button>
                 </div>
             `;
 
             item.addEventListener('click', () => {
-                window.location.href = `/Multi/editProduct/editProduct.html?articelid=${product.id}`;
+                window.location.href = `/Multi/editProduct/editProduct.html?articelid=${product.artikel_id}`;
             });
             /*unten anhängen */
             list.appendChild(item);

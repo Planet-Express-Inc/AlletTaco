@@ -6,18 +6,20 @@ document.addEventListener("DOMContentLoaded", async () => {
   if (isNaN(articelId)) return;
 
   try {
-    const productRes = await fetch('/editArticel.json');
-    const products = await productRes.json();
-    const product = products.find(p => p.id === articelId);
-    if (!product) return;
+
+    console.log(`https://allestaco.niclas-sieveneck.de:5000/v1/article/${articelId}`);
+
+    const productRes = await fetch(`https://allestaco.niclas-sieveneck.de:5000/v1/article/${articelId}`);
+    const productArray = await productRes.json();
+    const product = productArray[0];  
 
     // Titel und Beschreibung
-    document.getElementById('product-title').value = product.title;
-    document.getElementById('product-description').textContent = product.description;
-    document.getElementById('product-price').value = product.price;
-    document.getElementById('product-amount').value = product.amount;
-    const imageBase64 = product.image;
-    document.getElementById('preview').src = product.image;
+    document.getElementById('product-title').value = product.titel;
+    document.getElementById('product-description').textContent = product.beschreibung;
+    document.getElementById('product-kategorie').value = product.kategorie;
+    document.getElementById('product-price').value = product.preis;
+    document.getElementById('product-amount').value = product.bestand;
+    document.getElementById('preview').src = `https://allestaco.niclas-sieveneck.de:5000/v1/article/picture/${product.artikel_id}`
   } catch (error) {
     console.error("Fehler beim Laden:", error);
   }
@@ -28,6 +30,7 @@ document.getElementById('product-form').addEventListener('submit', function (eve
   event.preventDefault(); // Verhindert echtes Absenden
   const title = document.getElementById('product-title').value.trim();
   const description = document.getElementById('product-description').value.trim();
+  const kategorie = document.getElementById('product-kategorie').value.trim();
   const price = parseFloat(document.getElementById('product-price').value);
   const amount = parseFloat(document.getElementById('product-amount').value);
   const imageInput = document.getElementById('image-upload');
@@ -41,23 +44,46 @@ document.getElementById('product-form').addEventListener('submit', function (eve
   const reader = new FileReader();
   reader.onload = function () {
     const base64Image = reader.result
+    const userId = parseInt(sessionStorage.getItem('user_id'), 10);
 
     const productData = {
-      id: articelId,
-      title: title,
-      description: description,
-      price: price,
-      amount: amount,
-      image: base64Image  // Das Bild als Base64-String
-    };
+      titel: title, 
+      verkaeufer_id: userId, 
+      beschreibung: description, 
+      preis: price, 
+      bild: base64Image,  
+      status: "verfügbar", 
+      bestand: amount, 
+      kategorie: kategorie 
 
+    };
     // Ergebnis anzeigen oder an den Server senden
     console.log(JSON.stringify(productData, null, 2)); // Für Testzwecke
 
     // Optional: Senden an eine REST-API
-    /*
-    fetch('https://dein-server.de/api/produkte', {
+
+    // Löscht das Produkt    
+    fetch(`https://allestaco.niclas-sieveneck.de:5000/v1/article/${articelId}`, {
+      method: 'DELETE',
+      credentials: 'include'
+    })
+    .then(response => {
+      if (!response.ok) {
+        throw new Error('Fehler beim Löschen');
+      }
+      return response.text();
+    })
+    .then(data => {
+      console.log('Erfolgreich gelöscht:', data);
+    })
+    .catch(error => {
+      console.error('Fehler:', error);
+    });
+
+    // Fügt das neue Produkt hinzu
+    fetch(`https://allestaco.niclas-sieveneck.de:5000/v1/article`, {
       method: 'POST',
+      credentials: 'include',
       headers: {
         'Content-Type': 'application/json'
       },
@@ -66,11 +92,11 @@ document.getElementById('product-form').addEventListener('submit', function (eve
     .then(response => response.json())
     .then(data => {
       console.log('Gespeichert:', data);
+      document.getElementById('saveModal').style.display = 'flex';
     })
     .catch(error => {
       console.error('Fehler beim Senden:', error);
     });
-    */
   };
 
   reader.readAsDataURL(file); // Bild als Base64 einlesen
@@ -91,17 +117,3 @@ document.getElementById('image-upload').addEventListener('change', function (eve
   reader.readAsDataURL(file);
 });
 
-
-
-
-
-function toggleDropdown() {
-  document.getElementById("dropdown-menu").classList.toggle("show");
-}
-
-// Klick außerhalb schließt Dropdown
-window.addEventListener("click", function(event) {
-  if (!event.target.closest('.dropdown')) {
-    document.getElementById("dropdown-menu").classList.remove("show");
-  }
-});
