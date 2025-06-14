@@ -21,7 +21,6 @@ document.addEventListener("DOMContentLoaded", async () => {
 
         item.innerHTML = `
                 <p class="seller">Name: ${seller.benutzername}</p>
-                <p class="seller">Email: ${seller.email}</p>
                 <p class="seller-rating">${renderSterne((Math.round(seller.rating)))}</p>
             `;
 
@@ -43,7 +42,6 @@ document.addEventListener("DOMContentLoaded", async () => {
             const item = document.createElement('div');
             item.className = 'bewertung';
                 
-
             /*hinzufügen der HTML Elemente in die vorhandene Website*/
             item.innerHTML = `
                     <p class="bewertung-title">Titel: ${bewertung.id}</p>
@@ -60,7 +58,6 @@ document.addEventListener("DOMContentLoaded", async () => {
             console.error('Fehler beim Laden der Produkte:', err);
         });
     }
-
 
 function renderSterne(anzahl) {
   const maxSterne = 5;
