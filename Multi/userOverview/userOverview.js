@@ -12,9 +12,13 @@ function toggleDropdown() {
   
   document.addEventListener("DOMContentLoaded", function () {
     // Benutzerdaten laden
+    
     fetch(apiBaseUrl +"user/info/" + sessionStorage.getItem("user_id") )
+      
       .then(response => response.json())
-      .then(user => {
+      .then(users => {
+        const user = users[0];
+        console.log("Benutzerdaten:", user);
         const details = document.getElementById("userDetails");
         details.innerHTML = `
           <div><strong>Vorname:</strong> ${user.vorname}</div>
@@ -26,26 +30,60 @@ function toggleDropdown() {
         `;
   
         // Wenn Rolle Verkäufer ist, Kommentare anzeigen
-        if (sessionStorage.getItem("roll") === "verkäufer") {
+        if (sessionStorage.getItem("roll") === "Verkäufer") {
           document.getElementById("userCommentsSection").style.display = "block";
-          fetch(apiBaseUrl +'/user/reviews/${user.benutzer_id}')
-            .then(response => response.json())
-            .then(comments => {
-              const commentContainer = document.getElementById("userComments");
-              comments.forEach(comment => {
-                const div = document.createElement("div");
-                div.classList.add("comment");
-                div.innerHTML = `
-                  <p>${comment.kommentar} – ${"⭐".repeat(comment.sterne)}</p>
-                  <small>Von: ${comment.bewerteter_id}</small>
-                `;
-                commentContainer.appendChild(div);
-              });
-            })
-            .catch(error => console.error("Fehler beim Laden der Kommentare:", error));
+          document.getElementById("order-link-to-role").href = "/Multi/Verkaeufe/verkaeufe.html";
+          document.getElementById("order-link-to-role").textContent = "Verkäufe";
+          document.getElementById("order-link-to-role").style.display = "block";
+          
+          loadBewertungen();
+        }else{
+          document.getElementById("order-link-to-role").href = "/Multi/orderHistory/orderHistory.html";
+          document.getElementById("order-link-to-role").textContent = "Bestellungen";
+          document.getElementById("order-link-to-role").style.display = "block";
         }
+
       })
       .catch(error => console.error("Fehler beim Laden der Benutzerdaten:", error));
-  
-    // verlinkungs knopf noch zur bestellhistorie /Multi/orderHistory/orderHistory.html
   });
+
+
+  
+    function loadBewertungen () {
+        const sellerId = sessionStorage.getItem("user_id"); // Verkäufer-ID aus dem Session Storage hole
+        fetch(`https://allestaco.niclas-sieveneck.de:5000/v1/user/reviews/${sellerId}`)  /*URL der API*/
+        .then(response => response.json())
+        .then(data => {
+            const list = document.getElementById('userComments');
+    
+            /*auslesen der JSON*/
+            data.forEach(bewertung => {
+            const item = document.createElement('div');
+            item.className = 'bewertung';
+                
+
+            /*hinzufügen der HTML Elemente in die vorhandene Website*/
+            item.innerHTML = `
+                    <p class="bewertung-title">Titel: ${bewertung.id}</p>
+                    <p class="bewertung-user">User: ${bewertung.bewerter_id}</p>
+                    <p class="bewertung-user">User1: ${bewertung.bewertender_id}</p>
+                    <p class="bewertung-sterne">${renderSterne(bewertung.sterne)}</p>
+                    <p class="bewertung-kommentar">Kommentar: ${bewertung.kommentar}</p>
+            `;
+            /*unten anhängen */
+            list.appendChild(item);
+            });
+        })
+        .catch(err => {
+            console.error('Fehler beim Laden der Produkte:', err);
+        });
+    }
+
+
+function renderSterne(anzahl) {
+  const maxSterne = 5;
+  console.log(anzahl);
+  const sterne = anzahl || 0;
+  console.log(sterne);
+  return '★'.repeat(sterne) + '☆'.repeat(maxSterne - sterne);
+}
