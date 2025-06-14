@@ -32,11 +32,13 @@ function toggleDropdown() {
         // Wenn Rolle Verkäufer ist, Kommentare anzeigen
         if (sessionStorage.getItem("roll") === "Verkäufer") {
           document.getElementById("userCommentsSection").style.display = "block";
-          document.getElementById("order-link-to-role").href = "/Multi/Verkaeufe/verkaeufe.html";
+          document.getElementById("order-link-to-role").href = "/Multi/verkauferVerkaufe/verkauferVerkaufe.html";
           document.getElementById("order-link-to-role").textContent = "Verkäufe";
           document.getElementById("order-link-to-role").style.display = "block";
           
           loadBewertungen();
+
+
         }else{
           document.getElementById("order-link-to-role").href = "/Multi/orderHistory/orderHistory.html";
           document.getElementById("order-link-to-role").textContent = "Bestellungen";
