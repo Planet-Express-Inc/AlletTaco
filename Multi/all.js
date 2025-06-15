@@ -111,7 +111,7 @@ function suche() {
   // Startseite des Verkäufers mit Suchanfrage öffnen  
   if (roll == 'Verkäufer')
   {
-    window.location.href = `/Multi/Verkaeufer/verkaeufer.html?query=${encodeURIComponent(query)}`;
+    window.location.href = `/Multi/Kaeufer/kaeufer.html?query=${encodeURIComponent(query)}`;
   }
 }
 

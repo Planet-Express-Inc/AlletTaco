@@ -6,9 +6,6 @@ document.addEventListener("DOMContentLoaded", async () => {
   if (isNaN(articelId)) return;
 
   try {
-
-    console.log(`https://allestaco.niclas-sieveneck.de:5000/v1/article/${articelId}`);
-
     const productRes = await fetch(`https://allestaco.niclas-sieveneck.de:5000/v1/article/${articelId}`);
     const productArray = await productRes.json();
     const product = productArray[0];  
@@ -57,10 +54,6 @@ document.getElementById('product-form').addEventListener('submit', function (eve
       kategorie: kategorie 
 
     };
-    // Ergebnis anzeigen oder an den Server senden
-    console.log(JSON.stringify(productData, null, 2)); // Für Testzwecke
-
-    // Optional: Senden an eine REST-API
 
     // Löscht das Produkt    
     fetch(`https://allestaco.niclas-sieveneck.de:5000/v1/article/${articelId}`, {

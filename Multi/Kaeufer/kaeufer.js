@@ -1,17 +1,14 @@
 document.addEventListener("DOMContentLoaded", () => {
-  // Suchbegriff aus URL auslesen
+  // Get search query form URL
   const params = new URLSearchParams(window.location.search);
   const query = params.get("query") || ""; // Leerer String
 
-  // Artikel mit Suchbegriff laden
+  // Load articels with search query
   loadArticles(query);
 });
 
 function loadArticles(query) {
   const list = document.getElementById('product-list');
-  // Test json 
-
-  console.log(encodeURIComponent(query));
   const url = query.trim()
     ? `https://allestaco.niclas-sieveneck.de:5000/v1/article/search/${encodeURIComponent(query)}`
     : `https://allestaco.niclas-sieveneck.de:5000/v1/article/multiple/0/10`;

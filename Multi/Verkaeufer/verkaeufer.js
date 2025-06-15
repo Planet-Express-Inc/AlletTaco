@@ -1,4 +1,7 @@
-document.addEventListener("DOMContentLoaded", () => { 
+consoledocument.addEventListener("DOMContentLoaded", () => {
+  loadArticles();
+});
+
   // Load all articels from the seller       
   function loadArticles () {
     const userId = parseInt(sessionStorage.getItem('user_id'), 10);
@@ -9,8 +12,7 @@ document.addEventListener("DOMContentLoaded", () => {
         const list = document.getElementById('product-list');
         data.forEach(product => {
           const item = document.createElement('div');
-          item.className = 'product';
-          console.log(product);           
+          item.className = 'product';         
 
           // Get the views of an articel
           fetch(`https://allestaco.niclas-sieveneck.de:5000/v1/article/views/${product.artikel_id}`)
@@ -33,13 +35,10 @@ document.addEventListener("DOMContentLoaded", () => {
                   <p class="product-price">Preis: ${product.preis.replace('.', ',')} €</p>
                   <p class="product-amount">Bestand: ${product.bestand}</p>
                   <p class="product-amount">Aufrufe: ${aufrufe}</p> 
-                  <button onclick="adjust(${product.artikel_id})" class="adjust">Bearbeiten</button>
+                  <button onclick="edit(${product.artikel_id})" >Bearbeiten</button>
+                  <button onclick="deleteArticel(${product.artikel_id})" >Löschen</button>
                 </div>
               `;
-
-              item.addEventListener('click', () => {
-                window.location.href = `/Multi/editProduct/editProduct.html?articelid=${product.artikel_id}`;
-              });
 
               list.appendChild(item);
             })
@@ -64,5 +63,27 @@ document.addEventListener("DOMContentLoaded", () => {
       });
   }
 
-  loadArticles();
-});
+// Open an articel
+function edit (articel){
+  window.location.href = `/Multi/editProduct/editProduct.html?articelid=${articel}`;
+}
+// Delete an articel
+async function deleteArticel(id) {
+  try {
+    const response = await fetch(`https://allestaco.niclas-sieveneck.de:5000/v1/article/${id}`, {
+      method: 'DELETE',
+      credentials: 'include'
+    });
+
+    if (!response.ok) {
+      throw new Error('Fehler beim Löschen');
+    }
+    const data = await response.text();
+    console.log('Erfolgreich gelöscht:', data);
+    // Reload the site
+    await new Promise(resolve => setTimeout(resolve, 50000));
+    window.location.href = `/Multi/Verkaeufer/verkaeufer.html`;
+  } catch (error) {
+    console.error('Fehler:', error);
+  }
+}

@@ -2,6 +2,13 @@
 let selectedRoll = "";
 let apiBaseUrl  = "https://allestaco.niclas-sieveneck.de:5000/v1/"; //GrundURL für die API-Anfragen; HTTP WIRD BALD SEHR BALD IN HTTPS UMGEWANDELT
 
+// Enter klicken für login
+document.addEventListener("keydown", function(event) {
+if (event.key === "Enter") {
+    onLogin();
+}
+});
+
 //Funktion zum Verarbeiten der Cookie-Optionen
 function toggleCookies() {
     const choice = document.querySelector('input[name="cookie-choice"]:checked');

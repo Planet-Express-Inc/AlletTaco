@@ -9,41 +9,41 @@
   </head>
 
   <body>
-    <header class="header"> <!-- Obere Leiste -->
+        <header class="header"> <!-- First Line -->
 
       <div class="logo">
         <img src="/Multi/Bilder/taco_logo.png" alt="Alles Taco Logo">
       </div>
 
       <div class="search">
-          <input type="text" placeholder="Nach Artikeln suchen..." class="search-input">
-        <button class="search-button">🌮</button>
+          <input type="text" id="search-input" placeholder="Nach Artikeln suchen..." class="search-input">
+        <button class="search-button" onclick="suche()">🌮</button>
       </div>
 
       <div class="user-block"> 
         <div class="user-info-block">
           <div class="user-info" id="user-info">
-            Angemeldet als: 
+            Angemeldet als: Fehler 
           </div>
           <div class="user-role" id="user-role">
-            ()
+            (Kein Konto erkannt)
           </div>
         </div>
-        
+
       <div class="dropdown">
         <button class="action-button" onclick="toggleDropdown()">
           <img src="/Multi/Bilder/dein_bild.png" alt="ActionKnopf">
         </button>
 
         <div id="dropdown-menu" class="dropdown-content">
-          <!-- Nur für Verkäufer -->
+          <!-- Only seller -->
           <div class="role-content" data-role-content="Verkäufer">
+            <a href="#" id="profil-link">Profil</a>
             <a href="/Multi/Verkaeufer/verkaeufer.html" data-role="Verkäufer">Startseite</a>
-            <a href="/Multi/userOverview/userOverview.html" data-role="Verkäufer">Benutzerinfo</a>
             <a href="/Multi/Kaeufer/kaeufer.html" data-role="Käufer">Käufer</a>
           </div>
 
-          <!-- Nur für Käufer -->
+          <!-- Only buyer -->
           <div class="role-content" data-role-content="Käufer">
             <a href="/Multi/Kaeufer/kaeufer.html" data-role="Käufer">Startseite</a>
             <a href="/Multi/userOverview/userOverview.html" data-role="Käufer">Benutzerinfo</a>
