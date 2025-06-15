@@ -1,127 +1,226 @@
 import { BASE_URL } from '../config.js';
+
 let productsData = [];
 
-document.addEventListener("DOMContentLoaded", () => {    /*laden der Daten nach laden der Website */
+document.addEventListener("DOMContentLoaded", () => {
   const list = document.getElementById('product-card');
   const totalPriceElement = document.getElementById('total-price');
 
-function updateTotalPrice() {
-  let total = 0;
-  // Holt sich eine Liste aller angezeigten Produkte
-  const products = list.querySelectorAll('.product');
-  products.forEach(product => {
-    // Liest Preis pros Stück aus
-    const priceText = product.querySelector('.product-price').textContent;
-    // Wandelt Preis in Zahl um
-    const priceMatch = priceText.match(/Preis:\s*([\d,.]+)\s*€/); // Sucht nach Preis Zahl € 
-      let price = parseFloat(priceMatch[1].replace(',', '.')); // In Zahl umwandeln
-      total += price;
-  });
-  // Ausgabe Gesamtpreis mit 2 Nachkommastelen
-  totalPriceElement.textContent = total.toFixed(2).replace('.', ',') + ' €';
-}
+  // Preisformatierung einheitlich
+  function formatPrice(price) {
+    return price.toFixed(2).replace('.', ',') + ' €';
+  }
 
-function loadArticles() {
-  fetch(BASE_URL + `/user/cart`, {
-    method: 'GET',
-    credentials: 'include'
-  })
-  .then(response => response.json())
-  .then(async data => {  // <-- ACHTUNG: async hier
-    productsData = data;
-    console.log(data);
-    const list = document.getElementById('product-card');
+  window.updateTotalPrice = function () {
+    let total = 0;
+    const products = list.querySelectorAll('.product');
+    products.forEach(product => {
+      const priceText = product.querySelector('.product-price').textContent;
+      const priceMatch = priceText.match(/Preis:\s*([\d.,]+)\s*€/);
 
-    for (const articels of data) {
-      console.log(articels.artikel_id);
-      const productRes = await fetch(BASE_URL + `/article/${articels.artikel_id}`);
-      const productArray = await productRes.json();
-      const product = productArray[0]; 
+      if (priceMatch) {
+        const price = parseFloat(priceMatch[1].replace(',', '.'));
+        total += price;
+      }
+    });
+    totalPriceElement.textContent = formatPrice(total);
+  };
 
-      const item = document.createElement('div');
-      item.className = 'product';
+  async function loadArticles() {
+    try {
+      const response = await fetch(BASE_URL + `/user/cart`, { method: 'GET', credentials: 'include' });
+      const data = await response.json();
+      productsData = data;
 
-      const basePrice = parseFloat(articels.price);
+      for (const articels of data) {
+        const productRes = await fetch(BASE_URL + `/article/${articels.artikel_id}`);
+        const productArray = await productRes.json();
+        const product = productArray[0];
 
-      item.innerHTML = `
-        <img src="${BASE_URL}/article/picture/${product.artikel_id}" alt="${product.titel}">
-        <div class="product-info">
-          <h3 class="product-title">${product.titel}</h3>
-          <p class="product-description">${product.beschreibung}</p>
-          <p class="product-price" id="price-${product.artikel_id}">Preis: ${(parseFloat(product.preis)).toFixed(2).replace('.', ',')} €</p>
+        const item = document.createElement('div');
+        item.className = 'product';
 
-          <div class="product-actions">
-          <label for="quantity-${product.artikel_id}">Menge:</label>
-          <select id="quantity-${product.artikel_id}" class="quantity-select">
-              ${[...Array(product.amount)].map((_, i) => `<option value="${i + 1}">${i + 1}</option>`).join("")}
-          </select>
+        const basePrice = parseFloat(product.preis);
 
-          <button onclick="deleteArticel(${product.artikel_id})" class="delete-button">Löschen</button>
+        item.innerHTML = `
+          <img src="${BASE_URL}/article/picture/${product.artikel_id}" alt="${product.titel}">
+          <div class="product-info">
+            <h3 class="product-title">${product.titel}</h3>
+            <p class="product-description">${product.beschreibung}</p>
+            <p class="product-id">Artikel ID: ${product.artikel_id}</p>
+            <p class="product-seller">Verkäufer: ${product.verkaeufer_id}</p>
+            <p class="product-price" id="price-${product.artikel_id}">Preis: ${formatPrice(basePrice)}</p>
+
+            <div class="product-actions">
+              <label for="quantity-${product.artikel_id}">Menge:</label>
+              <select id="quantity-${product.artikel_id}" class="quantity-select">
+                  ${[...Array(product.bestand)].map((_, i) => `<option value="${i + 1}">${i + 1}</option>`).join("")}
+              </select>
+
+              <button onclick="deleteArticel(${product.artikel_id})" class="delete-button">Löschen</button>
+            </div>
           </div>
-        </div>
-      `;
+        `;
 
-      const quantitySelect = item.querySelector(`#quantity-${product.artikel_id}`);
-      const priceElement = item.querySelector(`#price-${product.artikel_id}`);
+        const quantitySelect = item.querySelector(`#quantity-${product.artikel_id}`);
+        const priceElement = item.querySelector(`#price-${product.artikel_id}`);
 
-      quantitySelect.addEventListener('change', () => {
-        const selectedQuantity = parseInt(quantitySelect.value, 10);
-        const totalPrice = (basePrice * selectedQuantity).toFixed(2);
-        priceElement.textContent = `Preis: ${totalPrice} €`;
+        quantitySelect.addEventListener('change', () => {
+          const selectedQuantity = parseInt(quantitySelect.value, 10);
+          const totalPrice = basePrice * selectedQuantity;
+          priceElement.textContent = `Preis: ${formatPrice(totalPrice)}`;
+          updateTotalPrice();
+        });
 
-        updateTotalPrice();
-      });
+        list.appendChild(item);
+      }
 
-      list.appendChild(item);
+      updateTotalPrice();
+    } catch (err) {
+      console.error('Fehler beim Laden der Produkte:', err);
     }
+  }
 
-    updateTotalPrice();
-  })
-  .catch(err => {
-    console.error('Fehler beim Laden der Produkte:', err);
-  });
-}
-loadArticles();
+  loadArticles();
 });
 
+
+window.deleteArticelButton = async function (id) {
+  deleteArticel(id);
+  setTimeout(() => location.reload(), 500);
+}
+
+
+
 // Löscht Artikel aus Warenkorb
-windows.deleteArticel = function  (id) {
-  fetch(BASE_URL + `/user/cart/${id}`, {
-    method: 'DELETE',
-    credentials: 'include'
-  })
-  .then(response => {
+window.deleteArticel = async function (id) {
+  try {
+    const response = await fetch(BASE_URL + `/user/cart/${id}`, {
+      method: 'DELETE',
+      credentials: 'include'
+    });
+
     if (response.status === 204) {
       console.log('Erfolgreich gelöscht (204)');
-      setTimeout(() => {
-        location.reload();
-      }, 1000);
     } else {
       console.error('Fehler beim Löschen: HTTP-Status', response.status);
       alert("Löschen fehlgeschlagen. Fehlercode: " + response.status);
     }
-  })
-  .catch(error => {
+  } catch (error) {
     console.error('Fehler beim Senden:', error);
     alert("Ein technischer Fehler ist aufgetreten.");
-  });
-}
+  }
+};
 
 // Zeigt Fenster nach Kauf an
-windows.buy = function () {
-  fetch(BASE_URL + `/user/purchase`, {
+
+window.buy = async function () {
+  try {
+    await fetch(BASE_URL + `/user/purchase`, {
+      method: 'POST',
+      credentials: 'include'
+    });
+
+    const modal = document.getElementById("review-modal");
+    modal.style.display = "block";
+  } catch (error) {
+    console.error('Fehler beim Kauf:', error);
+    alert("Ein Fehler beim Kauf ist aufgetreten.");
+  }
+};
+
+
+// Zeigt Fenster nach Kauf an
+window.buy = async function () {
+
+
+
+  const list = document.getElementById('product-card');
+  const products = list.querySelectorAll('.product');
+
+  const artikelInfos = await getElements(products);
+  console.log("Ausgabe ", artikelInfos);
+  // Delete the current shoping cart
+  for (const artikel of artikelInfos) {
+  await deleteArticel(artikel.artikel_id);
+  console.log("Artikel ID:", artikel.artikel_id);
+  }
+  // Add all articels in the shoping cart with new ammount
+  for (const artikel of artikelInfos) {
+  await addArticel(artikel);
+  console.log("Hier ist ein langer Text damit ich das besser sehe:", artikel);
+  }
+  // Buy the new shoping cart
+  try {
+    await fetch(BASE_URL + `/user/purchase`, {
     method: 'POST',
     credentials: 'include'
-  })
+  });
+
   const modal = document.getElementById("review-modal");
   modal.style.display = "block";
+  } catch (error) {
+    console.error('Fehler beim Kauf:', error);
+  }
+
+};
+
+// Add new Articel to shoping cart
+window.addArticel = async function (article) {
+  try {
+    console.log("Test ", article);
+    const response = await fetch(BASE_URL + `/user/cart`, {
+      method: 'POST',
+      credentials: 'include',
+      headers: {
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify(article)
+    });
+    const data = await response.json();
+    console.log('Hinzugefügt:', data);    
+  } catch (error) {
+    console.error('Fehler beim Senden:', error);
+  }
 }
 
-windows.startseite = function () {
+// Get the values of the html site
+window.getElements = async function (products){
+  const userId = sessionStorage.getItem("user_id");
+  const artikelInfos = [];
+
+  try {
+    for (const product of products) {
+    const artikelId = parseInt(product.querySelector('.product-id').textContent.match(/Artikel ID:\s*(\d+)/)[1],10);
+    const quantitySelect = product.querySelector('.quantity-select');
+    const anzahl = parseInt(quantitySelect.value, 10);
+
+    const productRes = await fetch(BASE_URL + `/article/${artikelId}`);
+    const productArray = await productRes.json();
+    const produkt = productArray[0];
+
+    artikelInfos.push({
+      artikel_id: artikelId,
+      benutzer_id: userId,
+      verkaeufer_id: produkt.verkaeufer_id,
+      anzahl: anzahl
+    });
+      }
+      console.log(artikelInfos);
+      await new Promise(resolve => setTimeout(resolve, 1000));
+      return artikelInfos;
+      
+  } catch (error) {
+    console.error('Fehler beim Kauf:', error);
+  }
+  
+}
+
+
+window.startseite = function () {
   window.location.href = "/Multi/Kaeufer/kaeufer.html";
-}
+};
 
-windows.bestellhistorie = function () {
+window.bestellhistorie = function () {
   window.location.href = "/Multi/orderHistory/orderHistory.html";
-}
-
+};

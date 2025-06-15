@@ -10,7 +10,7 @@ if (event.key === "Enter") {
 });
 
 //Funktion zum Verarbeiten der Cookie-Optionen
-function toggleCookies() {
+window.toggleCookies = function () {
     const choice = document.querySelector('input[name="cookie-choice"]:checked');
     if (!choice) {
         alert("Bitte wähle aus, ob du die Cookies akzeptieren oder ablehnen möchtest.");
@@ -26,7 +26,7 @@ function toggleCookies() {
 }
 
 //Funktion zum Anzeigen des RollenWahl-Popups
-function showRoll() {
+window.showRoll = function () {
     document.querySelector('.cookie-popup').style.display = 'none';
     document.querySelector('.roll-popup').style.display = 'block';
     document.querySelector('.login-popup').style.display = 'none';
@@ -34,7 +34,7 @@ function showRoll() {
 
 }
 // Funktion zum Abrufen und Speichern der Rolle
-function getRoll(){
+window.getRoll = function (){
     const rollButton = document.querySelector('input[name="roll-button"]:checked');
     if (!rollButton) {
         alert("Bitte wähle eine Rolle (Käufer oder Verkäufer) aus.");
@@ -47,7 +47,7 @@ function getRoll(){
 }
 
 //Funktion zum Anzeigen des Login-Popups
-function showLogin() {
+window.showLogin = function () {
     if (getRoll()) { // Prüft, ob Rolle ausgewählt wurde
         document.querySelector('.roll-popup').style.display = 'none';
         document.querySelector('.login-popup').style.display = 'block';
@@ -59,7 +59,7 @@ function showLogin() {
     }
 }
 //Funktion zum Verarbeiten der Login Daten
-async function onLogin() {
+window.onLogin = async function () {
     const username = document.getElementById('login-username').value;
     const password = document.getElementById('login-password').value;
     
@@ -93,7 +93,7 @@ async function onLogin() {
                 
                 if(selectedRoll == "Verkäufer"){
                    
-                   fetch(`https://allestaco.niclas-sieveneck.de:5000/v1/user/login`, {
+                   fetch(BASE_URL + `/user/login`, {
                         method: 'GET',
                         credentials: 'include'
                         })
@@ -122,11 +122,11 @@ async function onLogin() {
     }
 }
 //Funktion zum Anzeigen des Registrieren-Popups
-function showRegister() {
+window.showRegister = function () {
     document.querySelector('.login-popup').style.display = 'none';
     document.querySelector('.register-popup').style.display = 'block';
 }
-async function onRegister(){
+window.onRegister = async function (){
     const username = document.getElementById('register-username').value;
     const password = document.getElementById('register-password').value;
     const firstname = document.getElementById('register-firstname').value;

@@ -29,7 +29,7 @@ document.addEventListener("DOMContentLoaded", function() {
                     <h3>Artikel: ${product ? product.titel : order.artikel_id}</h3>
                     <p>Kauf-ID: ${order.kauf_id}</p>
                     <p>Verkäufer: ${verkaufer ? verkaufer.benutzername  : verorder.kaeufer_id}</p>
-                    <p>Preis: ${order.kaufpreis} €</p>
+                    <p>Preis: ${order.kaufpreis.toString().replace('.', ',')} €</p>
                     <p>Versand: ${order.versanddaten}</p>
                     <p><!-- Bewertung-Link -->
                     <a href="/Multi/Bewerten/bewerten.html?seller_id=${verkaufer.benutzer_id}">Diese Bestellung bewerten</a>

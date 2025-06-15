@@ -41,10 +41,10 @@ import { BASE_URL } from '../config.js';
 
 
   
-async function loadBewertungen() {
+window.loadBewertungen = async function () {
     try {
         // Bewertungen laden
-        const response = await fetch(`https://allestaco.niclas-sieveneck.de:5000/v1/user/reviews/${sellerId}`);
+        const response = await fetch(BASE_URL + `/user/reviews/${sellerId}`);
         const data = await response.json();
 
         const list = document.getElementById('bewertung-list');
@@ -72,7 +72,7 @@ async function loadBewertungen() {
 }
 
 
-function renderSterne(anzahl) {
+window.renderSterne = function (anzahl) {
   const maxSterne = 5;
   console.log(anzahl);
   const sterne = anzahl || 0;
