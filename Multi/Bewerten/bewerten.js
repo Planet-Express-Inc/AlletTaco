@@ -1,3 +1,5 @@
+import { BASE_URL } from '../config.js';
+
 const params = new URLSearchParams(window.location.search);
 const sellerID = params.get('seller_id');
 
@@ -41,7 +43,7 @@ document.getElementById('bewerten-form').addEventListener('submit', function (ev
     sterne: sterne
   };
   // Send review to server    
-  fetch(`https://allestaco.niclas-sieveneck.de:5000/v1/user/reviews`, {
+  fetch(BASE_URL + "/user/reviews", {
     method: 'POST',
     credentials: 'include',
     headers: {

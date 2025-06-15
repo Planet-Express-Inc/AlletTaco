@@ -1,3 +1,5 @@
+import { BASE_URL } from '../config.js';
+
 const params = new URLSearchParams(window.location.search);
 const productId = parseInt(params.get('id'), 10);
 let seller;
@@ -7,7 +9,7 @@ document.addEventListener("DOMContentLoaded", async () => {
   try {
 
     // Get already flown views
-    const viewsRes = await fetch (`https://allestaco.niclas-sieveneck.de:5000/v1/article/views/${productId}`);
+    const viewsRes = await fetch (BASE_URL + `/article/views/${productId}`);
     const viewArray = await viewsRes.json();
     const view = viewArray[0];
     const user = sessionStorage.getItem("user_id")
@@ -31,13 +33,13 @@ document.addEventListener("DOMContentLoaded", async () => {
     console.log(productData);
 
     // Remove old views
-    await fetch(`https://allestaco.niclas-sieveneck.de:5000/v1/article/views/${productId}`,{
+    await fetch(BASE_URL + `/article/views/${productId}`,{
       method: 'DELETE',
       credentials: 'include'
     })
 
     // Set new views
-    await fetch(`https://allestaco.niclas-sieveneck.de:5000/v1/article/views`,{
+    await fetch(BASE_URL + `/article/views`,{
     method: 'POST',
     credentials: 'include',
     headers: {
@@ -54,27 +56,26 @@ document.addEventListener("DOMContentLoaded", async () => {
     });
 
     // Get the product data
-    const productRes = await fetch(`https://allestaco.niclas-sieveneck.de:5000/v1/article/${productId}`);
+    const productRes = await fetch(BASE_URL + `/article/${productId}`);
     const productArray = await productRes.json();
     const product = productArray[0];  
 
     // Get the seller data
     const sellerId = product.verkaeufer_id;
-    const sellerRes = await fetch(`https://allestaco.niclas-sieveneck.de:5000/v1/user/info/${sellerId}`);
+    const sellerRes = await fetch(BASE_URL + `/user/info/${sellerId}`);
     const sellerArray = await sellerRes.json();
     seller = sellerArray[0]; 
     console.log("Verkäuferdaten:", seller);
 
     // Get the sellers rating
-    const ratingRes = await fetch(`https://allestaco.niclas-sieveneck.de:5000/v1/user/reviews/${sellerId}`);
+    const ratingRes = await fetch(BASE_URL + `/user/reviews/${sellerId}`);
     const ratingArray = await ratingRes.json();
     const summe = ratingArray.reduce((acc, ratingArray) => acc + ratingArray.sterne, 0);
     const durchschnitt = summe / ratingArray.length;
     const sternegerundet = Math.round(durchschnitt);
-    console.log("Durchschnittspreis:", durchschnitt)
 
     // Show the results on DOM
-    document.getElementById('product-image').src = `https://allestaco.niclas-sieveneck.de:5000/v1/article/picture/${productId}`;
+    document.getElementById('product-image').src = BASE_URL +`/article/picture/${productId}`;
     document.getElementById('product-image').alt = product.titel;
     document.getElementById('preis').textContent = "Preis: " + product.preis.replace('.',',') + " €";
     document.getElementById('views').textContent = "Aufrufe: " + anzahl;
@@ -96,7 +97,7 @@ document.addEventListener("DOMContentLoaded", async () => {
 
 });
 // Add products to the shoping cart
-function addToCart(){
+window.addToCart = function (){
     const userId = parseInt(sessionStorage.getItem('user_id'), 10);
       const productData = {
       anzahl: 1,
@@ -106,7 +107,7 @@ function addToCart(){
     };
     console.log(productData);
 
-    fetch(`https://allestaco.niclas-sieveneck.de:5000/v1/user/cart`, {
+    fetch(BASE_URL + `/user/cart`, {
       method: 'POST',
       credentials: 'include',
       headers: {

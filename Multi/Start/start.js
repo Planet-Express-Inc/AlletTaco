@@ -1,6 +1,6 @@
 // Globale Variable zum Speichern der gewählten Rolle
 let selectedRoll = "";
-let apiBaseUrl  = "https://allestaco.niclas-sieveneck.de:5000/v1/"; //GrundURL für die API-Anfragen; HTTP WIRD BALD SEHR BALD IN HTTPS UMGEWANDELT
+import { BASE_URL } from '../config.js';
 
 // Enter klicken für login
 document.addEventListener("keydown", function(event) {
@@ -64,7 +64,7 @@ async function onLogin() {
     const password = document.getElementById('login-password').value;
     
     try {
-        const response = await fetch(apiBaseUrl + 'user/login', {
+        const response = await fetch(BASE_URL + '/user/login', {
             method: 'POST',
             credentials: 'include',
             headers: {
@@ -144,7 +144,7 @@ async function onRegister(){
     console.log(body); // Logge den JSON-String
 
     try {
-            const response = await fetch(apiBaseUrl +'user/register', { // await = auf die Vervollständigung eines Promise wartet,
+            const response = await fetch(BASE_URL +'/user/register', { // await = auf die Vervollständigung eines Promise wartet,
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json'

@@ -1,0 +1,1 @@
+export const BASE_URL = "https://allestaco.niclas-sieveneck.de:5000/v1";

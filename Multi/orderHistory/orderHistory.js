@@ -1,8 +1,8 @@
-let apiBaseUrl  = "https://allestaco.niclas-sieveneck.de:5000/v1/"; //GrundURL für die API-Anfragen; HTTP WIRD BALD SEHR BALD IN HTTPS UMGEWANDELT
+import { BASE_URL } from '../config.js';
 
 document.addEventListener("DOMContentLoaded", function() {
     // API-URL wie im Screenshot
-    fetch(apiBaseUrl +"user/purchase", {
+    fetch(BASE_URL +"/user/purchase", {
       method: 'GET',
       credentials: 'include'}) // Cookies mit senden)}
 
@@ -17,11 +17,11 @@ document.addEventListener("DOMContentLoaded", function() {
             orders.forEach(async order => {
                 const orderDiv = document.createElement("div");
                 orderDiv.classList.add("order-item");
-                const productCall = await fetch(apiBaseUrl + "article/" + order.artikel_id);
+                const productCall = await fetch(BASE_URL + "/article/" + order.artikel_id);
                 const productArray = await productCall.json();
                 const product = productArray[0];
 
-                const verkauferCall = await fetch(apiBaseUrl + "user/info/" + product.verkaeufer_id);
+                const verkauferCall = await fetch(BASE_URL + "/user/info/" + product.verkaeufer_id);
                 const verkauferArray = await verkauferCall.json();
                 const verkaufer = verkauferArray[0];
                 console.log("kauferCall-ID:", verkauferArray); //Fehersuche
@@ -29,7 +29,7 @@ document.addEventListener("DOMContentLoaded", function() {
                     <h3>Artikel: ${product ? product.titel : order.artikel_id}</h3>
                     <p>Kauf-ID: ${order.kauf_id}</p>
                     <p>Verkäufer: ${verkaufer ? verkaufer.benutzername  : verorder.kaeufer_id}</p>
-                    <p>Preis: ${order.kaufpreis.toString().replace('.', ',')} €</p>
+                    <p>Preis: ${order.kaufpreis} €</p>
                     <p>Versand: ${order.versanddaten}</p>
                     <p><!-- Bewertung-Link -->
                     <a href="/Multi/Bewerten/bewerten.html?seller_id=${verkaufer.benutzer_id}">Diese Bestellung bewerten</a>

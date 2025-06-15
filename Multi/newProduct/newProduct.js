@@ -1,3 +1,5 @@
+import { BASE_URL } from '../config.js';
+
 document.getElementById('product-form').addEventListener('submit', function (event) {
   event.preventDefault(); 
 
@@ -32,7 +34,7 @@ document.getElementById('product-form').addEventListener('submit', function (eve
     };
     console.log(JSON.stringify(productData, null, 2)); 
     
-    fetch(`https://allestaco.niclas-sieveneck.de:5000/v1/article`, {
+    fetch(BASE_URL + `/article`, {
       method: 'POST',
       credentials: 'include',
       headers: {
@@ -53,9 +55,6 @@ document.getElementById('product-form').addEventListener('submit', function (eve
 
   reader.readAsDataURL(file); // Bild als Base64 einlesen
 });
-
-
-
 
 
 document.getElementById('image-upload').addEventListener('change', function(event) {

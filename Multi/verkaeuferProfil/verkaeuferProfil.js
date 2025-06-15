@@ -1,3 +1,5 @@
+import { BASE_URL } from '../config.js';
+
 const params = new URLSearchParams(window.location.search);
 const sellerId = parseInt(params.get('user_id'), 10);
 
@@ -13,7 +15,7 @@ document.addEventListener("DOMContentLoaded", async () => {
     {
 
         // Verkäuferdaten holen
-        const sellerRes = await fetch(`https://allestaco.niclas-sieveneck.de:5000/v1/user/info/${sellerId}`);
+        const sellerRes = await fetch(BASE_URL + `/user/info/${sellerId}`);
         const sellerArray = await sellerRes.json();
         const seller = sellerArray[0]; 
         console.log("Verkäuferdaten:", seller);
@@ -34,7 +36,7 @@ document.addEventListener("DOMContentLoaded", async () => {
 async function loadBewertungen() {
     try {
         // Bewertungen laden
-        const response = await fetch(`https://allestaco.niclas-sieveneck.de:5000/v1/user/reviews/${sellerId}`);
+        const response = await fetch(BASE_URL + `/user/reviews/${sellerId}`);
         const data = await response.json();
 
         const list = document.getElementById('bewertung-list');

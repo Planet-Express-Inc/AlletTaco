@@ -1,3 +1,4 @@
+import { BASE_URL } from '../config.js';
 let productsData = [];
 
 document.addEventListener("DOMContentLoaded", () => {    /*laden der Daten nach laden der Website */
@@ -21,7 +22,7 @@ function updateTotalPrice() {
 }
 
 function loadArticles() {
-  fetch(`https://allestaco.niclas-sieveneck.de:5000/v1/user/cart`, {
+  fetch(BASE_URL + `/user/cart`, {
     method: 'GET',
     credentials: 'include'
   })
@@ -33,7 +34,7 @@ function loadArticles() {
 
     for (const articels of data) {
       console.log(articels.artikel_id);
-      const productRes = await fetch(`https://allestaco.niclas-sieveneck.de:5000/v1/article/${articels.artikel_id}`);
+      const productRes = await fetch(BASE_URL + `/article/${articels.artikel_id}`);
       const productArray = await productRes.json();
       const product = productArray[0]; 
 
@@ -43,7 +44,7 @@ function loadArticles() {
       const basePrice = parseFloat(articels.price);
 
       item.innerHTML = `
-        <img src="https://allestaco.niclas-sieveneck.de:5000/v1/article/picture/${product.artikel_id}" alt="${product.titel}">
+        <img src="${BASE_URL}/article/picture/${product.artikel_id}" alt="${product.titel}">
         <div class="product-info">
           <h3 class="product-title">${product.titel}</h3>
           <p class="product-description">${product.beschreibung}</p>
@@ -84,8 +85,8 @@ loadArticles();
 });
 
 // Löscht Artikel aus Warenkorb
-function deleteArticel (id) {
-  fetch(`https://allestaco.niclas-sieveneck.de:5000/v1/user/cart/${id}`, {
+windows.deleteArticel = function  (id) {
+  fetch(BASE_URL + `/user/cart/${id}`, {
     method: 'DELETE',
     credentials: 'include'
   })
@@ -107,8 +108,8 @@ function deleteArticel (id) {
 }
 
 // Zeigt Fenster nach Kauf an
-function buy() {
-  fetch(`https://allestaco.niclas-sieveneck.de:5000/v1/user/purchase`, {
+windows.buy = function () {
+  fetch(BASE_URL + `/user/purchase`, {
     method: 'POST',
     credentials: 'include'
   })
@@ -116,11 +117,11 @@ function buy() {
   modal.style.display = "block";
 }
 
-function startseite() {
+windows.startseite = function () {
   window.location.href = "/Multi/Kaeufer/kaeufer.html";
 }
 
-function bestellhistorie() {
+windows.bestellhistorie = function () {
   window.location.href = "/Multi/orderHistory/orderHistory.html";
 }
 

@@ -1,3 +1,4 @@
+import { BASE_URL } from '../config.js';
 let articelId = 0;
 
 document.addEventListener("DOMContentLoaded", async () => {
@@ -6,7 +7,7 @@ document.addEventListener("DOMContentLoaded", async () => {
   if (isNaN(articelId)) return;
 
   try {
-    const productRes = await fetch(`https://allestaco.niclas-sieveneck.de:5000/v1/article/${articelId}`);
+    const productRes = await fetch(BASE_URL + `/article/${articelId}`);
     const productArray = await productRes.json();
     const product = productArray[0];  
 
@@ -16,7 +17,7 @@ document.addEventListener("DOMContentLoaded", async () => {
     document.getElementById('product-kategorie').value = product.kategorie;
     document.getElementById('product-price').value = product.preis;
     document.getElementById('product-amount').value = product.bestand;
-    document.getElementById('preview').src = `https://allestaco.niclas-sieveneck.de:5000/v1/article/picture/${product.artikel_id}`
+    document.getElementById('preview').src = BASE_URL + `/article/picture/${product.artikel_id}`
   } catch (error) {
     console.error("Fehler beim Laden:", error);
   }
@@ -56,7 +57,7 @@ document.getElementById('product-form').addEventListener('submit', function (eve
     };
 
     // Löscht das Produkt    
-    fetch(`https://allestaco.niclas-sieveneck.de:5000/v1/article/${articelId}`, {
+    fetch(BASE_URL + `/article/${articelId}`, {
       method: 'DELETE',
       credentials: 'include'
     })
@@ -74,7 +75,7 @@ document.getElementById('product-form').addEventListener('submit', function (eve
     });
 
     // Fügt das neue Produkt hinzu
-    fetch(`https://allestaco.niclas-sieveneck.de:5000/v1/article`, {
+    fetch(BASE_URL + `/article`, {
       method: 'POST',
       credentials: 'include',
       headers: {

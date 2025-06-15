@@ -1,37 +1,38 @@
-document.addEventListener("DOMContentLoaded", () => {    // Daten laden nach Websiteaufruf
+import { BASE_URL } from './config.js';
+
+document.addEventListener("DOMContentLoaded", () => {    
   showRoleBasedMenu();
   userData();
 
   // Profil aufrufen
   const profilLink = document.getElementById("profil-link");
-if (profilLink) {
-  profilLink.addEventListener("click", (e) => {
-    e.preventDefault();
+  if (profilLink) {
+    profilLink.addEventListener("click", (e) => {
+      e.preventDefault();
 
-    const userId = sessionStorage.getItem("user_id");
+      const userId = sessionStorage.getItem("user_id");
 
-    if (userId) {
-      window.location.href = `/Multi/verkaeuferProfil/verkaeuferProfil.html?user_id=${encodeURIComponent(userId)}`;
-    } else {
-      alert("Keine Benutzer-ID gefunden.");
-    }
-  });
-}
-// Warenkorb aufrufen
-const warenkorb = document.getElementById("warenkorb");
-if (warenkorb) {
-  warenkorb.addEventListener("click", (e) => {
-    e.preventDefault();
-    const userId = sessionStorage.getItem("user_id");
-    if (userId) {
-      // Leite mit Parameter weiter
-      window.location.href = `/Multi/Warenkorb/warenkorb.html?user_id=${encodeURIComponent(userId)}`;
-    } else {
-      alert("Keine Benutzer-ID gefunden.");
-    }
-  });
-}
+      if (userId) {
+        window.location.href = BASE_URL + `/Multi/verkaeuferProfil/verkaeuferProfil.html?user_id=${encodeURIComponent(userId)}`;
+      } else {
+        alert("Keine Benutzer-ID gefunden.");
+      }
+    });
+  }
 
+  // open shopping cart
+  const warenkorb = document.getElementById("warenkorb");
+  if (warenkorb) {
+    warenkorb.addEventListener("click", (e) => {
+      e.preventDefault();
+      const userId = sessionStorage.getItem("user_id");
+      if (userId) {
+        window.location.href = `/Multi/Warenkorb/warenkorb.html?user_id=${encodeURIComponent(userId)}`;
+      } else {
+        alert("Keine Benutzer-ID gefunden.");
+      }
+    });
+  }
 
   document.body.addEventListener("click", (e) => {
     const link = e.target.closest('[data-role]');
@@ -42,42 +43,39 @@ if (warenkorb) {
     const href = link.getAttribute('href');
 
     sessionStorage.setItem('roll', role);
-
     window.location.href = href;
-
   });
 });
 
-// Daten aus Session Storage auslesen
-function userData (){
-      const username = sessionStorage.getItem('username');
-      const role = sessionStorage.getItem('roll');
-      const userId = sessionStorage.getItem('user_id');
+// Get user data from session storage
+function userData() {
+  const username = sessionStorage.getItem('username');
+  const role = sessionStorage.getItem('roll');
+  const userId = sessionStorage.getItem('user_id');
 
-      // HTML Inhalte auslesen 
-      const userInfoElement = document.getElementById('user-info');
-      const userRoleElement = document.getElementById('user-role');
+  const userInfoElement = document.getElementById('user-info');
+  const userRoleElement = document.getElementById('user-role');
 
-      // Inhalte setzen
-      if (username && userInfoElement) {
-        userInfoElement.textContent = 'Angemeldet als: ' + username;
-      }
+  // Set the dynamic elements
+  if (username && userInfoElement) {
+    userInfoElement.textContent = 'Angemeldet als: ' + username;
+  }
 
-      if (role && userRoleElement) {
-        userRoleElement.textContent = `(${role})`;
-      }
+  if (role && userRoleElement) {
+    userRoleElement.textContent = `(${role})`;
+  }
 }
 
-// Zeige Dropdownmenü
+// Create dropdown menu
 function showRoleBasedMenu() {
   const role = sessionStorage.getItem('roll');
 
   const allRoleSections = document.querySelectorAll('[data-role-content]');
-  // alles verstecken
+  // hide everything
   allRoleSections.forEach(section => {
     section.style.display = 'none'; 
   });
-  // Zeige nur das für die Rolle 
+  // Only show the specific role 
   if (role) {
     const visibleSection = document.querySelector(`[data-role-content="${role}"]`);
     if (visibleSection) {
@@ -85,36 +83,31 @@ function showRoleBasedMenu() {
     }
   }
 }
-// zeige das Dropdownmenü
-function toggleDropdown() {
+
+// Show dropdown menu
+window.toggleDropdown = function() {
   document.getElementById("dropdown-menu").classList.toggle("show");
 }
 
-// Klick außerhalb schließt Dropdown
+// Click outside the dropdown menu
 window.addEventListener("click", function(event) {
   if (!event.target.closest('.dropdown')) {
     document.getElementById("dropdown-menu").classList.remove("show");
   }
 });
 
-// Suche öffnen
-function suche() {
+// open search
+window.suche = function () {
   const input = document.getElementById("search-input");
   const query = input ? input.value.trim() : "";
   const roll = sessionStorage.getItem('roll'); 
 
-  // Startseite des Käufers mit Suchanfrage öffnen
-  if (roll == 'Käufer')
-  {
+  // Open start site of käufer
+  if (roll == 'Käufer') {
     window.location.href = `/Multi/Kaeufer/kaeufer.html?query=${encodeURIComponent(query)}`;
   }
-  // Startseite des Verkäufers mit Suchanfrage öffnen  
-  if (roll == 'Verkäufer')
-  {
+  // Open start site of verkäufer 
+  if (roll == 'Verkäufer') {
     window.location.href = `/Multi/Kaeufer/kaeufer.html?query=${encodeURIComponent(query)}`;
   }
 }
-
-
-
-

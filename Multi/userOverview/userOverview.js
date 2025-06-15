@@ -1,9 +1,9 @@
-let apiBaseUrl  = "https://allestaco.niclas-sieveneck.de:5000/v1/"; //GrundURL für die API-Anfragen;
+import { BASE_URL } from '../config.js';
 
   document.addEventListener("DOMContentLoaded", function () {
     // Benutzerdaten laden
     
-    fetch(apiBaseUrl +"user/info/" + sessionStorage.getItem("user_id") )
+    fetch(BASE_URL +"/user/info/" + sessionStorage.getItem("user_id") )
       
       .then(response => response.json())
       .then(users => {

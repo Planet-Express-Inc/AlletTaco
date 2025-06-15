@@ -1,4 +1,6 @@
-consoledocument.addEventListener("DOMContentLoaded", () => {
+import { BASE_URL } from '../config.js';
+
+document.addEventListener("DOMContentLoaded", () => {
   loadArticles();
 });
 
@@ -6,7 +8,7 @@ consoledocument.addEventListener("DOMContentLoaded", () => {
   function loadArticles () {
     const userId = parseInt(sessionStorage.getItem('user_id'), 10);
     // Get all articel of the login user
-    fetch(`https://allestaco.niclas-sieveneck.de:5000/v1/article/user/${userId}`)  
+    fetch(BASE_URL + `/article/user/${userId}`)  
       .then(response => response.json())
       .then(data => {
         const list = document.getElementById('product-list');
@@ -15,7 +17,7 @@ consoledocument.addEventListener("DOMContentLoaded", () => {
           item.className = 'product';         
 
           // Get the views of an articel
-          fetch(`https://allestaco.niclas-sieveneck.de:5000/v1/article/views/${product.artikel_id}`)
+          fetch(BASE_URL + `/article/views/${product.artikel_id}`)
             .then(views => views.json())
             .then(viewArray => {
               let aufrufe = 0;
@@ -28,7 +30,7 @@ consoledocument.addEventListener("DOMContentLoaded", () => {
 
               // Build new html Elements with the articels
               item.innerHTML = `
-                <img src="https://allestaco.niclas-sieveneck.de:5000/v1/article/picture/${product.artikel_id}" alt="${product.titel}">   
+                <img src="${BASE_URL}/article/picture/${product.artikel_id}" alt="${product.titel}">   
                 <div class="product-info">
                   <h3 class="product-title">${product.titel}</h3>
                   <p class="product-description">${product.beschreibung}</p>
@@ -64,13 +66,13 @@ consoledocument.addEventListener("DOMContentLoaded", () => {
   }
 
 // Open an articel
-function edit (articel){
+window.edit = function (articel){
   window.location.href = `/Multi/editProduct/editProduct.html?articelid=${articel}`;
 }
 // Delete an articel
-async function deleteArticel(id) {
+ window.deleteArticel = async function (id) {
   try {
-    const response = await fetch(`https://allestaco.niclas-sieveneck.de:5000/v1/article/${id}`, {
+    const response = await fetch(BASE_URL + `/article/${id}`, {
       method: 'DELETE',
       credentials: 'include'
     });
@@ -81,7 +83,7 @@ async function deleteArticel(id) {
     const data = await response.text();
     console.log('Erfolgreich gelöscht:', data);
     // Reload the site
-    await new Promise(resolve => setTimeout(resolve, 50000));
+    await new Promise(resolve => setTimeout(resolve, 500));
     window.location.href = `/Multi/Verkaeufer/verkaeufer.html`;
   } catch (error) {
     console.error('Fehler:', error);

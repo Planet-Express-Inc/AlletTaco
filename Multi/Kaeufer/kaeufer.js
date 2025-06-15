@@ -1,3 +1,6 @@
+import { BASE_URL } from '../config.js';
+
+
 document.addEventListener("DOMContentLoaded", () => {
   // Get search query form URL
   const params = new URLSearchParams(window.location.search);
@@ -10,8 +13,8 @@ document.addEventListener("DOMContentLoaded", () => {
 function loadArticles(query) {
   const list = document.getElementById('product-list');
   const url = query.trim()
-    ? `https://allestaco.niclas-sieveneck.de:5000/v1/article/search/${encodeURIComponent(query)}`
-    : `https://allestaco.niclas-sieveneck.de:5000/v1/article/multiple/0/10`;
+    ? BASE_URL + `/article/search/${encodeURIComponent(query)}`
+    : BASE_URL + `/article/multiple/0/10`;
   // Holen der Json
   fetch(url)
   // Prüfung ob eine Json kommt
@@ -27,7 +30,7 @@ function loadArticles(query) {
         item.className = 'product';
         // Ausgabe auf html
         item.innerHTML = `
-          <img src="https://allestaco.niclas-sieveneck.de:5000/v1/article/picture/${product.artikel_id}" alt="${product.titel}">
+          <img src="${BASE_URL}/article/picture/${product.artikel_id}" alt="${product.titel}">
           <div class="product-info">
             <h3 class="product-title">${product.titel}</h3>
             <p class="product-description">${product.beschreibung}</p>
