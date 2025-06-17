@@ -1,8 +1,8 @@
-let apiBaseUrl  = "https://allestaco.niclas-sieveneck.de:5000/v1/"; //GrundURL für die API-Anfragen; HTTP WIRD BALD SEHR BALD IN HTTPS UMGEWANDELT
+import { BASE_URL } from '../config.js';
 
 document.addEventListener("DOMContentLoaded", function() {
     // API-URL wie im Screenshot
-    fetch(apiBaseUrl +"user/purchase", {
+    fetch(BASE_URL +"/user/purchase", {
       method: 'GET',
       credentials: 'include'}) // Cookies mit senden)}
 
@@ -17,11 +17,11 @@ document.addEventListener("DOMContentLoaded", function() {
             orders.forEach(async order => {
                 const orderDiv = document.createElement("div");
                 orderDiv.classList.add("order-item");
-                const productCall = await fetch(apiBaseUrl + "article/" + order.artikel_id);
+                const productCall = await fetch(BASE_URL + "/article/" + order.artikel_id);
                 const productArray = await productCall.json();
                 const product = productArray[0];
 
-                const kauferCall = await fetch(apiBaseUrl + "user/info/" + order.kaeufer_id);
+                const kauferCall = await fetch(BASE_URL + "/user/info/" + order.kaeufer_id);
                 const kauferArray = await kauferCall.json();
                 const kaufer = kauferArray[0];
                 console.log("kauferCall-ID:", kauferArray); //Fehersuche
