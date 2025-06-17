@@ -4,24 +4,38 @@ const params = new URLSearchParams(window.location.search);
 const sellerID = params.get('seller_id');
 
 document.addEventListener("DOMContentLoaded", () => {
-// Get the DOM Elemets
   const sterneContainer = document.getElementById('sterne-container');
   const sterneInput = document.getElementById('sterne-wert');
   const sterneSpans = sterneContainer.querySelectorAll('span');
-  // Get the User from URL
-  if (sellerID) {
-  const titelElement = document.getElementById('verkaeuferName');
-  titelElement.textContent = `Verkäufer: ${sellerID}`;
-  }
-  // Make Stars klickable
+
+  // Make stars focusable & screenreader-friendly
   sterneSpans.forEach(stern => {
+    stern.setAttribute('tabindex', '0');
+    stern.setAttribute('aria-checked', 'false');
+
+    // Tastatursteuerung für Screenreader/Tab-Nutzer
+    stern.addEventListener('keydown', (e) => {
+      if (e.key === " " || e.key === "Enter") {
+        stern.click();
+      }
+      // Links/Rechts zur Auswahl der Sterne per Pfeiltasten
+      if (e.key === "ArrowRight" && stern.nextElementSibling) {
+        stern.nextElementSibling.focus();
+      }
+      if (e.key === "ArrowLeft" && stern.previousElementSibling) {
+        stern.previousElementSibling.focus();
+      }
+    });
+
+    // Klick/Enter setzt aria-checked korrekt
     stern.addEventListener('click', () => {
       const wert = parseInt(stern.getAttribute('data-wert'));
       sterneInput.value = wert;
-
-      sterneSpans.forEach(s => {
+      sterneSpans.forEach((s, i) => {
         const sWert = parseInt(s.getAttribute('data-wert'));
         s.classList.toggle('filled', sWert <= wert);
+        // ARIA-checked NUR beim ausgewählten Stern
+        s.setAttribute('aria-checked', sWert === wert ? 'true' : 'false');
       });
     });
   });
