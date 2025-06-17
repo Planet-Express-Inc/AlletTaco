@@ -14,9 +14,8 @@ window.ladeVerkaeufe = async function () {
   }
 
   const sellsArticleArray = await response.json();
-  console.log(sellsArticleArray); // Hier hast du dein Array sicher
+  console.log(sellsArticleArray); 
 
-  // Verarbeitung direkt hier drin
   const months = new Array(12).fill(0);
   sellsArticleArray.forEach(element => {
     const month = parseInt(element.month);
