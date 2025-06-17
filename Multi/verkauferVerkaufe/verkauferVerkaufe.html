@@ -56,22 +56,26 @@
 
     
     <main class="main-content">
-      
-        <pre id= "istAllesTaco"> </pre>
-        
+      <pre id="istAllesTaco"></pre>
         <h1>Verkäufe:</h1>
-        <div class="order-history" id="orderHistory">
-            <!-- Bestellhistorie wird hier geladen -->
+          <div class="verkauf-wrapper">
+          <div class="order-history" id="orderHistory">
+          <!-- Verkäufe werden hier angezeigt -->
         </div>
-
-        <button onclick="window.location.href='/Multi/verkaeuferChart/verkaeuferChart.html'""> Chart </button>
+          <div class="verkauf-overview">
+            <h4>Hier geht es zu einer Übersicht der Verkäufe im Jahr, monatlich dargestellt.</h4>
+            
+              <a href="/Multi/verkaeuferChart/verkaeuferChart.html" class="btn btn-white btn-animate">Chart</a>
+            
+         </div>
+        </div>
     </main>
 
     <footer class="footer"> <!-- Impressum -->
       <div>
         <button class="impressum-button" onclick="window.location.href='https://niclas-sieveneck.de/impressum/'">
 			  Impressum
-		  </button>
+		    </button>
         <button class="impressum-button" onclick="window.location.href='https://niclas-sieveneck.de/datenschutz/'">
 			  Datenschutz
 		    </button>
