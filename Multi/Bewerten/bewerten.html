@@ -59,34 +59,32 @@
     <div class="detail-layout">
         <h2 id="verkaeuferName"></h2>
 
-            <form id="bewerten-form">
+            <form id="bewerten-form" aria-label="Bewertungsformular">
 
-            <h2>Sternebewertung:</h2>
-            <div class="sterne-bewertung" id="sterne-container">
-            <span data-wert="1">★</span>
-            <span data-wert="2">★</span>
-            <span data-wert="3">★</span>
-            <span data-wert="4">★</span>
-            <span data-wert="5">★</span>
+            <h2 id="sterne-label"> Sternebewertung:</h2>
+            <div class="sterne-bewertung" id="sterne-container" role="radiogroup" aria-labelledby="sterne-label">
+              <span data-wert="1" role="radio" aria-label="1 Stern" tabindex="0" aria-checked="false">★</span>
+              <span data-wert="2" role="radio" aria-label="2 Sterne" tabindex="0" aria-checked="false">★</span>
+              <span data-wert="3" role="radio" aria-label="3 Sterne" tabindex="0" aria-checked="false">★</span>
+              <span data-wert="4" role="radio" aria-label="4 Sterne" tabindex="0" aria-checked="false">★</span>
+              <span data-wert="5" role="radio" aria-label="5 Sterne" tabindex="0" aria-checked="false">★</span>
             </div>
             <input type="hidden" id="sterne-wert" name="sterne" required>
             
-            <h2>Kommentar:</h2>
+            <h2 for="description">Kommentar:</h2>
+            <textarea id="description" placeholder="Beschreibung eingeben..." rows="6" required aria-required="true"></textarea>
+            <button type="submit" class="save-button">Speichern</button>
 
-            <textarea id="description" placeholder="Beschreibung eingeben..." rows="6" required></textarea>
-            
-            <button type="submit" class="save-button">Speichern</button> 
-            
+
+
           </form>
 
       </div>
-        <div id="saveModal" class="modal">
+        <div id="saveModal" class="modal" aria-live="assertive">
           <div class="modal-content">
-            <p>Der Bewertung wurde erfolgreich gespeichert!</p>
+            <p>Die Bewertung wurde erfolgreich gespeichert!</p>
             <button id="backButton" onclick="window.location.href='/Multi/Kaeufer/kaeufer.html'">Zurück zur Startseite</button>
-      </div>
-    </div>
-            
+       </div>   
     </div>
 
 </main>

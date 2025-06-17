@@ -47,13 +47,22 @@ async function loadBewertungen() {
 
 
         // Bewertungen verarbeiten
-        data.forEach(bewertung => {
+        data.forEach(async bewertung => {
             const item = document.createElement('div');
             item.className = 'bewertung';
+
+            const kauferCall = await fetch(BASE_URL + "/user/info/" + bewertung.bewerter_id);
+            const kauferArray = await kauferCall.json();
+            const kaufer = kauferArray[0];
+
+            const verkauferCall = await fetch(BASE_URL + "/user/info/" + bewertung.bewerteter_id);
+            const verkauferArray = await verkauferCall.json();
+            const verkaufer = verkauferArray[0];
+
             
             item.innerHTML = `
-                <p class="bewertung-user">Bewerter: ${bewertung.bewerter_id}</p>
-                <p class="bewertung-user">Bewerteter: ${bewertung.bewerteter_id}</p>
+                <p class="bewertung-user">Bewerter: ${kaufer.benutzername}</p>
+                <p class="bewertung-user">Bewerteter: ${verkaufer.benutzername}</p>
                 <p class="bewertung-sterne">${renderSterne(bewertung.sterne)}</p>
                 <p class="bewertung-kommentar">Kommentar: ${bewertung.kommentar}</p>
             `;
