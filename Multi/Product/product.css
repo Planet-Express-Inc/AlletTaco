@@ -121,3 +121,11 @@
   cursor: pointer;
   font-size: 16px;
 }
+
+
+.seller-rating {
+  font-size: 30px;
+  color: #ffa500; 
+  font-weight: bold;
+  margin-bottom: 0.3rem;
+}

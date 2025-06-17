@@ -83,7 +83,7 @@ document.addEventListener("DOMContentLoaded", async () => {
     document.getElementById('product-description').textContent = product.beschreibung;
 
     document.getElementById('seller-name').textContent = "Name: " + seller.benutzername;
-    document.getElementById('seller-rating').textContent = "Bewertung: " + sternegerundet;
+    document.getElementById('seller-rating').textContent = renderSterne(sternegerundet);
     document.getElementById('seller-contact').textContent = "Email: " + seller.email;
 
     const sellerBox = document.getElementById("seller-box");
@@ -125,3 +125,10 @@ window.addToCart = function (){
     });
 }
 
+function renderSterne(anzahl) {
+  const maxSterne = 5;
+  console.log(anzahl);
+  const sterne = anzahl || 0;
+  console.log(sterne);
+  return '★'.repeat(sterne) + '☆'.repeat(maxSterne - sterne);
+}

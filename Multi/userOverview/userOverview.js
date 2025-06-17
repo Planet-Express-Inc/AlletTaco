@@ -44,10 +44,10 @@ import { BASE_URL } from '../config.js';
 window.loadBewertungen = async function () {
     try {
         // Bewertungen laden
-        const response = await fetch(BASE_URL + `/user/reviews/${sellerId}`);
+        const response = await fetch(BASE_URL + `/user/reviews/${sessionStorage.getItem("user_id")}`);
         const data = await response.json();
 
-        const list = document.getElementById('bewertung-list');
+        const list = document.getElementById('userComments');
 
 
 

@@ -5,10 +5,6 @@ const sellerId = parseInt(params.get('user_id'), 10);
 
 document.addEventListener("DOMContentLoaded", async () => {
     // 1. Holen der Produkt-ID aus der URL
-    
-    
-  
-    if (isNaN(sellerId)) return;
 
     const item = document.getElementById('seller-box');
     try
@@ -20,10 +16,17 @@ document.addEventListener("DOMContentLoaded", async () => {
         const seller = sellerArray[0]; 
         console.log("Verkäuferdaten:", seller);
 
+        // Get the sellers rating
+        const ratingRes = await fetch(BASE_URL + `/user/reviews/${sellerId}`);
+        const ratingArray = await ratingRes.json();
+        const summe = ratingArray.reduce((acc, ratingArray) => acc + ratingArray.sterne, 0);
+        const durchschnitt = summe / ratingArray.length;
+        const sternegerundet = Math.round(durchschnitt);
+
 
         item.innerHTML = `
                 <p class="seller">Name: ${seller.benutzername}</p>
-                <p class="seller-rating">${renderSterne((Math.round(seller.rating)))}</p>
+                <p class="seller-rating">${renderSterne(sternegerundet)}</p>
             `;
 
         } catch (error) {

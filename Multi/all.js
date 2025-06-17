@@ -13,7 +13,7 @@ document.addEventListener("DOMContentLoaded", () => {
       const userId = sessionStorage.getItem("user_id");
 
       if (userId) {
-        window.location.href = BASE_URL + `/Multi/verkaeuferProfil/verkaeuferProfil.html?user_id=${encodeURIComponent(userId)}`;
+        window.location.href = `/Multi/verkaeuferProfil/verkaeuferProfil.html?user_id=${encodeURIComponent(userId)}`;
       } else {
         alert("Keine Benutzer-ID gefunden.");
       }
