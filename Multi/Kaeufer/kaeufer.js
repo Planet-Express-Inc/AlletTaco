@@ -78,11 +78,9 @@ window.back = function (){
   // If there are no more articels
   if (startArticel==0){
     startArticel = 0;
-    endArticel = 10;
     alert("Sie sind auf Seite 1");
 }else{
   startArticel -= 10;
-  endArticel -= 10;
   noMoreArticel = false;
   loadArticles(startArticel,endArticel);
   }
@@ -94,7 +92,6 @@ window.forward = function (){
     alert("Sie sind auf der letzten Seite");
 }else{
   startArticel += 10;
-  endArticel += 10;
   loadArticles(startArticel,endArticel);
   }
 }

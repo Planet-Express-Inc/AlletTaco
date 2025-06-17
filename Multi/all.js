@@ -34,6 +34,23 @@ document.addEventListener("DOMContentLoaded", () => {
     });
   }
 
+
+// Logoff User
+const logoff = document.getElementById("logoff");
+if (logoff) {
+  logoff.addEventListener("click", (e) => {
+    e.preventDefault();
+    sessionStorage.clear();
+    fetch(BASE_URL + `/user/logoff`)
+      .then(response => response.json())
+      .then(data => {
+        console.log("Logout-Antwort:", data);
+        console.log(data);
+        window.location.href = "/index.html";
+      });
+  });
+}
+
   document.body.addEventListener("click", (e) => {
     const link = e.target.closest('[data-role]');
     if (!link) return;

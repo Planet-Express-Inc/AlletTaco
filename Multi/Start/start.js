@@ -126,8 +126,18 @@ window.showRegister = function () {
     document.querySelector('.register-popup').style.display = 'block';
 }
 window.onRegister = async function (){
+// Password check
+const password = document.getElementById("register-password").value;
+const errorDisplay = document.getElementById("password-error");
+
+// At least 8 figures
+if (password.length < 8) {
+alert("Passwort muss mindestens 8 Zeichen lang sein. \nBitte registrieren Sie sich erneut."); 
+return;
+}
+
+
     const username = document.getElementById('register-username').value;
-    const password = document.getElementById('register-password').value;
     const firstname = document.getElementById('register-firstname').value;
     const lastname = document.getElementById('register-lastname').value;
     const mail = document.getElementById('register-mail').value;
