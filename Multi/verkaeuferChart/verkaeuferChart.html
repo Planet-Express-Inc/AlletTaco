@@ -3,11 +3,10 @@
 
   <head>
     <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Alles Taco – Startseite</title>
-    <link rel="stylesheet" href="verkauferVerkaufe.css">
+    <link rel="stylesheet" href="verkaeuferChart.css">
     <link rel="stylesheet" href="/Multi/all.css">
-    <script type="module" src="verkauferVerkaufe.js"></script>
-    <script type="module" src="/Multi/all.js" defer></script>
        <header class="header"> <!-- First Line -->
 
       <div class="logo">
@@ -56,15 +55,10 @@
 
     
     <main class="main-content">
-      
-        <pre id= "istAllesTaco"> </pre>
-        
-        <h1>Verkäufe:</h1>
-        <div class="order-history" id="orderHistory">
-            <!-- Bestellhistorie wird hier geladen -->
-        </div>
-
-        <button onclick="window.location.href='/Multi/verkaeuferChart/verkaeuferChart.html'""> Chart </button>
+    <div class="tabel">
+        <h1>Verkäufe pro Monat</h1>
+        <canvas id="verkaufsChart" width="600" height="400"></canvas>
+    </div>
     </main>
 
     <footer class="footer"> <!-- Impressum -->
@@ -77,6 +71,7 @@
 		    </button>
       </div>
     </footer>
-
+    <script type="module" src="verkaeuferChart.js"></script>
+    <script type="module" src="/Multi/all.js" defer></script>
   </body>
 </html>
