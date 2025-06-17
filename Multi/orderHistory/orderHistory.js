@@ -32,6 +32,7 @@ document.addEventListener("DOMContentLoaded", function() {
                     <p>Preis: ${order.kaufpreis.toString().replace('.', ',')} €</p>
                     <p>Versand: ${order.versanddaten}</p>
                     <p>Anzahl: ${order.anzahl}</p>
+                    <p>Bestelldatum: ${order.day + "."+ order.month+"."+ order.year}</p>
                     <p>
                     <a href="/Multi/Bewerten/bewerten.html?seller_id=${verkaufer.benutzer_id}">Diese Bestellung bewerten</a>
                     </p>`
