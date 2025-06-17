@@ -79,8 +79,9 @@ document.addEventListener("DOMContentLoaded", async () => {
     document.getElementById('product-image').alt = product.titel;
     document.getElementById('preis').textContent = "Preis: " + product.preis.replace('.',',') + " €";
     document.getElementById('views').textContent = "Aufrufe: " + anzahl;
-    document.getElementById('product-title').textContent = product.titel;
-    document.getElementById('product-description').textContent = product.beschreibung;
+    document.getElementById('product-title').textContent = "Titel:" +  product.titel;
+    document.getElementById('product-kategorie').textContent = "Kategorie:" +  product.kategorie;
+    document.getElementById('product-description').textContent ="Beschreibung: " + product.beschreibung;
 
     document.getElementById('seller-name').textContent = "Name: " + seller.benutzername;
     document.getElementById('seller-rating').textContent = renderSterne(sternegerundet);
