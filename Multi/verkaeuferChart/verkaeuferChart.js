@@ -2,30 +2,42 @@ import { BASE_URL } from "../config.js";
 
 const user_id = sessionStorage.getItem("user_id");
 
-const sellsArticel = await fetch(BASE_URL + `/user/sales/${user_id}`);
-const sellsArticelArray = await sellsArticel.json ();
+window.ladeVerkaeufe = async function () {
+  const response = await fetch(BASE_URL + `/user/sales/${user_id}`, {
+    method: 'GET',
+    credentials: 'include',
+  });
 
-console.log(sellsArticelArray);
+  if (!response.ok) {
+    console.error('Fehler beim Laden:', response.status);
+    return;
+  }
 
-const months = new Array(12).fill(0);
-sellsArticelArray.array.forEach(element => {
-    const month = element.month;
+  const sellsArticleArray = await response.json();
+  console.log(sellsArticleArray); // Hier hast du dein Array sicher
 
+  // Verarbeitung direkt hier drin
+  const months = new Array(12).fill(0);
+  sellsArticleArray.forEach(element => {
+    const month = parseInt(element.month);
 
+    console.log(month);
     months[month-1] += element.anzahl;
 
+  });
 
-});
+  console.log(months);
+  return months;
+}
+ladeVerkaeufe();
 
-
-
-
-window.loadChart = function (){
+window.loadChart = async function (){
     const canvas = document.getElementById('verkaufsChart');
     const ctx = canvas.getContext('2d');
 
     const labels = ['Jan', 'Feb', 'Mär', 'Apr', 'Mai', 'Jun', 'Jul', 'Aug', 'Sep', 'Okt', 'Nov', 'Dez'];
-    const data = [120, 90, 150, 80, 200, 170, 220, 190, 140, 180, 160, 210];
+    const data = await ladeVerkaeufe();
+    console.log("Sie sind hier", data)
 
     const padding = 50;
     const chartWidth = canvas.width - 2 * padding;
