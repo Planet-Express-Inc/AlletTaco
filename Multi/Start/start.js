@@ -1,7 +1,6 @@
 // Globale Variable zum Speichern der gewählten Rolle
 let selectedRoll = "";
 import { BASE_URL } from '../config.js';
-
 // Enter klicken für login
 document.addEventListener("keydown", function(event) {
 if (event.key === "Enter") {
@@ -13,7 +12,7 @@ if (event.key === "Enter") {
 window.toggleCookies = function () {
     const choice = document.querySelector('input[name="cookie-choice"]:checked');
     if (!choice) {
-        alert("Bitte wähle aus, ob du die Cookies akzeptieren oder ablehnen möchtest.");
+        alert("Bitte wähle aus, ob du die Cookies akzeptieren oder ablehnen möchtest." );
         return;
     }
 
