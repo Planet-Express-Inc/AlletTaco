@@ -31,7 +31,8 @@ document.addEventListener("DOMContentLoaded", function() {
                     <p>Verkäufer: ${verkaufer ? verkaufer.benutzername  : verorder.kaeufer_id}</p>
                     <p>Preis: ${order.kaufpreis.toString().replace('.', ',')} €</p>
                     <p>Versand: ${order.versanddaten}</p>
-                    <p><!-- Bewertung-Link -->
+                    <p>Anzahl: ${order.anzahl}</p>
+                    <p>
                     <a href="/Multi/Bewerten/bewerten.html?seller_id=${verkaufer.benutzer_id}">Diese Bestellung bewerten</a>
                     </p>`
                 orderHistory.appendChild(orderDiv);

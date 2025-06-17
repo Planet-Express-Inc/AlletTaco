@@ -1,14 +1,16 @@
 import { BASE_URL } from '../config.js';
 
 document.addEventListener("DOMContentLoaded", function() {
+    const user_id = sessionStorage.getItem("user_id");
     // API-URL wie im Screenshot
-    fetch(BASE_URL +"/user/purchase", {
+    fetch(BASE_URL +`/user/sales/${user_id}`, {
       method: 'GET',
       credentials: 'include'}) // Cookies mit senden)}
 
    
         .then(response => response.json())
         .then(orders => {
+            console.log(orders)
             // console.log("Antwort von der API:", orders); //Fehersuche
             const orderHistory = document.getElementById("orderHistory");
             orderHistory.innerHTML = ""; // Alte Inhalte löschen
@@ -21,6 +23,8 @@ document.addEventListener("DOMContentLoaded", function() {
                 const productArray = await productCall.json();
                 const product = productArray[0];
 
+                console.log(product);
+
                 const kauferCall = await fetch(BASE_URL + "/user/info/" + order.kaeufer_id);
                 const kauferArray = await kauferCall.json();
                 const kaufer = kauferArray[0];
@@ -28,12 +32,9 @@ document.addEventListener("DOMContentLoaded", function() {
                 orderDiv.innerHTML = `
                     <h3>Artikel: ${product ? product.titel : order.artikel_id}</h3>
                     <p>Kauf-ID: ${order.kauf_id}</p>
-                    <p>Verkäufer: ${kaufer ? kaufer.benutzername  : kaufer.kaeufer_id}</p>
-                    <p>Preis: ${order.kaufpreis} €</p>
-                    <p>Versand: ${order.versanddaten}</p>
-                    <p><!-- Bewertung-Link -->
-                    <a href="/Multi/Bewerten/bewerten.html?seller_id=${verkaufer.benutzer_id}">Diese Bestellung bewerten</a>
-                    </p>`
+                    <p>Käufer: ${kaufer ? kaufer.benutzername  : kaufer.kaeufer_id}</p>
+                    <p>Preis: ${order.kaufpreis.toString().replace('.', ',')} €</p>
+                    <p>Anzahl: ${order.anzahl}</p>`
                 orderHistory.appendChild(orderDiv);
             });
         })
