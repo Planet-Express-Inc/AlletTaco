@@ -118,6 +118,7 @@ window.suche = function () {
   const input = document.getElementById("search-input");
   const query = input ? input.value.trim() : "";
   const roll = sessionStorage.getItem('roll'); 
+  console.log("Hallo hiersuche");
 
   // Open start site of käufer
   if (roll == 'Käufer') {
@@ -125,6 +126,20 @@ window.suche = function () {
   }
   // Open start site of verkäufer 
   if (roll == 'Verkäufer') {
+    sessionStorage.setItem('roll', 'Käufer');
     window.location.href = `/Multi/Kaeufer/kaeufer.html?query=${encodeURIComponent(query)}`;
   }
 }
+// Search works when clicked on enter
+document.addEventListener("DOMContentLoaded", () => {
+  const input = document.getElementById("search-input");
+
+  if (input) {
+    input.addEventListener("keydown", function (event) {
+      if (event.key === "Enter") {
+        event.preventDefault(); 
+        suche(); 
+      }
+    });
+  }
+});
