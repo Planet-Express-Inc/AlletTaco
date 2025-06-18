@@ -52,6 +52,11 @@
   background-color: #bbb;
   color: black;
 }
+.delete-button:hover {
+  background-color: rgb(176, 11, 14);
+}
+
+
 .product-total {
   margin-top: 10px;
   font-weight: bold;

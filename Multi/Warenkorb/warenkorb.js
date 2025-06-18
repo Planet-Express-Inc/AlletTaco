@@ -57,7 +57,7 @@ document.addEventListener("DOMContentLoaded", () => {
                   ${[...Array(product.bestand)].map((_, i) => `<option value="${i + 1}">${i + 1}</option>`).join("")}
               </select>
 
-              <button onclick="deleteArticel(${product.artikel_id})" class="delete-button">Löschen</button>
+              <button onclick="deleteArticelButton(${product.artikel_id})" class="delete-button">Löschen</button>
             </div>
           </div>
         `;
@@ -86,8 +86,9 @@ document.addEventListener("DOMContentLoaded", () => {
 
 
 window.deleteArticelButton = async function (id) {
-  deleteArticel(id);
-  setTimeout(() => location.reload(), 500);
+  await deleteArticel(id);
+  window.location.href = "/Multi/Warenkorb/warenkorb.html";
+  console.log("das ist ein ausgabe");
 }
 
 

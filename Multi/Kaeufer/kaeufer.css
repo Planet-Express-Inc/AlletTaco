@@ -32,6 +32,9 @@
   cursor: pointer;
   
 }
+.product:hover {
+  background-color:rgb(176, 11, 14);
+}
   
 .product img {
   width: 150px;
