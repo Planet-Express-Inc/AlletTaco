@@ -6,11 +6,11 @@ document.addEventListener("DOMContentLoaded", () => {
   const list = document.getElementById('product-card');
   const totalPriceElement = document.getElementById('total-price');
 
-  // Preisformatierung einheitlich
+  // Formate the price
   function formatPrice(price) {
     return price.toFixed(2).replace('.', ',') + ' €';
   }
-
+  // Calculate the total price after changing the ammount
   window.updateTotalPrice = function () {
     let total = 0;
     const products = list.querySelectorAll('.product');
@@ -25,7 +25,7 @@ document.addEventListener("DOMContentLoaded", () => {
     });
     totalPriceElement.textContent = formatPrice(total);
   };
-
+  // Shows all Articels which are in the shoping cart
   async function loadArticles() {
     try {
       const response = await fetch(BASE_URL + `/user/cart`, { method: 'GET', credentials: 'include' });
@@ -84,16 +84,14 @@ document.addEventListener("DOMContentLoaded", () => {
   loadArticles();
 });
 
-
+// The action when the deleted button was pressed
 window.deleteArticelButton = async function (id) {
   await deleteArticel(id);
   window.location.href = "/Multi/Warenkorb/warenkorb.html";
   console.log("das ist ein ausgabe");
 }
 
-
-
-// Löscht Artikel aus Warenkorb
+// Removes an articel from the shoping cart
 window.deleteArticel = async function (id) {
   try {
     const response = await fetch(BASE_URL + `/user/cart/${id}`, {
@@ -113,29 +111,10 @@ window.deleteArticel = async function (id) {
   }
 };
 
-// Zeigt Fenster nach Kauf an
-
-window.buy = async function () {
-  try {
-    await fetch(BASE_URL + `/user/purchase`, {
-      method: 'POST',
-      credentials: 'include'
-    });
-
-    const modal = document.getElementById("review-modal");
-    modal.style.display = "block";
-  } catch (error) {
-    console.error('Fehler beim Kauf:', error);
-    alert("Ein Fehler beim Kauf ist aufgetreten.");
-  }
-};
 
 
 // Zeigt Fenster nach Kauf an
 window.buy = async function () {
-
-
-
   const list = document.getElementById('product-card');
   const products = list.querySelectorAll('.product');
 

@@ -1,3 +1,24 @@
+/**
+ * Buyer Dashboard
+ *
+ * This script displays an overview of purchasable products for the buyer.
+ *
+ * Main Features:
+ * - `loadArticles(start, end)` loads a defined number of articles from the server
+ * - `loadQuery(query)` loads articles based on a search term
+ * - `showOnHtml(productArray)` renders the articles into the HTML document
+ * - `forward()` & `back()` enable navigation through pages of 10 articles each
+ *
+ * Special Notes:
+ * - When a search query is active, normal pagination is disabled
+ * - Product images are dynamically loaded using the article ID
+ * - Clicking on a product redirects to its detail page
+ *
+ * HTML Requirements:
+ * - A container with ID `product-list` for displaying the articles
+ * - Optional: Buttons or links that trigger `forward()` and `back()`
+ */
+
 import { BASE_URL } from '../config.js';
 let startArticel = 0;
 let endArticel = 10;

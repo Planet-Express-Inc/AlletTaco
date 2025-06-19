@@ -1,3 +1,26 @@
+/**
+ * Product Detail Display and View Tracking (product.js)
+ *
+ * Displays detailed information about a specific product.
+ *
+ * Main Features:
+ * - Fetching and displaying product information, seller details, and seller ratings
+ * - Counting and updating the product's view count
+ * - Displaying the seller rating as stars
+ * - Adding the product to the shopping cart
+ * - Redirecting to the seller profile when clicking on the seller box
+ *
+ * HTML Requirements:
+ * - Placeholder elements with IDs such as `product-title`, `preis`, `product-image`, `seller-name`, etc.
+ * - Seller box with ID `seller-box` (clickable link)
+ * - `saveModal` for showing confirmation when adding to cart
+ *
+ * Notes:
+ * - View count is increased each time the page is loaded.
+ * - The script checks if view data already exists; if not, a new entry is created.
+ * - Ratings are calculated from an array of reviews (average and rounded).
+ */
+
 import { BASE_URL } from '../config.js';
 
 const params = new URLSearchParams(window.location.search);
@@ -125,7 +148,7 @@ window.addToCart = function (){
       console.error('Fehler beim Senden:', error);
     });
 }
-
+// Calculate the number of full and empty stars
 function renderSterne(anzahl) {
   const maxSterne = 5;
   console.log(anzahl);

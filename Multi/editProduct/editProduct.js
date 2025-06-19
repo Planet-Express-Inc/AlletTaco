@@ -1,3 +1,28 @@
+/**
+ * Product Editing Script (editProduct.js)
+ *
+ * Enables sellers to edit existing products.
+ *
+ * Main Features:
+ * - Loads product information based on the article ID from the URL.
+ * - Populates the form with existing product data.
+ * - Allows uploading a new image with live preview.
+ * - Completely deletes the old product via a DELETE request.
+ * - Re-creates the product with updated information via a POST request.
+ * - Displays a confirmation modal upon successful editing.
+ *
+ * Expected HTML Elements:
+ * - Form with ID `product-form`
+ * - Input fields for title, description, category, price, stock
+ * - File upload field with ID `image-upload`
+ * - Image preview with ID `preview`
+ * - Modal with ID `saveModal`
+ *
+ * Requirements:
+ * - Article ID must be passed as a `articelid` query parameter
+ * - A new image must be selected (mandatory)
+ */
+
 import { BASE_URL } from '../config.js';
 let articelId = 0;
 
@@ -11,7 +36,7 @@ document.addEventListener("DOMContentLoaded", async () => {
     const productArray = await productRes.json();
     const product = productArray[0];  
 
-    // Titel und Beschreibung
+    // show the attributes of the seleted product
     document.getElementById('product-title').value = product.titel;
     document.getElementById('product-description').textContent = product.beschreibung;
     document.getElementById('product-kategorie').value = product.kategorie;
@@ -23,9 +48,9 @@ document.addEventListener("DOMContentLoaded", async () => {
   }
 });
 
-// Für den Upload der neuen Eigenschaften
+// Upload the new values
 document.getElementById('product-form').addEventListener('submit', function (event) {
-  event.preventDefault(); // Verhindert echtes Absenden
+  event.preventDefault(); 
   const title = document.getElementById('product-title').value.trim();
   const description = document.getElementById('product-description').value.trim();
   const kategorie = document.getElementById('product-kategorie').value.trim();
@@ -56,7 +81,7 @@ document.getElementById('product-form').addEventListener('submit', function (eve
 
     };
 
-    // Löscht das Produkt    
+    // Removes the old product   
     fetch(BASE_URL + `/article/${articelId}`, {
       method: 'DELETE',
       credentials: 'include'
@@ -74,7 +99,7 @@ document.getElementById('product-form').addEventListener('submit', function (eve
       console.error('Fehler:', error);
     });
 
-    // Fügt das neue Produkt hinzu
+    // Adds the new product
     fetch(BASE_URL + `/article`, {
       method: 'POST',
       credentials: 'include',
@@ -93,10 +118,10 @@ document.getElementById('product-form').addEventListener('submit', function (eve
     });
   };
 
-  reader.readAsDataURL(file); // Bild als Base64 einlesen
+  reader.readAsDataURL(file); 
 });
 
-// Bild vorschau
+// Picture preview
 document.getElementById('image-upload').addEventListener('change', function (event) {
   const file = event.target.files[0];
   if (!file) return;
@@ -104,7 +129,7 @@ document.getElementById('image-upload').addEventListener('change', function (eve
   const reader = new FileReader();
 
   reader.onload = function (e) {
-    const base64Image = e.target.result; // z.B. "data:image/jpeg;base64,..."
+    const base64Image = e.target.result; 
     document.getElementById('preview').src = base64Image;
   };
 

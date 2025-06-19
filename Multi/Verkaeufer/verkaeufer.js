@@ -1,3 +1,25 @@
+/**
+ * Article List and Management (sellerArticles.js)
+ *
+ * Displays all products offered by a logged-in seller.
+ *
+ * Main Features:
+ * - Fetches all articles of a user based on the user ID from session storage
+ * - Retrieves and displays the view counts for each article
+ * - Shows article details such as image, title, description, price, stock, and views
+ * - Buttons to edit and delete individual articles
+ * - Clickable area to add new articles
+ * - Deletes an article via API call with page reload upon success
+ *
+ * HTML Requirements:
+ * - Container element with ID 'product-list' to insert the articles
+ * - Buttons for editing and deleting, with globally defined handlers
+ *
+ * Notes:
+ * - View counts are fetched and displayed separately for each article
+ * - Errors during loading of articles or views are logged to the console
+ */
+
 import { BASE_URL } from '../config.js';
 
 document.addEventListener("DOMContentLoaded", () => {
