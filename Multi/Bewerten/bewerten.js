@@ -1,3 +1,21 @@
+/**
+ * Rating Script (bewerten.js)
+ *
+ * This file provides functions for rating a seller.
+ * Includes:
+ * - Dynamic display and selection of stars (1–5) with keyboard support and ARIA accessibility.
+ * - Retrieval of `seller_id` from the URL.
+ * - Form handling and submission of the rating as a POST request to the API.
+ * - Display of a modal upon successful submission.
+ *
+ * Expected HTML structure:
+ * - A container with stars (spans with `data-wert` attribute).
+ * - A hidden input field with ID `sterne-wert`.
+ * - A textarea for comments with ID `description`.
+ * - A form with ID `bewerten-form`.
+ * - A modal with ID `saveModal` to show after successful rating submission.
+ */
+
 import { BASE_URL } from '../config.js';
 
 const params = new URLSearchParams(window.location.search);
@@ -13,7 +31,7 @@ document.addEventListener("DOMContentLoaded", () => {
     stern.setAttribute('tabindex', '0');
     stern.setAttribute('aria-checked', 'false');
 
-    // Tastatursteuerung für Screenreader/Tab-Nutzer
+    // Keyboard navigation for screen reader/tab users
     stern.addEventListener('keydown', (e) => {
       if (e.key === " " || e.key === "Enter") {
         stern.click();
@@ -27,7 +45,7 @@ document.addEventListener("DOMContentLoaded", () => {
       }
     });
 
-    // Klick/Enter setzt aria-checked korrekt
+    // Click/Enter sets aria-checked correctly
     stern.addEventListener('click', () => {
       const wert = parseInt(stern.getAttribute('data-wert'));
       sterneInput.value = wert;
