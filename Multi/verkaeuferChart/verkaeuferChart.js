@@ -1,7 +1,27 @@
+/**
+ * Sales Statistics Visualization (verkaufsChart.js)
+ *
+ * Loads the sales data of the logged-in user and visualizes it as a bar chart.
+ *
+ * Main Features:
+ * - Retrieves monthly sales figures
+ * - Dynamically draws a bar chart on an HTML canvas with month labels
+ * - Scales bar heights based on the highest monthly value
+ *
+ * HTML Requirements:
+ * - A `<canvas>` element with the ID `verkaufsChart` for rendering the chart
+ * - A stored user login with `user_id` in `sessionStorage`
+ *
+ * Notes:
+ * - The Y-axis displays sales quantities; the X-axis displays months
+ * - Axes, bars, and labels are manually drawn using the Canvas 2D Context API
+ * - Colors and layout are hardcoded within the script
+ */
+
 import { BASE_URL } from "../config.js";
 
 const user_id = sessionStorage.getItem("user_id");
-
+// Get all sellings 
 window.ladeVerkaeufe = async function () {
   const response = await fetch(BASE_URL + `/user/sales/${user_id}`, {
     method: 'GET',
@@ -29,7 +49,7 @@ window.ladeVerkaeufe = async function () {
   return months;
 }
 ladeVerkaeufe();
-
+// Build the cart
 window.loadChart = async function (){
     const canvas = document.getElementById('verkaufsChart');
     const ctx = canvas.getContext('2d');
@@ -45,25 +65,24 @@ window.loadChart = async function (){
     // Max width
     const maxValue = Math.max(...data);
 
-    // Balkenbreite und Abstand
+    // Bar width
     const barWidth = chartWidth / data.length * 0.6;
     const barGap = (chartWidth / data.length) * 0.4;
 
-    // Hintergrund weiß
+    // Set Backgroundcolor
     ctx.fillStyle = '#fff';
     ctx.fillRect(0, 0, canvas.width, canvas.height);
 
-    // Achsen zeichnen
+    // build axes
     ctx.strokeStyle = '#000';
     ctx.lineWidth = 2;
-    // Y-Achse
     ctx.beginPath();
     ctx.moveTo(padding, padding);
     ctx.lineTo(padding, canvas.height - padding);
     ctx.lineTo(canvas.width - padding, canvas.height - padding);
     ctx.stroke();
 
-    // Y-Achse Beschriftung
+    // label the Y-axes
     ctx.fillStyle = '#000';
     ctx.font = '14px Arial';
     ctx.textAlign = 'right';
@@ -74,26 +93,23 @@ window.loadChart = async function (){
     const y = padding + (chartHeight / yTicks) * i;
     const value = Math.round(maxValue - (maxValue / yTicks) * i);
     ctx.fillText(value, padding - 10, y);
-    // kleine Tick Markierung
+    // small markes on the Y-axes
     ctx.beginPath();
     ctx.moveTo(padding - 5, y);
     ctx.lineTo(padding, y);
     ctx.stroke();
     }
-
-    // Balken und X-Achsen-Beschriftung zeichnen
+    // Print bars and X-axes
     ctx.textAlign = 'center';
     ctx.textBaseline = 'top';
     for(let i = 0; i < data.length; i++) {
     const barHeight = (data[i] / maxValue) * chartHeight;
     const x = padding + i * (barWidth + barGap) + barGap / 2;
     const y = canvas.height - padding - barHeight;
-
-    // Balken zeichnen
-    ctx.fillStyle = '#B00B0E'; // orange
+    ctx.fillStyle = '#B00B0E'; 
     ctx.fillRect(x, y, barWidth, barHeight);
 
-    // Monatsnamen
+    // label the X-axes
     ctx.fillStyle = '#000';
     ctx.fillText(labels[i], x + barWidth / 2, canvas.height - padding + 5);
     }

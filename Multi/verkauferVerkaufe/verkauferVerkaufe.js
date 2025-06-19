@@ -1,21 +1,36 @@
+/**
+ * Verkaufsübersicht für Verkäufer (verkaufsübersicht.js)
+ *
+ * Zeigt dem eingeloggten Verkäufer eine Liste seiner abgeschlossenen Verkäufe.
+ *
+ * Hauptfunktionen:
+ * - Abrufen aller Verkaufsdaten des aktuellen Benutzers 
+ * - Dynamisches Nachladen von Artikeldetails und Käufernamen für jede Bestellung
+ * - Darstellung der Verkäufe mit Titel, Käufername, Kauf-ID, Preis und Anzahl auf der Webseite
+ *
+ * Voraussetzungen im HTML:
+ * - Ein Container mit der ID `orderHistory` zur Anzeige der Verkäufe
+ * - Ein eingeloggter Benutzer mit gespeicherter `user_id` im `sessionStorage`
+ *
+ * Hinweise:
+ * - Für jede Bestellung werden zusätzliche API-Aufrufe durchgeführt, um Artikel- und Benutzerinformationen zu ergänzen
+ */
+
 import { BASE_URL } from '../config.js';
 
 document.addEventListener("DOMContentLoaded", function() {
     const user_id = sessionStorage.getItem("user_id");
-    // API-URL wie im Screenshot
+    // Get all sells
     fetch(BASE_URL +`/user/sales/${user_id}`, {
       method: 'GET',
-      credentials: 'include'}) // Cookies mit senden)}
-
-   
+      credentials: 'include'})   
         .then(response => response.json())
         .then(orders => {
             console.log(orders)
-            // console.log("Antwort von der API:", orders); //Fehersuche
             const orderHistory = document.getElementById("orderHistory");
-            orderHistory.innerHTML = ""; // Alte Inhalte löschen
+            orderHistory.innerHTML = ""; 
 
-            // Gehe über alle Bestellungen im Array
+            // Show each sell on the html site
             orders.forEach(async order => {
                 const orderDiv = document.createElement("div");
                 orderDiv.classList.add("order-item");
@@ -28,7 +43,7 @@ document.addEventListener("DOMContentLoaded", function() {
                 const kauferCall = await fetch(BASE_URL + "/user/info/" + order.kaeufer_id);
                 const kauferArray = await kauferCall.json();
                 const kaufer = kauferArray[0];
-                console.log("kauferCall-ID:", kauferArray); //Fehersuche
+                console.log("kauferCall-ID:", kauferArray); 
                 orderDiv.innerHTML = `
                     <h3>Artikel: ${product ? product.titel : order.artikel_id}</h3>
                     <p>Kauf-ID: ${order.kauf_id}</p>

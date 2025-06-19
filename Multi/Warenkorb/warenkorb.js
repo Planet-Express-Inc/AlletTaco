@@ -1,3 +1,27 @@
+/**
+ * Shopping Cart Management and Checkout (warenkorb.js)
+ *
+ * Displays all items in the current user's shopping cart and enables purchase.
+ *
+ * Main Features:
+ * - Retrieves all items in the current user's shopping cart
+ * - Displays item details including dynamic quantity selection
+ * - Automatically calculates and updates the total price when quantities change
+ * - Deletes individual items from the cart
+ * - Processes the purchase, including rebuilding the cart with updated quantities
+ * - Shows a confirmation modal after successful checkout
+ *
+ * HTML Requirements:
+ * - Container with ID 'product-card' for displaying products
+ * - Element with ID 'total-price' for showing the total amount
+ * - Modal with ID 'review-modal' for purchase confirmation
+ *
+ * Notes:
+ * - Prices are formatted accordingly
+ * - During checkout, all items are removed and re-added with updated quantities before completing the purchase
+ * - Errors and server responses are logged to the console
+ */
+
 import { BASE_URL } from '../config.js';
 
 let productsData = [];
@@ -113,7 +137,7 @@ window.deleteArticel = async function (id) {
 
 
 
-// Zeigt Fenster nach Kauf an
+// Buy the shoping cart and shows a success window
 window.buy = async function () {
   const list = document.getElementById('product-card');
   const products = list.querySelectorAll('.product');
@@ -142,7 +166,6 @@ window.buy = async function () {
   } catch (error) {
     console.error('Fehler beim Kauf:', error);
   }
-
 };
 
 // Add new Articel to shoping cart
@@ -195,12 +218,3 @@ window.getElements = async function (products){
   }
   
 }
-
-
-window.startseite = function () {
-  window.location.href = "/Multi/Kaeufer/kaeufer.html";
-};
-
-window.bestellhistorie = function () {
-  window.location.href = "/Multi/orderHistory/orderHistory.html";
-};

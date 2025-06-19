@@ -1,21 +1,37 @@
+/**
+ * Seller Profile and Rating Display (seller.js)
+ *
+ * Displays a seller’s profile including the ratings they have received.
+ *
+ * Main Features:
+ * - Fetches and displays seller information based on the `user_id` in the URL
+ * - Calculates and displays the average star rating
+ * - Loads and renders individual reviews with comments, star count, and user details
+ *
+ * HTML Requirements:
+ * - An element with the ID `seller-box` for seller information
+ * - A container with the ID `bewertung-list` for displaying individual reviews
+ *
+ * Notes:
+ * - Star ratings are rendered using Unicode characters (★/☆)
+ * - Multiple API calls are made to fetch reviewer and reviewee data
+ * - Errors or missing data are logged to the console
+ */
+
 import { BASE_URL } from '../config.js';
 
 const params = new URLSearchParams(window.location.search);
 const sellerId = parseInt(params.get('user_id'), 10);
 
 document.addEventListener("DOMContentLoaded", async () => {
-    // 1. Holen der Produkt-ID aus der URL
 
     const item = document.getElementById('seller-box');
     try
-    {
-
-        // Verkäuferdaten holen
+    {   // Get the seller information
         const sellerRes = await fetch(BASE_URL + `/user/info/${sellerId}`);
         const sellerArray = await sellerRes.json();
         const seller = sellerArray[0]; 
         console.log("Verkäuferdaten:", seller);
-
         // Get the sellers rating
         const ratingRes = await fetch(BASE_URL + `/user/reviews/${sellerId}`);
         const ratingArray = await ratingRes.json();
@@ -23,30 +39,23 @@ document.addEventListener("DOMContentLoaded", async () => {
         const durchschnitt = summe / ratingArray.length;
         const sternegerundet = Math.round(durchschnitt);
 
-
         item.innerHTML = `
                 <p class="seller">Name: ${seller.benutzername}</p>
                 <p class="seller-rating">${renderSterne(sternegerundet)}</p>
             `;
-
         } catch (error) {
         console.error("Fehler beim Laden:", error);
-        }
+        }eigenschaftenBewertungen
         loadBewertungen()
 });
-
-
-async function loadBewertungen() {
+// Load the reviews
+window.loadBewertungen = async function () {
     try {
-        // Bewertungen laden
+        
         const response = await fetch(BASE_URL + `/user/reviews/${sellerId}`);
         const data = await response.json();
-
         const list = document.getElementById('bewertung-list');
 
-
-
-        // Bewertungen verarbeiten
         data.forEach(async bewertung => {
             const item = document.createElement('div');
             item.className = 'bewertung';
@@ -59,7 +68,6 @@ async function loadBewertungen() {
             const verkauferArray = await verkauferCall.json();
             const verkaufer = verkauferArray[0];
 
-            
             item.innerHTML = `
                 <p class="bewertung-user">Bewerter: ${kaufer.benutzername}</p>
                 <p class="bewertung-user">Bewerteter: ${verkaufer.benutzername}</p>
@@ -74,8 +82,8 @@ async function loadBewertungen() {
         console.error('Fehler beim Laden der Bewertungen:', err);
     }
 }
-
-function renderSterne(anzahl) {
+// Calculate the number of full and empty stars
+window.renderSterne = function (anzahl) {
   const maxSterne = 5;
   console.log(anzahl);
   const sterne = anzahl || 0;
