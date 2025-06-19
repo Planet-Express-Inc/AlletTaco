@@ -45,7 +45,6 @@
   align-items: center;
 }
 
-
 .userComments {
   margin-top: 2rem;
   padding: 1rem;
@@ -57,7 +56,7 @@
 .bewertung {
   background-color: #f9f9f9;
   border: 1px solid #ddd;
-  border-left: 4px solid #f4b400; /* Gelber Akzent */
+  border-left: 4px solid #f4b400; 
   padding: 1rem;
   border-radius: 8px;
   transition: background-color 0.2s;
@@ -65,7 +64,7 @@
 
 .bewertung-sterne, .seller-rating {
   font-size: 30px;
-  color: #ffa500; /* Orange/Gelb */
+  color: #ffa500; 
   font-weight: bold;
   margin-bottom: 0.3rem;
 }

@@ -36,7 +36,7 @@
 }
 
 .verkauf-overview {
-  width: 29%;        /* oder 30% */
+  width: 29%;      
   min-width: 120px;
   background: rgb(255, 246, 236);
   border-radius: 26px;
@@ -45,8 +45,6 @@
 }
 
 /*Der Schöne geklaute Knopf https://codepen.io/avvign/pen/NVJzQW/ */
-
-
 .btn:link,
 .btn:visited {
     text-transform: uppercase;

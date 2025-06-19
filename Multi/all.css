@@ -3,55 +3,53 @@ html {
 }
 
 body {
-    margin: 0;
-    padding-bottom: 60px;
-    font-family: Arial, sans-serif;
-    background-color: rgb(255, 246, 236);
-  }
+  margin: 0;
+  padding-bottom: 60px;
+  font-family: Arial, sans-serif;
+  background-color: rgb(255, 246, 236);
+}
   
-  .header { 
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    padding: 10px 20px;
-    background-color: rgb(176, 11, 14); 
-    color: white;
-  }
+.header { 
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 10px 20px;
+  background-color: rgb(176, 11, 14); 
+  color: white;
+}
 
-  .logo img { 
-    height: 40px;
-    transition: transform 0.3s ease;
-  }
-  .logo img:hover { 
-    animation: bounce 0.6s;
-  }
+.logo img { 
+  height: 40px;
+  transition: transform 0.3s ease;
+}
+.logo img:hover { 
+  animation: bounce 0.6s;
+}
 
-  @keyframes bounce { /* Animation des Logos*/
-    0%   { transform: translateY(0); }
-    30%  { transform: translateY(-15px); }
-    50%  { transform: translateY(0); }
-    70%  { transform: translateY(-8px); }
-    100% { transform: translateY(0); }
-  }
+@keyframes bounce { 
+  0%   { transform: translateY(0); }
+  30%  { transform: translateY(-15px); }
+  50%  { transform: translateY(0); }
+  70%  { transform: translateY(-8px); }
+  100% { transform: translateY(0); }
+}
 
-  /* Suchleiste im Header */
-  .search {
+.search {
   display: flex;
   align-items: center;
   gap: 5px;
-   
-  }
-  .search-input {
-    width: 250px;   
-    padding: 8px 12px;
-    border: 1px solid #ddd;
-    border-radius: 20px;
-    outline: none;
-    transition: box-shadow 0.3s ease;
-  }
-  .search-input:focus {
-    box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
-  }
+}
+.search-input {
+  width: 250px;   
+  padding: 8px 12px;
+  border: 1px solid #ddd;
+  border-radius: 20px;
+  outline: none;
+  transition: box-shadow 0.3s ease;
+}
+.search-input:focus {
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+}
 
 .search-button {
   background-color: rgb(176, 11, 14);

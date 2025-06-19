@@ -9,7 +9,7 @@
   </head>
 
   <body>
-        <header class="header"> <!-- First Line -->
+        <header class="header"> 
 
       <div class="logo">
         <img src="/Multi/Bilder/taco_logo.png" alt="Alles Taco Logo">
@@ -57,36 +57,35 @@
     </header>
 
     <div class="detail-layout">
-            <form id="product-form">
+      <form id="product-form">
 
-            <img id="preview" alt="Produktbild" width="300">
-            
+      <img id="preview" alt="Produktbild" width="300">
+      
+      <input type="file" id="image-upload" accept="image/*">
+      
+      <h2>Titel:</h2>
 
-            <input type="file" id="image-upload" accept="image/*">
-            
-            <h2>Titel:</h2>
+      <input type="text" id="product-title" required>
 
-            <input type="text" id="product-title" required>
+      <h2>Beschreibung:</h2>
+      
+      <textarea id="product-description" rows="6" required></textarea>
+      
+      <h2>Kategorie:</h2>
 
-            <h2>Beschreibung:</h2>
-            
-            <textarea id="product-description" rows="6" required></textarea>
-            
-            <h2>Kategorie:</h2>
+      <input type="text" id="product-kategorie"required>
 
-            <input type="text" id="product-kategorie"required>
+      <h2>Preis:</h2>
 
-            <h2>Preis:</h2>
+      <input type="number" id="product-price" step="0.01" min="0" required>
 
-            <input type="number" id="product-price" step="0.01" min="0" required>
+      <h2>Menge:</h2>
 
-            <h2>Menge:</h2>
+      <input type="number" id="product-amount" step="1" min="1" required>
+    
+      <button type="submit" class="save-button">Speichern</button> 
 
-            <input type="number" id="product-amount" step="1" min="1" required>
-          
-            <button type="submit" class="save-button">Speichern</button> 
-
-          </form>
+    </form>
 
   </div>
     <div id="saveModal" class="modal">

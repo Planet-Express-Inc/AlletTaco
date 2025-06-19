@@ -20,58 +20,51 @@
     gap: 20px; 
 }
 
-
-  
 .product-large-image {
-    background-color: white;
-    padding: 20px;
-    width: 100%; /* Bild passt sich der Containerbreite an */
-    max-width: 500px; /* Maximalbreite von 600px */
-    border-radius: 12px;
+  background-color: white;
+  padding: 20px;
+  width: 100%; 
+  max-width: 500px;
+  border-radius: 12px;
 }
 .add-to-cart {
-    padding: 10px 20px;
-    background-color: rgb(176, 11, 14);
-    color: white;
-    border: none;
-    border-radius: 8px;
-    cursor: pointer;
-    font-size: 16px;
-    transition: background-color 0.3s ease;
+  padding: 10px 20px;
+  background-color: rgb(176, 11, 14);
+  color: white;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  font-size: 16px;
+  transition: background-color 0.3s ease;
 }
 
 .add-to-cart {
-    background-color: rgb(150, 9, 11); /* Dunkleres Rot für Hover-Effekt */
+    background-color: rgb(150, 9, 11); 
 }
   
 .articel_box, .seller-box {
-    background-color: white;
-    padding: 20px;
-    border-radius: 12px;
-    box-shadow: 0 2px 8px rgba(0,0,0,0.1);
-    width: 100%; /* Boxen passen sich der Containerbreite an */
-    max-width: 500px; /* Maximalbreite für die Boxen */
+  background-color: white;
+  padding: 20px;
+  border-radius: 12px;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+  width: 100%; 
+  max-width: 500px;
 }
 
 .seller-box {
-    max-width: 500px; /* Maximalbreite für den Verkäuferbereich */
-    min-height: 100px;
-    cursor: pointer;
+  max-width: 500px; 
+  min-height: 100px;
+  cursor: pointer;
 }
 .seller-box:hover {
   background-color: rgb(176, 11, 14);
 }
 
-
 .articel_box h1, .seller-box h2 {
   margin-top: 0;
 }
-
-
-
-/* Modal Hintergrund */
 .modal {
-  display: none; /* standardmäßig ausgeblendet */
+  display: none; 
   position: fixed;
   z-index: 9999;
   left: 0;
@@ -84,7 +77,6 @@
   align-items: center;
 }
 
-/* Modal Inhalt */
 .modal-content {
   background-color: #fff;
   padding: 30px 40px;
@@ -94,7 +86,6 @@
   animation: fadeIn 0.3s ease;
 }
 
-/* Button Style */
 .modal-content button {
   padding: 10px 20px;
   background-color: rgb(176, 11, 14);
@@ -104,7 +95,6 @@
   cursor: pointer;
   font-size: 16px;
 }
-
 
 .seller-rating {
   font-size: 30px;

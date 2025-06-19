@@ -42,6 +42,17 @@
 
 ---
 
+## Kown Issues 
+
+1. Sellers are able to purchase their own products and subsequently rate them.
+2. Account data cannot be edited or updated.
+3. The graphical overview of completed sales does not filter by year.
+4. Pagination (forward and back) does not work during search mode.
+5. The search functionality is only available for buyers.
+6. Sold-out products are not visually marked or indicated.
+
+---
+
 ## 📄 License
 
 MIT License – free to use and modify.  

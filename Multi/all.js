@@ -1,3 +1,26 @@
+/**
+ * User Menu and Navigation (all.js)
+ *
+ * This script manages the navigation of the header and footer based on the user role.
+ *
+ * Main Features:
+ * - Displays dynamic menu content based on the stored user role (`roll`)
+ * - Shows user information from session storage (`username`, `role`)
+ * - Navigates to profile or shopping cart via buttons
+ * - Logs out the user and ends the session
+ * - Manages dropdown menus for additional functions
+ * - Search functionality triggered by the Enter key
+ *
+ * HTML Requirements:
+ * - Elements with IDs: `profil-link`, `warenkorb`, `logoff`, `user-info`, `user-role`, `dropdown-menu`, `search-input`
+ * - Sections with `data-role-content="<role>"` for role-based menu display
+ * - Search redirects to the buyer page, even for sellers (switching role to 'buyer')
+ *
+ * Note:
+ * - The role is stored in `sessionStorage` and can be set by clicks (via `data-role`)
+ * - Multiple DOMContentLoaded listeners are redundant and could be consolidated
+ */
+
 import { BASE_URL } from './config.js';
 
 document.addEventListener("DOMContentLoaded", () => {    
@@ -110,6 +133,18 @@ window.toggleDropdown = function() {
 window.addEventListener("click", function(event) {
   if (!event.target.closest('.dropdown')) {
     document.getElementById("dropdown-menu").classList.remove("show");
+  }
+});
+// Search starts with enter
+document.addEventListener("DOMContentLoaded", function () {
+  const input = document.getElementById("search-input");
+  if (input) {
+    input.addEventListener("keydown", function (event) {
+      if (event.key === "Enter") {
+        event.preventDefault();
+        window.suche();
+      }
+    });
   }
 });
 
