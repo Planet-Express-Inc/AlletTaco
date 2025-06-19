@@ -135,8 +135,6 @@ if (password.length < 8) {
 alert("Passwort muss mindestens 8 Zeichen lang sein. \nBitte registrieren Sie sich erneut."); 
 return;
 }
-
-
     const username = document.getElementById('register-username').value;
     const firstname = document.getElementById('register-firstname').value;
     const lastname = document.getElementById('register-lastname').value;

@@ -6,8 +6,7 @@
     font-display:block;
     padding: 10px 20px;
     width: 100%;
-  }
- 
+  } 
   
  .main-content {
     padding: 40px;
@@ -32,4 +31,8 @@
 
 .login-popup, .register-popup, .roll-popup {
     display: none; /* verborgen beim Laden */
+}
+
+.password-length{
+  font-size: 13px;
 }
