@@ -17,7 +17,6 @@
  *
  * Notes:
  * - View counts are fetched and displayed separately for each article
- * - Errors during loading of articles or views are logged to the console
  */
 
 import { BASE_URL } from '../config.js';

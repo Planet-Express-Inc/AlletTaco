@@ -19,7 +19,6 @@
  * Notes:
  * - Prices are formatted accordingly
  * - During checkout, all items are removed and re-added with updated quantities before completing the purchase
- * - Errors and server responses are logged to the console
  */
 
 import { BASE_URL } from '../config.js';
@@ -218,3 +217,11 @@ window.getElements = async function (products){
   }
   
 }
+// Go to Startseite 
+window.startseite = function () {
+  window.location.href = "/Multi/Kaeufer/kaeufer.html";
+};
+// Go to Bestellhistorie
+window.bestellhistorie = function () {
+  window.location.href = "/Multi/orderHistory/orderHistory.html";
+};

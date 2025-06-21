@@ -13,9 +13,8 @@
  * - A container with the ID `bewertung-list` for displaying individual reviews
  *
  * Notes:
- * - Star ratings are rendered using Unicode characters (★/☆)
+ * - Star ratings are rendered using Unicode characters 
  * - Multiple API calls are made to fetch reviewer and reviewee data
- * - Errors or missing data are logged to the console
  */
 
 import { BASE_URL } from '../config.js';

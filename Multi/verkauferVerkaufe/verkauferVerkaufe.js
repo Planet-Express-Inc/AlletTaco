@@ -1,19 +1,19 @@
 /**
- * Verkaufsübersicht für Verkäufer (verkaufsübersicht.js)
+ * Sales Overview for Sellers (verkaufsübersicht.js)
  *
- * Zeigt dem eingeloggten Verkäufer eine Liste seiner abgeschlossenen Verkäufe.
+ * Displays a list of completed sales for the logged-in seller.
  *
- * Hauptfunktionen:
- * - Abrufen aller Verkaufsdaten des aktuellen Benutzers 
- * - Dynamisches Nachladen von Artikeldetails und Käufernamen für jede Bestellung
- * - Darstellung der Verkäufe mit Titel, Käufername, Kauf-ID, Preis und Anzahl auf der Webseite
+ * Main Features:
+ * - Fetches all sales data for the current user
+ * - Dynamically loads product details and buyer names for each order
+ * - Displays sales on the webpage including title, buyer name, order ID, price, and quantity
  *
- * Voraussetzungen im HTML:
- * - Ein Container mit der ID `orderHistory` zur Anzeige der Verkäufe
- * - Ein eingeloggter Benutzer mit gespeicherter `user_id` im `sessionStorage`
+ * HTML Requirements:
+ * - A container with the ID `orderHistory` to display the sales
+ * - A logged-in user with a stored `user_id` in `sessionStorage`
  *
- * Hinweise:
- * - Für jede Bestellung werden zusätzliche API-Aufrufe durchgeführt, um Artikel- und Benutzerinformationen zu ergänzen
+ * Notes:
+ * - Additional API calls are made for each order to retrieve product and user information
  */
 
 import { BASE_URL } from '../config.js';
