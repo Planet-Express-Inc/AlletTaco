@@ -87,22 +87,25 @@ window.showOnHtml = async function (productArray){
   const list = document.getElementById('product-list');
   list.innerHTML = ""; // 
   productArray.forEach(product => {
-    const item = document.createElement('div');
-      item.className = 'product';
-      // Show on html
-      item.innerHTML = `
-        <img src="${BASE_URL}/article/picture/${product.artikel_id}" alt="${product.titel}">
-        <div class="product-info">
-          <h3 class="product-title">${product.titel}</h3>
-          <p class="product-description">${product.beschreibung}</p>
-          <p class="product-price">Preis: ${product.preis.replace('.', ',')} €</p>
-        </div>
-      `;
-      // Eventlistener when pressed on articel
-      item.addEventListener('click', () => {
-        window.location.href = `/Multi/Product/product.html?id=${product.artikel_id}`;
-      });
-      list.appendChild(item);
+    if (product.bestand > 0)
+    {
+      const item = document.createElement('div');
+        item.className = 'product';
+        // Show on html
+        item.innerHTML = `
+          <img src="${BASE_URL}/article/picture/${product.artikel_id}" alt="${product.titel}">
+          <div class="product-info">
+            <h3 class="product-title">${product.titel}</h3>
+            <p class="product-description">${product.beschreibung}</p>
+            <p class="product-price">Preis: ${product.preis.replace('.', ',')} €</p>
+          </div>
+        `;
+        // Eventlistener when pressed on articel
+        item.addEventListener('click', () => {
+          window.location.href = `/Multi/Product/product.html?id=${product.artikel_id}`;
+        });
+        list.appendChild(item);
+    }
   });
 }
 // Go 10 articels back
