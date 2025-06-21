@@ -39,6 +39,11 @@ document.addEventListener("DOMContentLoaded", () => {
 });
 // Load articels with search query
 window.loadQuery = async function (query){
+  // Hide buttons
+  const buttonContainer = document.querySelector('.button-container');
+  if (buttonContainer) {
+    buttonContainer.style.display = 'none';
+  }
   const productRes = await fetch(BASE_URL + `/article/search/${encodeURIComponent(query)}`, {
     method:'GET',
     credentials:'include',
@@ -51,6 +56,12 @@ window.loadQuery = async function (query){
 
 // Load Articels when no query is found
 window.loadArticles = async function (start, end){
+  // Show buttons
+  const buttonContainer = document.querySelector('.button-container');
+  if (buttonContainer) {
+    buttonContainer.style.display = 'flex';
+  }
+
   const data = {
     "number": end,
     "offset": start
