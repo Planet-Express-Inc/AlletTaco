@@ -46,8 +46,15 @@ document.addEventListener("DOMContentLoaded", () => {
         total += price;
       }
     });
-    totalPriceElement.textContent = formatPrice(total);
-  };
+      totalPriceElement.textContent = formatPrice(total);
+
+  // Activate or deactivate buy button 
+  const purchaseButton = document.getElementById('buy-button');
+  if (purchaseButton) {
+    purchaseButton.disabled = total === 0;
+    purchaseButton.classList.toggle('disabled', total === 0);
+  }
+};
   // Shows all Articels which are in the shoping cart
   async function loadArticles() {
     try {

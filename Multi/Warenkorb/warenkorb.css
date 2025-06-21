@@ -119,6 +119,11 @@
   font-size: 16px;
 }
 
+#buy-button.disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
 /* Der Andere geklaute Button*/
 .glow-on-hover {
     width: 220px;
