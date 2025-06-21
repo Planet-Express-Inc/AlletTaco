@@ -58,17 +58,3 @@ document.addEventListener("DOMContentLoaded", function() {
 
 
 
-/* 
-article-by-user alle Articles from a user.
-
-
-GET
-​/v1​/article​/user​/{user_id}
-die in ein Array schreiben
-
-dann einen Api call
-
-Noch mal mit Niclas sprechen, verkäufer_id übergeben können wäre premium bei den verkäufen und dann alle zurückzubekommen smash 
-
-
-*/

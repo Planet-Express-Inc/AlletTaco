@@ -40,7 +40,7 @@ import { BASE_URL } from '../config.js';
           
         `;
   
-        // Wenn Rolle Verkäufer ist, Kommentare anzeigen
+        // if rolle is "Verkäufer", show user comments section and link to sales
         if (sessionStorage.getItem("roll") === "Verkäufer") {
           document.getElementById("userCommentsSection").style.display = "block";
           document.getElementById("order-link-to-role").href = "/Multi/verkauferVerkaufe/verkauferVerkaufe.html";
@@ -64,7 +64,7 @@ import { BASE_URL } from '../config.js';
   
 window.loadBewertungen = async function () {
     try {
-        // Bewertungen laden
+        // APi Call to fetch user reviews
         const response = await fetch(BASE_URL + `/user/reviews/${sessionStorage.getItem("user_id")}`);
         const data = await response.json();
 
@@ -72,7 +72,7 @@ window.loadBewertungen = async function () {
 
 
 
-        // Bewertungen verarbeiten
+        // render the reviews in the userComments section
         data.forEach(bewertung => {
             const item = document.createElement('div');
             item.className = 'bewertung';

@@ -18,7 +18,7 @@
 import { BASE_URL } from '../config.js';
 
 document.addEventListener("DOMContentLoaded", function() {
-    // API-URL wie im Screenshot
+    // API call to fetch the user's purchase history
     fetch(BASE_URL +"/user/purchase", {
       method: 'GET',
       credentials: 'include'}) // Cookies mit senden)}
@@ -28,9 +28,13 @@ document.addEventListener("DOMContentLoaded", function() {
         .then(orders => {
             // console.log("Antwort von der API:", orders); //Fehersuche
             const orderHistory = document.getElementById("orderHistory");
-            orderHistory.innerHTML = ""; // Alte Inhalte löschen
+            orderHistory.innerHTML = ""; // document empty the order history container
+            if (orders.length === 0) {
+                orderHistory.innerHTML = "<p>Keine Bestellungen gefunden.</p>";
+                return;
+            }
 
-            // Gehe über alle Bestellungen im Array
+            // goes through each order and fetches the related product and seller information
             orders.forEach(async order => {
                 const orderDiv = document.createElement("div");
                 orderDiv.classList.add("order-item");

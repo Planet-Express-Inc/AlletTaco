@@ -36,7 +36,7 @@ if (event.key === "Enter") {
 }
 });
 
-//Funktion zum Verarbeiten der Cookie-Optionen
+//function for displaying the cookie popup
 window.toggleCookies = function () {
     const choice = document.querySelector('input[name="cookie-choice"]:checked');
     if (!choice) {
@@ -52,7 +52,7 @@ window.toggleCookies = function () {
     }
 }
 
-//Funktion zum Anzeigen des RollenWahl-Popups
+// Roule selection function
 window.showRoll = function () {
     document.querySelector('.cookie-popup').style.display = 'none';
     document.querySelector('.roll-popup').style.display = 'block';
@@ -60,7 +60,7 @@ window.showRoll = function () {
     document.querySelector('.register-popup').style.display = 'none';
 
 }
-// Funktion zum Abrufen und Speichern der Rolle
+// set the selected role and save it in session storage
 window.getRoll = function (){
     const rollButton = document.querySelector('input[name="roll-button"]:checked');
     if (!rollButton) {
@@ -73,7 +73,7 @@ window.getRoll = function (){
     return true; // Rolle erfolgreich gespeichert
 }
 
-//Funktion zum Anzeigen des Login-Popups
+//login function to display the login popup
 window.showLogin = function () {
     if (getRoll()) { // Prüft, ob Rolle ausgewählt wurde
         document.querySelector('.roll-popup').style.display = 'none';
@@ -85,7 +85,8 @@ window.showLogin = function () {
         loginPopup.innerHTML = `Einloggen im <br>(${selectedRoll}-konto)`; //.innerHTML um <br> zeilenumbruch
     }
 }
-//Funktion zum Verarbeiten der Login Daten
+//sent login request to the server fia fetch API post request
+// and handle the response
 window.onLogin = async function () {
     const username = document.getElementById('login-username').value;
     const password = document.getElementById('login-password').value;
@@ -106,12 +107,12 @@ window.onLogin = async function () {
 
         const data = await response.json();
 
-        if (response.ok) { //Response von Niclas abfragen
+        if (response.ok) { //Response von Server abfragen
            // Prüfe, ob Antwort ein Array ist und mindestens ein Element enthält
         if (response.ok && Array.isArray(data) && data.length > 0) {
-                // User-ID und username im Local Storage speichern
+                // save User-ID and username in sessionStorage
 
-                const userData = data[0]; // Nimm das erste Element aus dem Array
+                const userData = data[0]; 
                 sessionStorage.setItem("user_id", userData.benutzer_id);
                 sessionStorage.setItem("username", userData.benutzername);
 
