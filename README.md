@@ -13,9 +13,9 @@ start
 
 ---
 
-## 📁 Project Structure
+## Project Structure
 
-### 👤 Buyer View
+### Buyer View
 
 | Directory           | Description |
 |--------------------|-------------|
@@ -27,7 +27,7 @@ start
 
 ---
 
-### 🧑‍💼 Seller View
+###  Seller View
 
 | Directory              | Description |
 |------------------------|-------------|
@@ -40,7 +40,7 @@ start
 
 ---
 
-### ⚙️ Configuration & Shared Files
+### Configuration & Shared Files
 
 | File/Directory   | Description |
 |------------------|-------------|
@@ -62,7 +62,7 @@ start
 
 ---
 
-## 📄 License
+## License
 
 MIT License – free to use and modify.  
 Feel free to contribute or raise issues!

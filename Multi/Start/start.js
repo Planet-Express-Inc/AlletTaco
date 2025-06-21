@@ -1,3 +1,31 @@
+/**
+ * Login, Registration, and Role Selection (login.js)
+ *
+ * Manages the login process including cookie prompt, role selection (buyer/seller),
+ * login, registration, and navigation to the respective user interfaces.
+ *
+ * Main Features:
+ * - Cookie prompt with accept/decline options and info notice
+ * - Dynamically displays popups: cookie notice, role selection, login, and registration
+ * - Role selection and storage
+ * - Login function with role validation, session storage, and redirection:
+ *    - Buyer → `/Multi/Kaeufer/kaeufer.html`
+ *    - Seller → `/Multi/Verkaeufer/verkaeufer.html`
+ * - Registration with password validation (min. 8 characters) and POST to `/user/register`
+ * - Login can also be triggered via Enter key
+ *
+ * HTML Requirements:
+ * - Input fields for username, password, first name, last name, and email
+ * - Popup containers with the following classes: `.cookie-popup`, `.roll-popup`, `.login-popup`, `.register-popup`
+ * - Input radio buttons with `name="roll-button"` for role selection
+ * - Input radio buttons with `name="cookie-choice"` for cookie consent
+ * - `#password-error` for optional password error display
+ *
+ * Notes:
+ * - The selected role is sent with the login request and stored in the session
+ * - The login response is checked to ensure it returns an array of user data
+ */
+
 // Globale Variable zum Speichern der gewählten Rolle
 let selectedRoll = "";
 import { BASE_URL } from '../config.js';

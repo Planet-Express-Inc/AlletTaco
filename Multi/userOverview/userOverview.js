@@ -1,3 +1,24 @@
+/**
+ * Display User Profile (profil.js)
+ *
+ * Displays all user data for the currently logged-in user.
+ *
+ * Main Features:
+ * - Loads user data based on `user_id` from `sessionStorage` (`/user/info/:id`)
+ * - Displays first name, last name, email, username, and role in the profile section
+ * - Shows different sections depending on the user role:
+ *    - For "seller": displays reviews and link to sales (`/verkauferVerkaufe`)
+ *    - For other roles: shows link to order history (`/orderHistory`)
+ * - Optionally shows submitted reviews for sellers via `/user/reviews/:id`
+ * - Star ratings are rendered graphically
+ *
+ * HTML Requirements:
+ * - `userDetails`: container to display user profile data
+ * - `userCommentsSection`: optional section for seller reviews (initially hidden)
+ * - `order-link-to-role`: navigation link for sales or order history
+ * - `userComments`: section for displaying reviews
+ */
+
 import { BASE_URL } from '../config.js';
 
   document.addEventListener("DOMContentLoaded", function () {

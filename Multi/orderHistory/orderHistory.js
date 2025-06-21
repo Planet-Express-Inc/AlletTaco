@@ -1,3 +1,20 @@
+/**
+ * Buyer Order History (purchase.js)
+ *
+ * Displays all purchases made by a buyer.
+ *
+ * Main Features:
+ * - Retrieves all orders of the user via the `/user/purchase` API endpoint
+ * - For each order:
+ *   - Fetches the related product data (`/article/:id`)
+ *   - Retrieves the seller's name (`/user/info/:verkaeufer_id`)
+ *   - Displays product name, purchase price, quantity, shipping details, and date
+ *   - Provides a link to rate the seller
+ *
+ * HTML Requirements:
+ * - Element with the ID `orderHistory` for displaying the list of orders
+ */
+
 import { BASE_URL } from '../config.js';
 
 document.addEventListener("DOMContentLoaded", function() {
@@ -28,7 +45,7 @@ document.addEventListener("DOMContentLoaded", function() {
                 orderDiv.innerHTML = `
                     <h3>Artikel: ${product ? product.titel : order.artikel_id}</h3>
                     <p>Kauf-ID: ${order.kauf_id}</p>
-                    <p>Verkäufer: ${verkaufer ? verkaufer.benutzername  : verorder.kaeufer_id}</p>
+                    <p>Verkäufer: ${verkaufer ? verkaufer.benutzername  : order.kaeufer_id}</p>
                     <p>Preis: ${order.kaufpreis.toString().replace('.', ',')} €</p>
                     <p>Anzahl: ${order.anzahl}</p>
                     <p>Versand: ${order.versanddaten}</p>
