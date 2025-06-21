@@ -66,5 +66,6 @@ start
 
 MIT License – free to use and modify.  
 Feel free to contribute or raise issues!
+This project was developed with the assistance of [ChatGPT](https://openai.com/chatgpt) by OpenAI.
 
 ---
