@@ -178,3 +178,14 @@ document.addEventListener("DOMContentLoaded", () => {
     });
   }
 });
+
+// The logo brings you back to the startsite
+window.startsite = function () {
+  const role = sessionStorage.getItem("roll");
+  if (role =="Verkäufer"){
+    window.location.href = `/Multi/Verkaeufer/verkaeufer.html`;
+  } if (role =="Käufer") {
+    window.location.href = `/Multi/Kaeufer/kaeufer.html`;
+  } 
+
+}
