@@ -44,7 +44,7 @@ document.addEventListener("DOMContentLoaded", async () => {
             `;
         } catch (error) {
         console.error("Fehler beim Laden:", error);
-        }eigenschaftenBewertungen
+        }
         loadBewertungen()
 });
 // Load the reviews
