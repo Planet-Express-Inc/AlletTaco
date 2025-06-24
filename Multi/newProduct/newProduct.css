@@ -71,3 +71,8 @@ form#product-form > * {
   cursor: pointer;
   font-size: 16px;
 }
+
+:focus {
+  outline: 3px solid #ff7300;
+  outline-offset: 2px;
+}

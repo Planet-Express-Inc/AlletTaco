@@ -109,3 +109,8 @@
         transform: translateY(0px);
     }
 }
+
+:focus {
+  outline: 3px solid #ff7300;
+  outline-offset: 2px;
+}

@@ -102,3 +102,8 @@
   font-weight: bold;
   margin-bottom: 0.3rem;
 }
+
+:focus {
+  outline: 3px solid #ff7300;
+  outline-offset: 2px;
+}

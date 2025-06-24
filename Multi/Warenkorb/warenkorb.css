@@ -185,3 +185,8 @@
     50% { background-position: 400% 0; }
     100% { background-position: 0 0; }
 }
+
+:focus {
+  outline: 3px solid #ff7300;
+  outline-offset: 2px;
+}

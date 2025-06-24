@@ -45,3 +45,8 @@
   margin-bottom: 0.5rem;
   color: #333;
 }
+
+:focus {
+  outline: 3px solid #ff7300;
+  outline-offset: 2px;
+}
