@@ -4,15 +4,6 @@
 
 ---
 
-## ToDo
-comments in 
-
-userOverview
-orderHistory
-start
-
----
-
 ## Project Structure
 
 ### Buyer View
